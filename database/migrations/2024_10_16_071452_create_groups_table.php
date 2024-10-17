@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->foreign('grade_id')->references('id')->on('grades');
+            $table->foreignId('grade_id')->constrained(
+                 table: 'grades', indexName: 'group_grade_id'
+            );
             $table->timestamps();
         });
     }

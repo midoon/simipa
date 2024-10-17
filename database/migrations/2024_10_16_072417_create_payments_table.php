@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreign('payment_type_id')->references('id')->on('payment_types');
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreignId('payment_type_id')->constrained(
+                 table: 'payment_types', indexName: 'payment_payment_types'
+            );
+            $table->foreignId('student_id')->constrained(
+                 table: 'students', indexName: 'payment_student_id'
+            );
             $table->float('amount');
             $table->date('payment_date');
             $table->longText('description');
