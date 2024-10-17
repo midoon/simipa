@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
+            $table->foreign('grade_id')->references('id')->on('grades');
+            $table->string('name');
+            $table->longText('description');
             $table->timestamps();
         });
     }

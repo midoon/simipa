@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('role_teachers', function (Blueprint $table) {
             $table->id();
+            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('role_id')->references('id')->on('roles');
             $table->timestamps();
         });
     }

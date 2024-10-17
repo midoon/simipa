@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('payment_installments', function (Blueprint $table) {
             $table->id();
+            $table->foreign('payment_id')->references('id')->on('payments');
+            $table->float('amount');
+            $table->date('due_date');
+            $table->enum('status', ['paid', 'unpaid', 'overdue']);
+            $table->date('payment_date');
             $table->timestamps();
         });
     }

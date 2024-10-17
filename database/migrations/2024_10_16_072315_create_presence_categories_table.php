@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('presence_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->longText('description');
             $table->timestamps();
         });
     }

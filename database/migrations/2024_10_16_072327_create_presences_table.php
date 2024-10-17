@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('presences', function (Blueprint $table) {
             $table->id();
+            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('category_id')->references('id')->on('presence_categories');
+            $table->date('day');
+            $table->enum('status', ['hadir', 'sakit', 'ijin', 'alpha']);
             $table->timestamps();
         });
     }
