@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreign('group_id')->references('id')->on('groups');
             $table->string('name');
             $table->string('nisn');
-            $table->enum('gender',['male','female']);
+            $table->enum('gender',['laki-laki','perempuan']);
             $table->timestamps();
         });
     }
