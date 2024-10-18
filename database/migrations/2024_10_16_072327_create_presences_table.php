@@ -19,6 +19,9 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained(
                  table: 'presence_categories', indexName: 'presence_presence_category_id'
             );
+            $table->foreignId('group_id')->constrained(
+                 table: 'groups', indexName: 'presence_group_id'
+            );
             $table->date('day');
             $table->enum('status', ['hadir', 'sakit', 'ijin', 'alpha']);
             $table->timestamps();

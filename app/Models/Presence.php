@@ -14,6 +14,10 @@ class Presence extends Model
     }
 
     public function presenceCategory(): BelongsTo{
-        return $this->belongsTo(presenceCategory::class);
+        return $this->belongsTo(PresenceCategory::class);
+    }
+
+    public function group(): BelongsTo{
+        return $this->belongsTo(Group::class);
     }
 }

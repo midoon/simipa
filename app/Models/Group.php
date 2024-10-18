@@ -21,4 +21,8 @@ class Group extends Model
     public function students(): HasMany{
         return $this->hasMany(Student::class);
     }
+
+    public function presences(): HasMany{
+        return $this->hasMany(Presence::class);
+    }
 }
