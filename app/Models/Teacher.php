@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Teacher extends Model
 {
     protected $guarded = ['id'];
 
-    public function roleTeachers(): HasMany{
-        return $this->hasMany(RoleTeacher::class);
+    public function teacherAccount(): BelongsTo{
+        return $this->belongsTo(TeacherAccount::class);
     }
 
     public function schedules(): HasMany {
