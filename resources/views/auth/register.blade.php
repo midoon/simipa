@@ -20,7 +20,7 @@
                             class="border-b-2 w-full focus:outline-none py-1.5">
                     </div>
                     <div class="mb-10">
-                        <input type="password" name="nik" id="nik" placeholder="password"
+                        <input type="password" name="password" id="password" placeholder="password"
                             class="border-b-2 w-full focus:outline-none py-1.5">
                     </div>
                     <div class="w-full text-center">
