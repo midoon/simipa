@@ -1,6 +1,5 @@
 <x-layout title="Login | Admin">
 
-
     <div class="w-full bg-simipa-5 border">
         <div class="w-full flex justify-center items-center min-h-screen px-8">
             <div class="w-full md:max-w-sm rounded-xl bg-white p-10 border">
