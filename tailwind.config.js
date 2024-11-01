@@ -8,6 +8,7 @@ export default {
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
+        "./node_modules/flowbite/**/*.js",
     ],
     theme: {
         extend: {
@@ -22,9 +23,10 @@ export default {
                     4: "#FEF3E2",
                     5: "#D9D9D9",
                     6: "#FFFFFF",
+                    7: "#374151",
                 },
             },
         },
     },
-    plugins: [],
+    plugins: [require("flowbite/plugin")],
 };

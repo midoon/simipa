@@ -24,6 +24,7 @@ class LoginAdminController extends Controller
 
         $dataSession = [
              'username' => $request->input('username'),
+             'role' => "admin"
         ];
 
 
