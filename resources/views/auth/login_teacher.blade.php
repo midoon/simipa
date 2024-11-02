@@ -7,11 +7,11 @@
                 <form action="" class="mt-10">
                     <div class="mb-10">
                         <input type="text" name="nik" id="nik" placeholder="nik "
-                            class="border-b-2 w-full focus:outline-none py-1.5">
+                            class="border-0 border-b-2 w-full focus:outline-none py-1.5">
                     </div>
                     <div class="mb-10">
                         <input type="password" name="password" id="password" placeholder="password"
-                            class="border-b-2 w-full focus:outline-none py-1.5">
+                            class="border-0 border-b-2 w-full focus:outline-none py-1.5">
                     </div>
                     <div class="w-full text-center">
                         <button type="submit" class="px-20 py-2 bg-simipa-2 text-white rounded-full">Login</button>

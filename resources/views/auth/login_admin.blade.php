@@ -12,12 +12,12 @@
                 <form action="/login/admin" method="POST" class="mt-10">
                     @csrf
                     <div class="mb-10">
-                        <input type="text" name="username" id="username" placeholder="username "
-                            class="border-b-2 w-full focus:outline-none py-1.5" required>
+                        <input type="username" name="username" id="username" placeholder="username"
+                            class=" border-0 border-b-2 w-full focus:outline-none py-1.5 round" required>
                     </div>
                     <div class="mb-10">
                         <input type="password" name="password" id="password" placeholder="password"
-                            class="border-b-2 w-full focus:outline-none py-1.5" required>
+                            class=" border-0 border-b-2 w-full focus:outline-none py-1.5 round" required>
                     </div>
                     <div class="w-full text-center">
                         <button type="submit" class="px-20 py-2 bg-simipa-2 text-white rounded-full">Login
