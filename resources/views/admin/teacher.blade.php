@@ -4,11 +4,9 @@
         <!-- Header -->
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Guru</h1>
-            <a href="#">
-                <div class="px-5 py-2 bg-simipa-2 rounded-xl">
-                    <h3 class="text-simipa-6">Tambah Guru</h3>
-                </div>
-            </a>
+            <button onclick="openCreateModal()" class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
+                Tambah Data Guru
+            </button>
         </header>
         <hr class="my-4">
 
@@ -78,11 +76,21 @@
         </div>
     </x-navbar-admin>
 
+    <x-modal-create-teacher></x-modal-create-teacher>
+
 
 
     <script>
         function confirmDeletion() {
             return confirm("Apakah Anda yakin ingin menghapusnya?");
+        }
+
+        function openCreateModal() {
+            document.getElementById('createModal').classList.remove('hidden');
+        }
+
+        function closeCreateModal() {
+            document.getElementById('createModal').classList.add('hidden');
         }
     </script>
 

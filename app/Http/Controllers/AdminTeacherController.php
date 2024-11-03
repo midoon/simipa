@@ -9,4 +9,8 @@ class AdminTeacherController extends Controller
     public function index(){
         return view('admin.teacher');
     }
+
+    public function store(Request $request){
+        dd($request);
+    }
 }
