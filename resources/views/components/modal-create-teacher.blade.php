@@ -35,8 +35,8 @@
                 <label for="gender" class="block font-semibold mb-1">Gender</label>
                 <select id="gender" name="gender" class="border w-full rounded-lg px-2 py-1.5" required>
                     <option selected disabled>Pilih Gender</option>
-                    <option value="male">Laki-laki</option>
-                    <option value="female">Perempuan</option>
+                    <option value="laki-laki">Laki-laki</option>
+                    <option value="perempuan">Perempuan</option>
                 </select>
             </div>
             <div class="mb-7">

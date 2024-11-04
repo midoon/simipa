@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('name');
             $table->string('nik');
-            $table->enum('gender',['laki-laki','perempuan']);
+            $table->enum('gender',['laki-laki','perempuan'])->default('laki-laki');
             $table->timestamps();
         });
     }
