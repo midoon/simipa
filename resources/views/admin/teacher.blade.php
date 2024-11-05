@@ -51,7 +51,8 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex ">
-                                        <button>
+                                        <button onclick="openEditModal({{ $teacher->id }})"
+                                            data-target="#editModalTeacher{{ $teacher->id }}">
                                             <svg class="w-6 h-6 text-gray-800 mx-1" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 fill="none" viewBox="0 0 24 24">
@@ -76,8 +77,8 @@
                                     </div>
                                 </td>
                             </tr>
+                            <x-modal-edit-teacher :teacher="$teacher"></x-modal-edit-teacher>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
@@ -89,17 +90,26 @@
 
 
 
+
     <script>
         function confirmDeletion() {
             return confirm("Apakah Anda yakin ingin menghapusnya?");
         }
 
         function openCreateModal() {
-            document.getElementById('createModal').classList.remove('hidden');
+            document.getElementById('createModalTeacher').classList.remove('hidden');
         }
 
         function closeCreateModal() {
-            document.getElementById('createModal').classList.add('hidden');
+            document.getElementById('createModalTeacher').classList.add('hidden');
+        }
+
+        function openEditModal(id) {
+            document.getElementById('editModalTeacher' + id).classList.remove('hidden');
+        }
+
+        function closeEditModal(id) {
+            document.getElementById('editModalTeacher' + id).classList.add('hidden');
         }
     </script>
 
