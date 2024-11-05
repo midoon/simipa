@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->json('role');
             $table->string('name');
-            $table->string('nik');
+            $table->string('nik')->unique();
             $table->enum('gender',['laki-laki','perempuan'])->default('laki-laki');
             $table->timestamps();
         });

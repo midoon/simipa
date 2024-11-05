@@ -25,3 +25,4 @@ Route::get('/admin/dashboard', [AdminController::class, 'index']);
 //adminteacher
 Route::get('/admin/teacher', [AdminTeacherController::class, 'index']);
 Route::post('/admin/teacher', [AdminTeacherController::class, 'store']);
+Route::delete('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'destroy']);

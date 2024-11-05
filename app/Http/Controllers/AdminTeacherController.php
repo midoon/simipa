@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminTeacherController extends Controller
 {
     public function index(){
-        return view('admin.teacher');
+
+        $teachers = Teacher::all();
+        return view('admin.teacher', ['teachers' => $teachers]);
     }
 
     public function store(Request $request){
@@ -23,6 +26,11 @@ class AdminTeacherController extends Controller
 
 
 
+        return redirect("/admin/teacher");
+    }
+
+    public function destroy($teacherId){
+        DB::table('teachers')->delete($teacherId);
         return redirect("/admin/teacher");
     }
 }
