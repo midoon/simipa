@@ -23,15 +23,6 @@
                 </div>
             </div>
             <div class="mb-3">
-                <div class="flex-1 space-y-2 md:flex md:items-center md:space-x-3 md:space-y-0">
-                    <div class="w-full">
-                        <label for="password" class="block font-semibold mb-1">Passowrd</label>
-                        <input type="password" name="password" id="password" placeholder="password" required
-                            class="w-full border py-1.5 px-3 rounded-lg">
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3">
                 <label for="gender" class="block font-semibold mb-1">Gender</label>
                 <select id="gender" name="gender" class="border w-full rounded-lg px-2 py-1.5" required>
                     <option selected disabled>Pilih Gender</option>

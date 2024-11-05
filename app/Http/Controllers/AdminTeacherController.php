@@ -12,28 +12,17 @@ class AdminTeacherController extends Controller
     }
 
     public function store(Request $request){
-        $roles = [];
-        if ($request->roles == null){
-            $roles[0] = "guru";
-        } else {
-            for ($i = 0; $i < count($request->roles); $i++){
-                $roles[$i] = $request->roles[$i];
-            }
-        }
+        $roles = $request->roles ?? ['guru'];
 
         $teacher = Teacher::create([
             'name' => $request->name,
-            'password' => $request->password,
+            'role' => $roles,
             'nik' => $request->nik,
             'gender' => $request->gender,
         ]);
 
 
 
-        dd($teacher);
-
-
-
-
+        return redirect("/admin/teacher");
     }
 }

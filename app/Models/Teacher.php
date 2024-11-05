@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Teacher extends Model
 {
     protected $guarded = ['id'];
+    protected $casts = [
+        'role' => 'array',
+    ];
 
     public function teacherAccount(): BelongsTo {
         return $this->belongsTo(TeacherAccount::class);
