@@ -10,8 +10,8 @@ class Teacher extends Model
 {
     protected $guarded = ['id'];
 
-    public function roleTechers(): HasMany {
-        return $this->hasMany(RoleTeacher::class);
+    public function teacherAccount(): BelongsTo {
+        return $this->belongsTo(TeacherAccount::class);
     }
 
     public function schedules(): HasMany {

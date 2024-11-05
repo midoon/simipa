@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role_teachers', function (Blueprint $table) {
+        Schema::create('teacher_accounts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("role_id")->constrained(
-                table: 'roles', indexName: 'role_teacher_role_id'
+            $table->foreignId('teacher_id')->constrained(
+                table: 'teachers', indexName: 'teacher_account_teacher_id'
             );
-            $table->foreignId("teacher_id")->constrained(
-                table: 'teachers', indexName: 'role_teacher_teacher_id'
-            );
+            $table->string('password');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('role_teachers');
+        Schema::dropIfExists('teacher_accounts');
     }
 };
