@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Teacher;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,5 +33,26 @@ class AdminTeacherController extends Controller
     public function destroy($teacherId){
         DB::table('teachers')->delete($teacherId);
         return redirect("/admin/teacher");
+    }
+
+    public function update(Request $request, $teacherId){
+        $roles = $request->roles ?? ['guru'];
+
+        try {
+            DB::table('teachers')->where('id', $teacherId)->update([
+                'name' => $request->name,
+                'role' => $roles,
+                'nik' => $request->nik,
+                'gender' => $request->gender,
+            ]);
+             return redirect("/admin/teacher")->with('success', 'Data guru berhasil diupdate.');
+        } catch (QueryException $e){
+            if ($e->errorInfo[1] == 1062)//kode mysql untuk duplicate data
+            {
+                 return back()->withErrors(['nik' => "NIK: $request->nik sudah terdaftar."])->withInput();
+            }
+            return back()->withErrors(['error' => 'Terjadi kesalahan saat mengupdate data.'])->withInput();
+        }
+
     }
 }

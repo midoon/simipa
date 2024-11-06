@@ -6,9 +6,9 @@
         <div class="bg-white rounded-lg w-1/3 p-6">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Edit Data Guru: {{ $teacher->name }}</h2>
             <!-- Formulir Edit Data -->
-            <form action="#" method="POST">
+            <form action="/admin/teacher/{{ $teacher->id }}" method="POST">
                 @csrf
-                @method('PATCH')
+                @method('PUT')
 
                 <div class="mb-3">
                     <label for="name" class="block font-semibold mb-1">Nama</label>
@@ -58,7 +58,7 @@
                     <button type="button" onclick="closeEditModal({{ $teacher->id }})"
                         class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 mr-2">Batal</button>
                     <button type="submit"
-                        class="px-4 py-2 bg-simipa-1 text-white rounded hover:bg-simipa-2">Simpan</button>
+                        class="px-4 py-2 bg-simipa-1 text-white rounded hover:bg-simipa-2">Edit</button>
                 </div>
             </form>
         </div>

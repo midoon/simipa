@@ -12,6 +12,12 @@
         </header>
         <hr class="my-4">
 
+        @error('nik')
+            <div class="flex justify-center my-3">
+                <div class="text-red-500 font-bold">{{ $message }}</div>
+            </div>
+        @enderror
+
         <div>
             <div class="relative overflow-x-auto rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right">
