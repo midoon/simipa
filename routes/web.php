@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminGradeController;
 use App\Http\Controllers\AdminTeacherController;
 use App\Http\Controllers\LoginAdminController;
 use Illuminate\Support\Facades\Route;
@@ -22,9 +23,12 @@ Route::get('/login/teacher', fn () => view('auth.login_teacher'));
 // admin
 Route::get('/admin/dashboard', [AdminController::class, 'index']);
 
-//adminteacher
+//admin teacher
 Route::get('/admin/teacher', [AdminTeacherController::class, 'index']);
 Route::post('/admin/teacher', [AdminTeacherController::class, 'store']);
 Route::put('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'update']);
 Route::delete('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'destroy']);
+
+//admin grade
+Route::get('/admin/grade',[AdminGradeController::class, 'index']);
 

@@ -12,7 +12,7 @@ class AdminTeacherController extends Controller
     public function index(){
 
         $teachers = Teacher::all();
-        return view('admin.teacher', ['teachers' => $teachers]);
+        return view('admin.teacher.teacher', ['teachers' => $teachers]);
     }
 
     public function store(Request $request){

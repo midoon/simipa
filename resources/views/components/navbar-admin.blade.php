@@ -6,7 +6,7 @@
         </div>
         <nav class="mt-8">
             <a href="/admin/teacher" class="block py-3 px-4 rounded hover:bg-simipa-2">Guru</a>
-            <a href="/#" class="block py-3 px-4 rounded hover:bg-simipa-2">Kelas</a>
+            <a href="/admin/grade" class="block py-3 px-4 rounded hover:bg-simipa-2">Kelas</a>
             <a href="/#" class="block py-3 px-4 rounded hover:bg-simipa-2">Siswa</a>
             <a href="/#" class="block py-3 px-4 rounded hover:bg-simipa-2">Mata Pelajaran</a>
             <a href="/#" class="block py-3 px-4 rounded hover:bg-simipa-2">Jadwal</a>
