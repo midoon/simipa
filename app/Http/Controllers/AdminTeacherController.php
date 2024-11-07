@@ -34,9 +34,6 @@ class AdminTeacherController extends Controller
             return back()->withErrors(['error' => 'Terjadi kesalahan saat mengupdate data.'])->withInput();
         }
 
-
-
-        return redirect("/admin/teacher");
     }
 
     public function destroy($teacherId){
