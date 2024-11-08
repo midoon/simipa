@@ -31,4 +31,5 @@ Route::delete('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'des
 
 //admin grade
 Route::get('/admin/grade',[AdminGradeController::class, 'index']);
+Route::post('/admin/grade', [AdminGradeController::class, 'store']);
 
