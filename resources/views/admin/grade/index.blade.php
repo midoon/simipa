@@ -3,10 +3,13 @@
         <!-- Header -->
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Kelas & Rombel</h1>
-            <div>
+            <div class="flex justify-center">
                 <button onclick="openCreateGradeModal()"
                     class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
                     Tambah Data Kelas
+                </button>
+                <button onclick="" class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
+                    Tambah Data Rombel
                 </button>
             </div>
         </header>
