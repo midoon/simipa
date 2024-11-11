@@ -8,7 +8,8 @@
                     class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
                     Tambah Data Kelas
                 </button>
-                <button onclick="" class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
+                <button onclick="openCreateGroupModal()"
+                    class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
                     Tambah Data Rombel
                 </button>
             </div>
@@ -164,6 +165,10 @@
 
         function closeCreateGradeModal() {
             document.getElementById('createModalGrade').classList.add('hidden');
+        }
+
+        function openCreateGroupModal() {
+
         }
     </script>
 </x-layout>
