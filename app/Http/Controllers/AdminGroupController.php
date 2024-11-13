@@ -7,4 +7,7 @@ use Illuminate\Http\Request;
 class AdminGroupController extends Controller
 {
     //
+    public function stor(Request $request){
+
+    }
 }
