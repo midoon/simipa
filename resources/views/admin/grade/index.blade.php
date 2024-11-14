@@ -3,7 +3,7 @@
         <!-- Header -->
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Kelas & Rombel</h1>
-            <div class="flex justify-center">
+            <div class="flex justify-center gap-3">
                 <button onclick="openCreateGradeModal()"
                     class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
                     Tambah Data Kelas
@@ -32,7 +32,7 @@
                                 <th scope="col" class="px-6 py-3">
                                     Nama
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-1 py-3">
                                     Opsi
                                 </th>
                             </tr>
@@ -45,7 +45,7 @@
                                     <td class="px-6 py-4">
                                         {{ $grade->name }}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-1 py-4">
                                         <div class="flex gap-3">
                                             <button>
                                                 <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1"

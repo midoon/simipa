@@ -24,6 +24,7 @@ class AdminGradeController extends Controller
         ]);
 
 
+
         try{
             Grade::create([
                 'name' => $request->name
