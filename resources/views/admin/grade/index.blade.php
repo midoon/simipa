@@ -28,7 +28,6 @@
                     <table class="w-full text-sm text-left rtl:text-right">
                         <thead class="text-xs text-simipa-1 uppercase bg-gray-300">
                             <tr>
-
                                 <th scope="col" class="px-6 py-3">
                                     Nama
                                 </th>
@@ -38,7 +37,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             @foreach ($grades as $grade)
                                 <tr class="bg-simipa-6 border-b ">
 
@@ -56,7 +54,7 @@
                                                         d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                                 </svg>
                                             </button>
-                                            <form action="" method="POST">
+                                            <form action="/admin/grade/{{ $grade->id }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" onclick="return confirmDeletion()">

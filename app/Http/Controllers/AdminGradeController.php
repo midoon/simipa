@@ -6,6 +6,7 @@ use App\Models\Grade;
 use App\Models\Group;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminGradeController extends Controller
 {
@@ -38,5 +39,11 @@ class AdminGradeController extends Controller
             return back()->withErrors(['error' => 'Terjadi kesalahan saat mengupdate data.'])->withInput();
         }
 
+    }
+
+
+    public function destroy($kelasId){
+        DB::table('grades')->delete($kelasId);
+        return redirect("/admin/grade");
     }
 }
