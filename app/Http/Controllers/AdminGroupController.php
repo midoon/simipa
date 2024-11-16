@@ -7,7 +7,13 @@ use Illuminate\Http\Request;
 class AdminGroupController extends Controller
 {
     //
-    public function stor(Request $request){
+
+    public function store(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'grade_id' => 'required',
+        ]);
+
 
     }
 }

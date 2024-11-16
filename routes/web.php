@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminGradeController;
+use App\Http\Controllers\AdminGroupController;
 use App\Http\Controllers\AdminTeacherController;
 use App\Http\Controllers\LoginAdminController;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,4 @@ Route::get('/admin/grade',[AdminGradeController::class, 'index']);
 Route::post('/admin/grade', [AdminGradeController::class, 'store']);
 Route::delete('/admin/grade/{kelasId}', [AdminGradeController::class, 'destroy']);
 
+Route::post('/admin/group',[AdminGroupController::class, 'store']);
