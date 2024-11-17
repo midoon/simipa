@@ -43,7 +43,26 @@ class AdminGradeController extends Controller
 
 
     public function destroy($kelasId){
-        DB::table('grades')->delete($kelasId);
-        return redirect("/admin/grade");
+         try{
+            $existData = [];
+
+            if (DB::table('groups')->where('grade_id', $kelasId)->exists()) {
+                array_push($existData,'rombel');
+            }
+
+            if (DB::table('subjects')->where('grade_id', $kelasId)->exists()){
+                array_push($existData,'rombel');
+            }
+
+            if (count($existData) != 0) {
+                return back()->withErrors(['kelas' =>"Kelas yang ingin anda hapus masih digunakan di data " . implode(", ",$existData)])->withInput();
+            }
+            DB::table('grades')->delete($kelasId);
+            return redirect('/admin/grade');
+        } catch (QueryException $e){
+
+            return back()->withErrors(['error' => 'Terjadi kesalahan saat hapus data.'])->withInput();
+        }
+
     }
 }

@@ -15,6 +15,11 @@
             </div>
         </header>
         <hr class="my-4">
+        @error('error')
+            <div class="flex justify-center my-3">
+                <div class="text-red-500 font-bold">{{ $message }}</div>
+            </div>
+        @enderror
         @error('kelas')
             <div class="flex justify-center my-3">
                 <div class="text-red-500 font-bold">{{ $message }}</div>
