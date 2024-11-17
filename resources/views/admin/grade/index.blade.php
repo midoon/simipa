@@ -20,6 +20,11 @@
                 <div class="text-red-500 font-bold">{{ $message }}</div>
             </div>
         @enderror
+        @error('rombel')
+            <div class="flex justify-center my-3">
+                <div class="text-red-500 font-bold">{{ $message }}</div>
+            </div>
+        @enderror
 
 
         <div class="grid grid-cols-5 gap-6">
@@ -101,10 +106,10 @@
                                 <tr class="bg-simipa-6 border-b ">
 
                                     <td class="px-6 py-4">
-                                        123
+                                        {{ $group->name }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        123
+                                        {{ $group->grade->name }}
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex gap-3">
