@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Teacher;
+use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,16 +30,36 @@ class AdminTeacherController extends Controller
         } catch (QueryException $e){
             if ($e->errorInfo[1] == 1062)//kode mysql untuk duplicate data
             {
-                 return back()->withErrors(['nik' => "NIK: $request->nik sudah terdaftar."])->withInput();
+                 return back()->withErrors(['guru' => "NIK: $request->nik sudah terdaftar."])->withInput();
             }
-            return back()->withErrors(['error' => 'Terjadi kesalahan saat mengupdate data.'])->withInput();
+            return back()->withErrors(['error' => 'Terjadi kesalahan saat mengupdate data.']);
         }
 
     }
 
     public function destroy($teacherId){
-        DB::table('teachers')->delete($teacherId);
-        return redirect("/admin/teacher");
+
+        try{
+            $existData = [];
+
+            if (DB::table('schedules')->where('teacher_id', $teacherId)->exists()) {
+                array_push($existData,'jadwal');
+            }
+
+             if (DB::table('teacher_accounts')->where('teacher_id', $teacherId)->exists()) {
+                DB::table('teacher_accounts')->delete($teacherId);
+            }
+
+            if (count($existData) != 0) {
+                return back()->withErrors(['guru' =>"Guru yang ingin anda hapus masih digunakan di data " . implode(", ",$existData)]);
+            }
+
+            DB::table('teachers')->delete($teacherId);
+            return redirect("/admin/teacher");
+        } catch (Exception  $e){
+            return back()->withErrors(['error' => 'Terjadi kesalahan saat menghapus data.']);
+        }
+
     }
 
     public function update(Request $request, $teacherId){
@@ -55,7 +76,7 @@ class AdminTeacherController extends Controller
         } catch (QueryException $e){
             if ($e->errorInfo[1] == 1062)//kode mysql untuk duplicate data
             {
-                 return back()->withErrors(['nik' => "NIK: $request->nik sudah terdaftar."])->withInput();
+                 return back()->withErrors(['guru' => "NIK: $request->nik sudah terdaftar."])->withInput();
             }
             return back()->withErrors(['error' => 'Terjadi kesalahan saat mengupdate data.'])->withInput();
         }

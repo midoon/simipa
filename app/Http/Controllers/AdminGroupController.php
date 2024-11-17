@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Exception;
 
 class AdminGroupController extends Controller
 {
@@ -30,12 +31,13 @@ class AdminGroupController extends Controller
             }
             return back()->withErrors(['error' => 'Terjadi kesalahan saat mengupdate data.'])->withInput();
         }
+    }
 
+    public function destroy($groupId){
+        try {
 
+        }catch(Exception $e){
 
-
-        return redirect('/admin/grade');
-
-
+        }
     }
 }

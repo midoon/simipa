@@ -12,7 +12,7 @@
         </header>
         <hr class="my-4">
 
-        @error('nik')
+        @error('guru')
             <div class="flex justify-center my-3">
                 <div class="text-red-500 font-bold">{{ $message }}</div>
             </div>
