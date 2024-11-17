@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Group extends Model
 {
     protected $guarded = ['id'];
+    protected $with = ['grade'];
 
     public function grade(): BelongsTo{
         return $this->belongsTo(Grade::class);
