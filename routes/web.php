@@ -35,4 +35,6 @@ Route::get('/admin/grade',[AdminGradeController::class, 'index']);
 Route::post('/admin/grade', [AdminGradeController::class, 'store']);
 Route::delete('/admin/grade/{kelasId}', [AdminGradeController::class, 'destroy']);
 
+// admin group
 Route::post('/admin/group',[AdminGroupController::class, 'store']);
+Route::delete('/admin/group/{groupId}',[AdminGroupController::class, 'destroy']);
