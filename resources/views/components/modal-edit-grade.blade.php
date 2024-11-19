@@ -1,7 +1,7 @@
 <!-- resources/views/components/modal-edit-teacher.blade.php -->
 @props(['grade'])
 
-<div id="editModalGrade{{ $grade->id }}" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden ">
+<div id="editModalGrade{{ $grade->id }}" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden z-10">
     <div class="h-full flex items-center justify-center">
         <div class="bg-white rounded-lg w-1/3 p-6">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Edit Data Guru: {{ $grade->name }}</h2>
