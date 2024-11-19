@@ -56,7 +56,22 @@ class AdminGroupController extends Controller
             DB::table('groups')->delete($groupId);
             return redirect('/admin/grade');
         }catch(Exception $e){
-             return back()->withErrors(['error' => "Terjadi kesalahan saat menghapus data "]);
+            $msg = $e->getMessage();
+            return back()->withErrors(['error' => "Terjadi kesalahan saat menghapus data : $msg"]);
+        }
+    }
+
+
+    public function update(Request $request, $groupId){
+        try{
+            DB::table('groups')->where('id',$groupId)->update([
+                'name' => $request->name,
+                'grade_id' => $request->grade_id
+            ]);
+            return redirect('/admin/grade');
+        } catch(Exception $e){
+            $msg = $e->getMessage();
+            return back()->withErrors(['error' => "Terjadi kesalahan saat mengupdate data : $msg"]);
         }
     }
 }

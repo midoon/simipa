@@ -38,4 +38,6 @@ Route::put('/admin/grade/{kelasId}', [AdminGradeController::class, 'update']);
 
 // admin group
 Route::post('/admin/group',[AdminGroupController::class, 'store']);
+Route::put('/admin/group/{groupId}', [AdminGroupController::class, 'update']);
 Route::delete('/admin/group/{groupId}',[AdminGroupController::class, 'destroy']);
+
