@@ -34,6 +34,7 @@ Route::delete('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'des
 Route::get('/admin/grade',[AdminGradeController::class, 'index']);
 Route::post('/admin/grade', [AdminGradeController::class, 'store']);
 Route::delete('/admin/grade/{kelasId}', [AdminGradeController::class, 'destroy']);
+Route::put('/admin/grade/{kelasId}', [AdminGradeController::class, 'update']);
 
 // admin group
 Route::post('/admin/group',[AdminGroupController::class, 'store']);

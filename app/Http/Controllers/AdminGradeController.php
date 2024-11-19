@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Grade;
 use App\Models\Group;
+use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Catch_;
 
 class AdminGradeController extends Controller
 {
@@ -60,9 +62,21 @@ class AdminGradeController extends Controller
             DB::table('grades')->delete($kelasId);
             return redirect('/admin/grade');
         } catch (QueryException $e){
-
-            return back()->withErrors(['error' => 'Terjadi kesalahan saat hapus data.'])->withInput();
+            $msg = $e->getMessage();
+            return back()->withErrors(['error' => "Terjadi kesalahan saat hapus data: $msg"])->withInput();
         }
 
+    }
+
+    public function update(Request $request, $kelasId){
+        try {
+             DB::table('grades')->where('id', $kelasId)->update([
+                'name' => $request->name,
+            ]);
+             return redirect("/admin/grade");
+        } catch( Exception $e) {
+             $msg = $e->getMessage();
+             return back()->withErrors(['error' => "Terjadi kesalahan saat update data: $msg"])->withInput();
+        }
     }
 }
