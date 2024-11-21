@@ -14,6 +14,24 @@
         </header>
         <hr class="my-4">
 
+
+
+        @error('student')
+            <div class="flex justify-center my-3">
+                <div class="text-red-500 font-bold">{{ $message }}</div>
+            </div>
+        @enderror
+
+        @if ($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <ul class="mt-2 list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         {{ $students }}
         {{-- table --}}
         <div>

@@ -8,7 +8,8 @@ use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Stmt\Catch_;
+use Illuminate\Support\Facades\Validator;
+
 
 class AdminGradeController extends Controller
 {
@@ -22,11 +23,13 @@ class AdminGradeController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
+        $validator = Validator::make($request->all(),[
             'name' => 'required',
         ]);
 
-
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
 
         try{
             Grade::create([
@@ -69,6 +72,13 @@ class AdminGradeController extends Controller
     }
 
     public function update(Request $request, $kelasId){
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
         try {
              DB::table('grades')->where('id', $kelasId)->update([
                 'name' => $request->name,

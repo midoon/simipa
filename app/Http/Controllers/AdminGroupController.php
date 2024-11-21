@@ -7,16 +7,21 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class AdminGroupController extends Controller
 {
     //
 
     public function store(Request $request){
-        $request->validate([
+        $validator = Validator::make($request->all(),[
             'name' => 'required',
-            'grade_id' => 'required',
+            'grade_id' => 'required'
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
 
 
         try{
@@ -63,6 +68,14 @@ class AdminGroupController extends Controller
 
 
     public function update(Request $request, $groupId){
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'grade_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
         try{
             DB::table('groups')->where('id',$groupId)->update([
                 'name' => $request->name,

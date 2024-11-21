@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class AdminTeacherController extends Controller
 {
@@ -18,6 +19,16 @@ class AdminTeacherController extends Controller
 
     public function store(Request $request){
         $roles = $request->roles ?? ['guru'];
+
+         $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'nik' => 'required',
+            'gender' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
 
         try {
             Teacher::create([
@@ -64,6 +75,16 @@ class AdminTeacherController extends Controller
 
     public function update(Request $request, $teacherId){
         $roles = $request->roles ?? ['guru'];
+
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'nik' => 'required',
+            'gender' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
 
         try {
             DB::table('teachers')->where('id', $teacherId)->update([

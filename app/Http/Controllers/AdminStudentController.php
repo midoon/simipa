@@ -7,6 +7,7 @@ use App\Models\Student;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AdminStudentController extends Controller
 {
@@ -19,12 +20,16 @@ class AdminStudentController extends Controller
 
     public function store(Request $request) {
 
-        $request->validate([
+        $validator = Validator::make($request->all(),[
             'name' => 'required',
             'group_id' => 'required',
             'nisn' => 'required',
             'gender' => 'required'
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
 
         try{
             Student::create([
