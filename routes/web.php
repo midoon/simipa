@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminGradeController;
 use App\Http\Controllers\AdminGroupController;
+use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminTeacherController;
 use App\Http\Controllers\LoginAdminController;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +42,6 @@ Route::post('/admin/group',[AdminGroupController::class, 'store']);
 Route::put('/admin/group/{groupId}', [AdminGroupController::class, 'update']);
 Route::delete('/admin/group/{groupId}',[AdminGroupController::class, 'destroy']);
 
+// admin student
+Route::get('/admin/student', [AdminStudentController::class, 'index']);
+Route::post('/admin/student', [AdminStudentController::class, 'store']);

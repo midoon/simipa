@@ -17,8 +17,8 @@ return new class extends Migration
                  table: 'groups', indexName: 'student_group_id'
             );
             $table->string('name');
-            $table->string('nisn');
-            $table->enum('gender',['laki-laki','perempuan']);
+            $table->string('nisn')->unique();
+            $table->enum('gender',['laki-laki','perempuan'])->default('laki-laki');
             $table->timestamps();
         });
     }
