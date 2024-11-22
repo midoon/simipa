@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grade;
 use App\Models\Group;
 use App\Models\Student;
 use Exception;
@@ -15,7 +16,8 @@ class AdminStudentController extends Controller
     public function index(){
         $students = Student::all();
         $groups = Group::all();
-        return view('admin.student.index', ['students' => $students, 'groups' => $groups]);
+        $grades = Grade::all();
+        return view('admin.student.index', ['students' => $students, 'groups' => $groups, 'grades' => $grades]);
     }
 
     public function store(Request $request) {

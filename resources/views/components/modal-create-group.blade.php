@@ -24,7 +24,7 @@
 
                 <div class="mb-3">
                     <label for="gradeSelect">Pilih Kelas</label>
-                    <select name="grade_id" id="gradeSelect" class="px-2 py-2 w-full">
+                    <select name="grade_id" id="gradeSelect" class="border px-2 py-2 w-full">
                         @foreach ($grades as $grade)
                             <option value="{{ $grade->id }}">{{ $grade->name }}</option>
                         @endforeach
