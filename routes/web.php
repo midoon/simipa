@@ -45,3 +45,4 @@ Route::delete('/admin/group/{groupId}',[AdminGroupController::class, 'destroy'])
 // admin student
 Route::get('/admin/student', [AdminStudentController::class, 'index']);
 Route::post('/admin/student', [AdminStudentController::class, 'store']);
+Route::get('/admin/student/test', [AdminStudentController::class, 'test']);

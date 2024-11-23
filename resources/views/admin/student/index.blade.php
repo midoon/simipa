@@ -6,10 +6,7 @@
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Siswa</h1>
             <div>
-                <button onclick="openCreateStudenModal()"
-                    class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
-                    Tambah Data Siswa
-                </button>
+
             </div>
         </header>
         <hr class="my-4">
@@ -36,20 +33,55 @@
         <div>
             {{-- filter --}}
             <div class="mb-3">
-                <form action="#" method="GET" class="flex gap-2  items-center">
-                    <div class=" w-1/6">
-                        <select name="grade_id" id="gradeSelect" class="px-2 py-2 w-full rounded-lg shadow-md">
-                            <option disabled selected>Filter Rombel</option>
-                            @foreach ($groups as $group)
-                                <option value="{{ $group->id }}">
-                                    {{ $group->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <!-- Tombol Aksi -->
-                    <button type="submit"
-                        class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
-                </form>
+                <div class="flex gap-3 border">
+                    <form action="/admin/student/test" method="GET" class="flex gap-2  items-center w-1/4">
+                        <div class="w-full">
+                            <select name="grade_id" id="gradeSelect" class="px-2 py-2 w-full rounded-lg shadow-md">
+                                <option disabled selected>Filter Rombel</option>
+                                @foreach ($groups as $group)
+                                    <option value="{{ $group->id }}">
+                                        {{ $group->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <!-- Tombol Aksi -->
+                        <button type="submit"
+                            class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
+                    </form>
+                    <form action="/admin/student/test" method="GET" class="flex gap-2  items-center w-1/4">
+                        <div class="w-full">
+                            <select name="grade_id" id="gradeSelect" class="px-2 py-2 w-full rounded-lg shadow-md">
+                                <option disabled selected>Filter Kelas</option>
+                                @foreach ($grades as $grade)
+                                    <option value="{{ $grade->id }}">
+                                        {{ $grade->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <!-- Tombol Aksi -->
+                        <button type="submit"
+                            class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
+                    </form>
+                    <form action="/admin/student/test" method="GET" class="flex gap-2  items-center w-1/4">
+                        <div class="w-full">
+                            <input type="text" placeholder="Cari berdasarkan nama" name="name"
+                                class="px-2 py-2 w-full rounded-lg shadow-md">
+                        </div>
+                        <!-- Tombol Aksi -->
+                        <button type="submit"
+                            class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
+                    </form>
+                    <form action="/admin/student/test" method="GET" class="flex gap-2  items-center w-1/4">
+                        <!-- Tombol Aksi -->
+                        <button type="submit"
+                            class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">Hapus
+                            Filter</button>
+                        <button onclick="openCreateStudenModal()"
+                            class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
+                            Tambah Data Siswa
+                        </button>
+                    </form>
+                </div>
             </div>
 
             {{-- content --}}

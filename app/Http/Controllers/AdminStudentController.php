@@ -13,6 +13,24 @@ use Illuminate\Support\Facades\Validator;
 class AdminStudentController extends Controller
 {
     //
+
+    public function test(Request $request){
+
+        $query = $request->query();
+
+        if($request->filled('kelas')){
+            dd($query);
+        } else {
+            dd('zong');
+        }
+
+        // if (count($query) != 0){
+        //     dd($request->query());
+        // } else {
+        //     dd("tidak ada cuy");
+        // }
+    }
+
     public function index(){
         $students = Student::all();
         $groups = Group::all();
