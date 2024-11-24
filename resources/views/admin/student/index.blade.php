@@ -6,8 +6,13 @@
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Siswa</h1>
             <div>
+                <button onclick="openCreateStudenModal()"
+                    class="px-2 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 w-full">
+                    Tambah Data Siswa
+                </button>
 
             </div>
+
         </header>
         <hr class="my-4">
 
@@ -34,9 +39,10 @@
             {{-- filter --}}
             <div class="mb-3">
                 <div class="flex gap-3 border">
-                    <form action="/admin/student/test" method="GET" class="flex gap-2  items-center w-1/4">
+                    {{-- by group --}}
+                    <form action="/admin/student" method="GET" class="flex gap-2  items-center w-1/4">
                         <div class="w-full">
-                            <select name="grade_id" id="gradeSelect" class="px-2 py-2 w-full rounded-lg shadow-md">
+                            <select name="group_id" id="groupSelect" class="px-2 py-2 w-full rounded-lg shadow-md">
                                 <option disabled selected>Filter Rombel</option>
                                 @foreach ($groups as $group)
                                     <option value="{{ $group->id }}">
@@ -48,7 +54,8 @@
                         <button type="submit"
                             class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
                     </form>
-                    <form action="/admin/student/test" method="GET" class="flex gap-2  items-center w-1/4">
+                    {{-- by grade --}}
+                    <form action="/admin/student" method="GET" class="flex gap-2  items-center w-1/4">
                         <div class="w-full">
                             <select name="grade_id" id="gradeSelect" class="px-2 py-2 w-full rounded-lg shadow-md">
                                 <option disabled selected>Filter Kelas</option>
@@ -62,7 +69,8 @@
                         <button type="submit"
                             class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
                     </form>
-                    <form action="/admin/student/test" method="GET" class="flex gap-2  items-center w-1/4">
+                    {{-- by name --}}
+                    <form action="/admin/student" method="GET" class="flex gap-2  items-center w-1/4">
                         <div class="w-full">
                             <input type="text" placeholder="Cari berdasarkan nama" name="name"
                                 class="px-2 py-2 w-full rounded-lg shadow-md">
@@ -71,16 +79,14 @@
                         <button type="submit"
                             class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
                     </form>
-                    <form action="/admin/student/test" method="GET" class="flex gap-2  items-center w-1/4">
-                        <!-- Tombol Aksi -->
-                        <button type="submit"
-                            class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">Hapus
-                            Filter</button>
-                        <button onclick="openCreateStudenModal()"
-                            class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
-                            Tambah Data Siswa
-                        </button>
-                    </form>
+                    {{-- delete filter --}}
+                    <div class="flex justify-end w-1/4">
+                        <a href="/admin/student">
+                            <button type="submit"
+                                class="px-8 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">Hapus
+                                Filter</button>
+                        </a>
+                    </div>
                 </div>
             </div>
 

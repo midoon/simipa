@@ -8,6 +8,7 @@ use App\Models\Student;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AdminStudentController extends Controller
@@ -18,8 +19,8 @@ class AdminStudentController extends Controller
 
         $query = $request->query();
 
-        if($request->filled('kelas')){
-            dd($query);
+        if(isset($query['grade_id'])){
+            dd('grade');
         } else {
             dd('zong');
         }
@@ -31,11 +32,34 @@ class AdminStudentController extends Controller
         // }
     }
 
-    public function index(){
-        $students = Student::all();
-        $groups = Group::all();
-        $grades = Grade::all();
-        return view('admin.student.index', ['students' => $students, 'groups' => $groups, 'grades' => $grades]);
+    public function index(Request $request){
+        try {
+            $query = $request->query();
+            $students = Student::all();
+            $groups = Group::all();
+            $grades = Grade::all();
+
+            if(isset($query['group_id'])){
+               $students = Student::with('group')->where('group_id', $query['group_id'])->get();
+            }
+            if (isset($query['grade_id'])){
+                $gradeId = $query['grade_id'];
+                $students = Student::with('group.grade')->whereHas('group.grade', function ($query) use ($gradeId) {
+                    $query->where('id',$gradeId);
+                })->get();
+            }
+            if (isset($query['name'])) {
+                 $students = Student::with('group')->where('name', 'like', '%' . $query['name'] . '%')->get();
+            }
+
+
+            //dd($students);
+            return view('admin.student.index', ['students' => $students, 'groups' => $groups, 'grades' => $grades]);
+        } catch (Exception $e) {
+            $msg = $e->getMessage();
+            return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data : $msg"]);
+        }
+
     }
 
     public function store(Request $request) {
