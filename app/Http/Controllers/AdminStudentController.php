@@ -13,24 +13,6 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminStudentController extends Controller
 {
-    //
-
-    public function test(Request $request){
-
-        $query = $request->query();
-
-        if(isset($query['grade_id'])){
-            dd('grade');
-        } else {
-            dd('zong');
-        }
-
-        // if (count($query) != 0){
-        //     dd($request->query());
-        // } else {
-        //     dd("tidak ada cuy");
-        // }
-    }
 
     public function index(Request $request){
         try {
@@ -89,6 +71,33 @@ class AdminStudentController extends Controller
                  return back()->withErrors(['student' => "NISN: $request->nisn sudah terdaftar."]);
             }
             return back()->withErrors(['error' => 'Terjadi kesalahan saat mengupdate data.']);
+        }
+    }
+
+    public function destroy($studentId){
+        try {
+            $exisData = [];
+            if (DB::table('fees')->where('student_id', $studentId)->exists()) {
+                array_push($existData,'tagihan');
+            }
+            // nanti kita ubah mekanisme presensinya serta DB nya
+            if (DB::table('presences')->where('student_id', $studentId)->exists()) {
+                array_push($existData,'presensi');
+            }
+
+            if (DB::table('payments')->where('student_id', $studentId)->exists()) {
+                array_push($existData,'pembayaran');
+            }
+
+            if (count($exisData) != 0){
+                return back()->withErrors(['Siswa' =>"siswa yang ingin anda hapus masih digunakan di data " . implode(", ",$existData)]);
+            }
+
+            DB::table('students')->delete($studentId);
+            return redirect('/admin/student');
+        } catch (Exception $e) {
+             $msg = $e->getMessage();
+            return back()->withErrors(['error' => "Terjadi kesalahan saat menghapus data : $msg"]);
         }
     }
 }
