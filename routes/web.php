@@ -53,4 +53,5 @@ Route::put('/admin/student/{studentId}', [AdminStudentController::class, 'update
 //admin subject
 Route::get('/admin/subject', [AdminSubjectController::class, 'index']);
 Route::post('/admin/subject', [AdminSubjectController::class, 'store']);
+Route::delete('/admin/subject/{subjectId}', [AdminSubjectController::class, 'destroy']);
 

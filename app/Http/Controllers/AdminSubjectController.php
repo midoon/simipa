@@ -6,6 +6,7 @@ use App\Models\Grade;
 use App\Models\Subject;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AdminSubjectController extends Controller
@@ -34,6 +35,23 @@ class AdminSubjectController extends Controller
         ]);
 
         return redirect('/admin/subject');
+        } catch (Exception $e) {
+            $msg = $e->getMessage();
+            return back()->withErrors(['error' => "Terjadi kesalahan saat menambahs data : $msg"]);
+        }
+    }
+
+    public function destroy($subjectId){
+        try {
+            $exisData = [];
+            if (DB::table('schedules')->where('subject_id', $subjectId)->exists()) {
+                array_push($existData,'tagihan');
+            }
+             if (count($exisData) != 0){
+                return back()->withErrors(['Siswa' =>"siswa yang ingin anda hapus masih digunakan di data " . implode(", ",$existData)]);
+            }
+            DB::table('subjects')->delete($subjectId);
+            return redirect('/admin/subject');
         } catch (Exception $e) {
             $msg = $e->getMessage();
             return back()->withErrors(['error' => "Terjadi kesalahan saat menambahs data : $msg"]);
