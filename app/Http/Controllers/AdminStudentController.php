@@ -100,4 +100,32 @@ class AdminStudentController extends Controller
             return back()->withErrors(['error' => "Terjadi kesalahan saat menghapus data : $msg"]);
         }
     }
+
+    public function update(Request $request, $studentId) {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'nisn' => 'required',
+            'gender' => 'required',
+            'group_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+        try {
+            DB::table('students')->where('id', $studentId)->update([
+                'name' => $request->name,
+                'group_id' => $request->group_id,
+                'nisn' => $request->nisn,
+                'gender' => $request->gender,
+            ]);
+             return redirect("/admin/student");
+        } catch (QueryException $e){
+            if ($e->errorInfo[1] == 1062)//kode mysql untuk duplicate data
+            {
+                 return back()->withErrors(['student' => "NISN: $request->nisn sudah terdaftar."]);
+            }
+            return back()->withErrors(['error' => 'Terjadi kesalahan saat mengupdate data.']);
+        }
+    }
 }

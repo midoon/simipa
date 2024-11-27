@@ -7,7 +7,8 @@
         <div class="bg-white rounded-lg w-1/3 p-6">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Edit Data Siswa</h2>
             <!-- Formulir Tambah Data -->
-            <form action="" method="POST">
+            <form action="/admin/student/{{ $student->id }}" method="POST">
+                @method('PUT')
                 @csrf
                 <div class="mb-3">
                     <div class="flex-1 space-y-2 md:flex md:items-center md:space-x-3 md:space-y-0">
