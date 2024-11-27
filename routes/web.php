@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminGradeController;
 use App\Http\Controllers\AdminGroupController;
 use App\Http\Controllers\AdminStudentController;
+use App\Http\Controllers\AdminSubjectController;
 use App\Http\Controllers\AdminTeacherController;
 use App\Http\Controllers\LoginAdminController;
 use Illuminate\Support\Facades\Route;
@@ -47,4 +48,9 @@ Route::get('/admin/student', [AdminStudentController::class, 'index']);
 Route::post('/admin/student', [AdminStudentController::class, 'store']);
 Route::delete('/admin/student/{studentId}', [AdminStudentController::class, 'destroy']);
 Route::put('/admin/student/{studentId}', [AdminStudentController::class, 'update']);
+
+
+//admin subject
+Route::get('/admin/subject', [AdminSubjectController::class, 'index']);
+Route::post('/admin/subject', [AdminSubjectController::class, 'store']);
 
