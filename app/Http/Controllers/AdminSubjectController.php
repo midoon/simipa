@@ -23,18 +23,18 @@ class AdminSubjectController extends Controller
             'name' => 'required',
             'grade_id' => 'required',
             'description' => 'required',
-        ]);
+            ]);
 
-        if ($validator->fails()) {
-            return back()->withErrors($validator);
-        }
-        Subject::create([
-            'name' => $request->name,
-            'grade_id' => $request->grade_id,
-            'description' => $request->description
-        ]);
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+            Subject::create([
+                'name' => $request->name,
+                'grade_id' => $request->grade_id,
+                'description' => $request->description
+            ]);
 
-        return redirect('/admin/subject');
+            return redirect('/admin/subject');
         } catch (Exception $e) {
             $msg = $e->getMessage();
             return back()->withErrors(['error' => "Terjadi kesalahan saat menambahs data : $msg"]);
@@ -55,6 +55,30 @@ class AdminSubjectController extends Controller
         } catch (Exception $e) {
             $msg = $e->getMessage();
             return back()->withErrors(['error' => "Terjadi kesalahan saat menambahs data : $msg"]);
+        }
+    }
+
+    public function update(Request $request, $subjectId){
+        try{
+            $validator = Validator::make($request->all(),[
+                'name' => 'required',
+                'grade_id' => 'required',
+                'description' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+
+            DB::table('subjects')->where('id', $subjectId)->update([
+                'name' => $request->name,
+                'grade_id' => $request->grade_id,
+                'description' => $request->description
+            ]);
+            return redirect('/admin/subject');
+        }catch (Exception $e){
+            $msg = $e->getMessage();
+            return back()->withErrors(['error' => "Terjadi kesalahan saat mengedit data : $msg"]);
         }
     }
 }
