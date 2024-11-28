@@ -95,7 +95,8 @@
                                     {{ $subject->grade->name }}
                                 </td>
                                 <td class="px-6 py-4 ">
-                                    {{ Str::limit($subject->description, 5, '...') }}
+                                    <p class="hover:text-blue-500 hover:cursor-pointer"
+                                        onclick="openShowDescription({{ $subject->id }})">Lihat selengkapnya...</p>
                                 </td>
                                 <td class="px-6 py-4 ">
                                     <div class="flex gap-3">
@@ -125,6 +126,7 @@
                                 </td>
                             </tr>
                             <x-modal-edit-subject :subject="$subject" :grades="$grades"></x-modal-edit-subject>
+                            <x-modal-show-subject-desc :subject="$subject"></x-modal-show-subject-desc>
                         @endforeach
                     </tbody>
                 </table>
@@ -155,6 +157,15 @@
 
         function closeEditSubjectModal(id) {
             document.getElementById('editModalSubject' + id).classList.add('hidden');
+        }
+
+        // show more
+        function openShowDescription(id) {
+            document.getElementById('showModalSubjectDesc' + id).classList.remove('hidden');
+        }
+
+        function closeShowDescription(id) {
+            document.getElementById('showModalSubjectDesc' + id).classList.add('hidden');
         }
     </script>
 
