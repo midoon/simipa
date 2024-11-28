@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminGradeController;
 use App\Http\Controllers\AdminGroupController;
+use App\Http\Controllers\AdminScheduleController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminSubjectController;
 use App\Http\Controllers\AdminTeacherController;
@@ -56,3 +57,4 @@ Route::post('/admin/subject', [AdminSubjectController::class, 'store']);
 Route::delete('/admin/subject/{subjectId}', [AdminSubjectController::class, 'destroy']);
 Route::put('/admin/subject/{subjectId}', [AdminSubjectController::class, 'update']);
 
+Route::get('/admin/schedule', [AdminScheduleController::class, 'index']);
