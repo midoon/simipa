@@ -12,9 +12,29 @@ use Illuminate\Support\Facades\Validator;
 class AdminSubjectController extends Controller
 {
     public function index(Request $request){
-        $grades = Grade::all();
-        $subjects = Subject::all();
-        return view('admin.subject.index', ['grades' => $grades, 'subjects' => $subjects]);
+
+        try{
+            $query = $request->query();
+
+            $subjectQuery = Subject::query()->with('grade');
+
+            $subjectQuery->when(isset($query['grade_id']), function ($q) use ($query) {
+                $q->where('grade_id', $query['grade_id']);
+            });
+
+            $subjectQuery->when(isset($query['name']), function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query['name'] . '%');
+            });
+
+            $subjects = $subjectQuery->get();
+            $grades = Grade::all();
+            return view('admin.subject.index', ['grades' => $grades, 'subjects' => $subjects]);
+
+        } catch(Exception $e){
+             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
+        }
+
+
     }
 
     public function store(Request $request) {

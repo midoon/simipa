@@ -32,67 +32,103 @@
         @endif
 
         {{-- table --}}
-        <div class="relative overflow-x-auto rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right">
-                <thead class="text-xs text-simipa-1 uppercase bg-gray-300">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Nama
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Kelas
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Deskripsi
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Opsi
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($subjects as $subject)
-                        <tr class="bg-simipa-6 border-b">
-                            <td class="px-6 py-4 ">
-                                {{ $subject->name }}
-                            </td>
-                            <td class="px-6 py-4 ">
-                                {{ $subject->grade->name }}
-                            </td>
-                            <td class="px-6 py-4 ">
-                                {{ Str::limit($subject->description, 5, '...') }}
-                            </td>
-                            <td class="px-6 py-4 ">
-                                <div class="flex gap-3">
-                                    <button onclick="openEditSubjectModal({{ $subject->id }})">
-                                        <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
-                                        </svg>
-                                    </button>
-                                    <form action="/admin/subject/{{ $subject->id }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" onclick="return confirmDeletion()">
-                                            <svg class="w-6 h-6 text-grey-800 hover:text-red-700" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="none" viewBox="0 0 24 24">
+        <div>
+            {{-- filter --}}
+            <div class="mb-3 flex gap-3">
+                <form action="/admin/subject" method="GET" class="flex gap-2  items-center w-1/2">
+                    <div class="w-full">
+                        <select name="grade_id" id="gradeSelect" class="px-2 py-2 w-full rounded-lg shadow-md">
+                            <option disabled selected>Filter Kelas</option>
+                            @foreach ($grades as $grade)
+                                <option value="{{ $grade->id }}">
+                                    {{ $grade->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <!-- Tombol Aksi -->
+                    <button type="submit"
+                        class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
+                </form>
+                <form action="/admin/subject" method="GET" class="flex gap-2  items-center w-1/2">
+                    <div class="w-full">
+                        <input type="text" placeholder="Cari berdasarkan nama" name="name"
+                            class="px-2 py-2 w-full rounded-lg shadow-md">
+                    </div>
+                    <!-- Tombol Aksi -->
+                    <button type="submit"
+                        class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
+                </form>
+                <div class="flex justify-end  w-full">
+                    <a href="/admin/subject">
+                        <button type="submit"
+                            class="px-8 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">Hapus
+                            Filter</button>
+                    </a>
+                </div>
+            </div>
+            {{-- main table --}}
+            <div class="relative overflow-x-auto rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right">
+                    <thead class="text-xs text-simipa-1 uppercase bg-gray-300">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Nama
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Kelas
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Deskripsi
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Opsi
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($subjects as $subject)
+                            <tr class="bg-simipa-6 border-b">
+                                <td class="px-6 py-4 ">
+                                    {{ $subject->name }}
+                                </td>
+                                <td class="px-6 py-4 ">
+                                    {{ $subject->grade->name }}
+                                </td>
+                                <td class="px-6 py-4 ">
+                                    {{ Str::limit($subject->description, 5, '...') }}
+                                </td>
+                                <td class="px-6 py-4 ">
+                                    <div class="flex gap-3">
+                                        <button onclick="openEditSubjectModal({{ $subject->id }})">
+                                            <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round"
                                                     stroke-linejoin="round" stroke-width="2"
-                                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                                    d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                             </svg>
                                         </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        <x-modal-edit-subject :subject="$subject" :grades="$grades"></x-modal-edit-subject>
-                    @endforeach
-                </tbody>
-            </table>
+                                        <form action="/admin/subject/{{ $subject->id }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="return confirmDeletion()">
+                                                <svg class="w-6 h-6 text-grey-800 hover:text-red-700" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            <x-modal-edit-subject :subject="$subject" :grades="$grades"></x-modal-edit-subject>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </x-navbar-admin>
 
