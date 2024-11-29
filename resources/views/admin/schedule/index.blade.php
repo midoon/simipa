@@ -4,7 +4,8 @@
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Jadwal Guru</h1>
             <div>
-                <button onclick="" class="px-2 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 w-full">
+                <button onclick="openCreateScheduleModal()"
+                    class="px-2 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 w-full">
                     Tambah Data Jadwal
                 </button>
 
@@ -68,52 +69,54 @@
                     <tbody>
 
 
-                        <tr class="bg-simipa-6 border-b">
-                            <td class="px-6 py-4 ">
-                                1-A
-                            </td>
-                            <td class="px-6 py-4 ">
-                                Fiqih
-                            </td>
-                            <td class="px-6 py-4 ">
-                                jhon
-                            </td>
-                            <td class="px-6 py-4 ">
-                                senin
-                            </td>
-                            <td class="px-6 py-4 ">
-                                8.00
-                            </td>
-                            <td class="px-6 py-4 ">
-                                9.00
-                            </td>
-                            <td class="px-6 py-4 ">
-                                <div class="flex gap-3">
-                                    <button onclick="" data-target="">
-                                        <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
-                                        </svg>
-                                    </button>
-                                    <form action="" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" onclick="return confirmDeletion()">
-                                            <svg class="w-6 h-6 text-grey-800 hover:text-red-700" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                fill="none" viewBox="0 0 24 24">
+                        @foreach ($schedules as $schedule)
+                            <tr class="bg-simipa-6 border-b">
+                                <td class="px-6 py-4 ">
+                                    {{ $schedule->group->name }}
+                                </td>
+                                <td class="px-6 py-4 ">
+                                    {{ $schedule->subject->name }}
+                                </td>
+                                <td class="px-6 py-4 ">
+                                    {{ $schedule->teacher->name }}
+                                </td>
+                                <td class="px-6 py-4 ">
+                                    {{ $schedule->day_of_week }}
+                                </td>
+                                <td class="px-6 py-4 ">
+                                    {{ $schedule->start_time }}
+                                </td>
+                                <td class="px-6 py-4 ">
+                                    {{ $schedule->end_time }}
+                                </td>
+                                <td class="px-6 py-4 ">
+                                    <div class="flex gap-3">
+                                        <button onclick="" data-target="">
+                                            <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round"
                                                     stroke-linejoin="round" stroke-width="2"
-                                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                                    d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                             </svg>
                                         </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
+                                        <form action="" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="return confirmDeletion()">
+                                                <svg class="w-6 h-6 text-grey-800 hover:text-red-700" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
 
 
                     </tbody>
@@ -121,4 +124,30 @@
             </div>
         </div>
     </x-navbar-admin>
+
+    <x-modal-create-schedule :groups="$groups" :teachers="$teachers" :subjects="$subjects"></x-modal-create-schedule>
+
+    <script>
+        function confirmDeletion() {
+            return confirm("Apakah Anda yakin ingin menghapusnya?");
+        }
+
+        // create
+        function openCreateScheduleModal() {
+            document.getElementById('createModalSchedule').classList.remove('hidden');
+        }
+
+        function closeCreateScheduleModal() {
+            document.getElementById('createModalSchedule').classList.add('hidden');
+        }
+
+        // edit
+        function openEditScheduleModal(id) {
+            document.getElementById('editModalSchedule' + id).classList.remove('hidden');
+        }
+
+        function closeEditScheduleModal(id) {
+            document.getElementById('editModalSchedule' + id).classList.add('hidden');
+        }
+    </script>
 </x-layout>

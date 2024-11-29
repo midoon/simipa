@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('teacher_id')->constrained(
                  table: 'teachers', indexName: 'schedule_teacher_id'
             );
-            $table->enum('day_of_week',['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabut', 'minggu']);
+            $table->enum('day_of_week',['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu']);
             $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();
