@@ -36,6 +36,69 @@
         {{-- table --}}
         <div>
             {{-- filter --}}
+            <div class="mb-3 flex gap-3">
+                <form action="/admin/schedule" method="GET" class="flex gap-2  items-center w-1/2">
+                    <div class="w-full">
+                        <select name="group_id" id="groupSelect" class="px-2 py-2 w-full rounded-lg shadow-md">
+                            <option disabled selected>Filter Rombel</option>
+                            @foreach ($groups as $group)
+                                <option value="{{ $group->id }}">
+                                    {{ $group->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <!-- Tombol Aksi -->
+                    <button type="submit"
+                        class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
+                </form>
+                <form action="/admin/schedule" method="GET" class="flex gap-2  items-center w-1/2">
+                    <div class="w-full">
+                        <select name="teacher_id" id="teacherSelect" class="px-2 py-2 w-full rounded-lg shadow-md">
+                            <option disabled selected>Filter Guru</option>
+                            @foreach ($teachers as $teacher)
+                                <option value="{{ $teacher->id }}">
+                                    {{ $teacher->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <!-- Tombol Aksi -->
+                    <button type="submit"
+                        class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
+                </form>
+                <form action="/admin/schedule" method="GET" class="flex gap-2  items-center w-1/2">
+                    <div class="w-full">
+                        <select name="day_of_week" id="daySelect" class="px-2 py-2 w-full rounded-lg shadow-md">
+                            <option disabled selected>Filter Hari</option>
+                            <option value="senin">Senin</option>
+                            <option value="selasa">Selasa</option>
+                            <option value="rabu">Rabu</option>
+                            <option value="kamis">kamis</option>
+                            <option value="jumat">Jumat</option>
+                            <option value="sabtu">Sabtu</option>
+                            <option value="minggu">minggu</option>
+                        </select>
+                    </div>
+                    <!-- Tombol Aksi -->
+                    <button type="submit"
+                        class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
+                </form>
+                <form action="/admin/schedule" method="GET" class="flex gap-2  items-center w-1/2">
+                    <div class="w-full">
+                        <input type="text" placeholder="Cari berdasarkan nama" name="name"
+                            class="px-2 py-2 w-full rounded-lg shadow-md">
+                    </div>
+                    <!-- Tombol Aksi -->
+                    <button type="submit"
+                        class="px-4 py-1 bg-simipa-1 text-white rounded hover:bg-simipa-2">Cari</button>
+                </form>
+                <div class="flex justify-end ">
+                    <a href="/admin/schedule">
+                        <button type="submit"
+                            class="px-8 py-2 text-sm bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">Hapus
+                            Filter</button>
+                    </a>
+                </div>
+            </div>
 
 
             {{-- content --}}
@@ -104,9 +167,10 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" onclick="return confirmDeletion()">
-                                                <svg class="w-6 h-6 text-grey-800 hover:text-red-700" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="none" viewBox="0 0 24 24">
+                                                <svg class="w-6 h-6 text-grey-800 hover:text-red-700"
+                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" fill="none"
+                                                    viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round"
                                                         stroke-linejoin="round" stroke-width="2"
                                                         d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />

@@ -12,12 +12,40 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminScheduleController extends Controller
 {
-    public function index(){
-        $schedules = Schedule::all();
-        $teachers = Teacher::all();
-        $groups = Group::all();
-        $subjects = Subject::all();
-        return view('admin.schedule.index', ['schedules' => $schedules, 'teachers' => $teachers, 'groups' => $groups, 'subjects' => $subjects]);
+    public function index(Request $request){
+
+        try{
+            $query = $request->query();
+            $scheduleQuery = Schedule::query()->with(['group', 'teacher', 'subject']);
+
+            $scheduleQuery->when(isset($query['group_id']), function($q) use ($query){
+                $q->where('group_id', $query['group_id']);
+            });
+
+            $scheduleQuery->when(isset($query['teacher_id']), function($q) use ($query){
+                $q->where('teacher_id', $query['teacher_id']);
+            });
+
+            $scheduleQuery->when(isset($query['day_of_week']), function($q) use ($query){
+                $q->where('day_of_week', $query['day_of_week']);
+            });
+
+            $scheduleQuery->when(isset($query['name']), function ($q) use ($query) {
+               $q->whereHas('subject', function($subQuery) use ($query){
+                $subQuery->where('name', 'like', '%' . $query['name'] . '%');
+               });
+            });
+
+            $schedules = $scheduleQuery->get();
+            $teachers = Teacher::all();
+            $groups = Group::all();
+            $subjects = Subject::all();
+            return view('admin.schedule.index', ['schedules' => $schedules, 'teachers' => $teachers, 'groups' => $groups, 'subjects' => $subjects]);
+        } catch (Exception $e) {
+            return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
+        }
+
+
     }
 
     public function store(Request $request){
