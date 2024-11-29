@@ -14,35 +14,49 @@ use Illuminate\Support\Facades\Validator;
 class AdminStudentController extends Controller
 {
 
-    public function index(Request $request){
+    public function index(Request $request) {
         try {
+            // Ambil query parameter
             $query = $request->query();
-            $students = Student::all();
+
+            // Mulai membangun query untuk Student
+            $studentsQuery = Student::query()->with('group.grade');
+
+            // Filter berdasarkan group_id jika ada
+            $studentsQuery->when(isset($query['group_id']), function ($q) use ($query) {
+                $q->where('group_id', $query['group_id']);
+            });
+
+            // Filter berdasarkan grade_id jika ada
+            $studentsQuery->when(isset($query['grade_id']), function ($q) use ($query) {
+                $q->whereHas('group.grade', function ($subQuery) use ($query) {
+                    $subQuery->where('id', $query['grade_id']);
+                });
+            });
+
+            // Filter berdasarkan nama jika ada
+            $studentsQuery->when(isset($query['name']), function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query['name'] . '%');
+            });
+
+            // Eksekusi query
+            $students = $studentsQuery->get();
+
+            // Ambil data groups dan grades
             $groups = Group::all();
             $grades = Grade::all();
 
-            if(isset($query['group_id'])){
-               $students = Student::with('group')->where('group_id', $query['group_id'])->get();
-            }
-            if (isset($query['grade_id'])){
-                $gradeId = $query['grade_id'];
-                $students = Student::with('group.grade')->whereHas('group.grade', function ($query) use ($gradeId) {
-                    $query->where('id',$gradeId);
-                })->get();
-            }
-            if (isset($query['name'])) {
-                 $students = Student::with('group')->where('name', 'like', '%' . $query['name'] . '%')->get();
-            }
-
-
-            //dd($students);
-            return view('admin.student.index', ['students' => $students, 'groups' => $groups, 'grades' => $grades]);
+            // Tampilkan view
+            return view('admin.student.index', [
+                'students' => $students,
+                'groups' => $groups,
+                'grades' => $grades,
+            ]);
         } catch (Exception $e) {
-            $msg = $e->getMessage();
-            return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data : $msg"]);
+            return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
         }
-
     }
+
 
     public function store(Request $request) {
 
