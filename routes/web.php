@@ -59,3 +59,4 @@ Route::put('/admin/subject/{subjectId}', [AdminSubjectController::class, 'update
 
 Route::get('/admin/schedule', [AdminScheduleController::class, 'index']);
 Route::post('/admin/schedule', [AdminScheduleController::class, 'store']);
+Route::delete('/admin/schedule/{scheduleId}', [AdminScheduleController::class, 'destroy']);

@@ -8,6 +8,7 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AdminScheduleController extends Controller
@@ -73,6 +74,14 @@ class AdminScheduleController extends Controller
             ]);
             return redirect('/admin/schedule');
         } catch (Exception $e){
+            return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
+        }
+    }
+
+    public function destroy($scheduleId){
+        try{
+            DB::table('schedules')->delete($scheduleId);
+        } catch (Exception $e) {
             return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
         }
     }
