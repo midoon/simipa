@@ -19,8 +19,8 @@
                 </form>
                 <div class="mt-8">
                     <h3 class="text-simipa-1 font-medium text-center text-sm">Sudah mempunyai akun? login <a
-                            href="/login/teacher" class="hover:underline text-blue-500">disini</a></h3>
-                    <h3 class="text-simipa-2 text-center text-sm mt-5 hover:underline"><a href="/login/admin">Login
+                            href="/teacher/login" class="hover:underline text-blue-500">disini</a></h3>
+                    <h3 class="text-simipa-2 text-center text-sm mt-5 hover:underline"><a href="/admin/login">Login
                             sebagai
                             admin</a></h3>
                 </div>

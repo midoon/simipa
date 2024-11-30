@@ -41,4 +41,13 @@ class LoginAdminController extends Controller
         return redirect("/admin/dashboard");
 
     }
+
+    public function logout(Request $request){
+        // Hapus session
+        $request->session()->forget('user');
+        $request->session()->flush();
+
+        // Redirect ke halaman login
+        return redirect('/admin/login')->with('success', 'Anda berhasil logout');
+    }
 }

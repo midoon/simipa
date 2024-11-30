@@ -20,7 +20,7 @@
                 <div class="mt-8">
                     <h3 class="text-simipa-1 font-medium text-center text-sm">Belum mempunyai akun? daftar <a
                             href="/register" class="hover:underline text-blue-500">disini</a></h3>
-                    <h3 class="text-simipa-2 text-center text-sm mt-5 hover:underline"><a href="/login/admin">Login
+                    <h3 class="text-simipa-2 text-center text-sm mt-5 hover:underline"><a href="/admin/login">Login
                             sebagai
                             admin</a></h3>
                 </div>

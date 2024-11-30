@@ -9,7 +9,7 @@
                     </div>
                 @endif
                 <h1 class="text-center text-3xl font-bold text-simipa-1">Login</h1>
-                <form action="/login/admin" method="POST" class="mt-10">
+                <form action="/admin/login" method="POST" class="mt-10">
                     @csrf
                     <div class="mb-10">
                         <input type="username" name="username" id="username" placeholder="username"
@@ -26,7 +26,7 @@
                 </form>
                 <div class="mt-8">
 
-                    <h3 class="text-simipa-2 text-center text-sm mt-5 hover:underline"><a href="/login/teacher">Login
+                    <h3 class="text-simipa-2 text-center text-sm mt-5 hover:underline"><a href="/teacher/login">Login
                             sebagai
                             guru</a></h3>
                 </div>

@@ -99,7 +99,13 @@
         </nav>
 
         <div class="absolute bottom-0 left-0 w-full p-4">
-            <a href="/logout" class="block py-2 px-4 rounded bg-simipa-1 hover:bg-red-600 text-center">Logout</a>
+            {{-- <a href="/logout" class="block py-2 px-4 rounded bg-simipa-1 hover:bg-red-600 text-center">Logout</a> --}}
+            <form action="/admin/logout" method="POST" class="inline">
+                @csrf
+                <button type="submit" class="px-4 py-2 bg-simipa-1 hover:bg-red-600 text-center w-full rounded">
+                    Logout
+                </button>
+            </form>
         </div>
     </aside>
 

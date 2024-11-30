@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminSubjectController;
 use App\Http\Controllers\AdminTeacherController;
 use App\Http\Controllers\LoginAdminController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,56 +17,60 @@ use Illuminate\Support\Facades\Route;
 //     return view(welcome);
 // });
 
-Route::get('/', fn () => redirect('/login/teacher'));
+Route::get('/', fn () => redirect('/teacher/login'));
 
 Route::get('/register', fn () => view('auth.register'));
+Route::get('/teacher/login', fn () => view('auth.login_teacher'));
 
-Route::get('/login/admin', [LoginAdminController::class, 'index']);
-Route::post('/login/admin', [LoginAdminController::class, 'auth']);
+// auth admin
+Route::get('/admin/login', [LoginAdminController::class, 'index']);
+Route::post('/admin/login', [LoginAdminController::class, 'auth']);
+Route::post('/admin/logout', [LoginAdminController::class, 'logout']);
 
-Route::get('/login/teacher', fn () => view('auth.login_teacher'));
+Route::middleware([AdminMiddleware::class])->group(function(){
+    Route::get('/admin/dashboard', [AdminController::class, 'index']);
 
+    //admin teacher
+    Route::get('/admin/teacher', [AdminTeacherController::class, 'index']);
+    Route::post('/admin/teacher', [AdminTeacherController::class, 'store']);
+    Route::put('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'update']);
+    Route::delete('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'destroy']);
+
+    //admin grade
+    Route::get('/admin/grade',[AdminGradeController::class, 'index']);
+    Route::post('/admin/grade', [AdminGradeController::class, 'store']);
+    Route::delete('/admin/grade/{kelasId}', [AdminGradeController::class, 'destroy']);
+    Route::put('/admin/grade/{kelasId}', [AdminGradeController::class, 'update']);
+
+    // admin group
+    Route::post('/admin/group',[AdminGroupController::class, 'store']);
+    Route::put('/admin/group/{groupId}', [AdminGroupController::class, 'update']);
+    Route::delete('/admin/group/{groupId}',[AdminGroupController::class, 'destroy']);
+
+    // admin student
+    Route::get('/admin/student', [AdminStudentController::class, 'index']);
+    Route::post('/admin/student', [AdminStudentController::class, 'store']);
+    Route::delete('/admin/student/{studentId}', [AdminStudentController::class, 'destroy']);
+    Route::put('/admin/student/{studentId}', [AdminStudentController::class, 'update']);
+
+
+    //admin subject
+    Route::get('/admin/subject', [AdminSubjectController::class, 'index']);
+    Route::post('/admin/subject', [AdminSubjectController::class, 'store']);
+    Route::delete('/admin/subject/{subjectId}', [AdminSubjectController::class, 'destroy']);
+    Route::put('/admin/subject/{subjectId}', [AdminSubjectController::class, 'update']);
+
+    // admin schedule
+    Route::get('/admin/schedule', [AdminScheduleController::class, 'index']);
+    Route::post('/admin/schedule', [AdminScheduleController::class, 'store']);
+    Route::delete('/admin/schedule/{scheduleId}', [AdminScheduleController::class, 'destroy']);
+    Route::put('/admin/schedule/{scheduleId}', [AdminScheduleController::class, 'update']);
+
+    // admin activity
+    Route::get('/admin/activity', [AdminActivityController::class, 'index']);
+    Route::post('/admin/activity', [AdminActivityController::class, 'store']);
+    Route::put('/admin/activity/{activityId}', [AdminActivityController::class, 'update']);
+    Route::delete('/admin/activity/{activityId}', [AdminActivityController::class, 'destroy']);
+});
 // admin
-Route::get('/admin/dashboard', [AdminController::class, 'index']);
 
-//admin teacher
-Route::get('/admin/teacher', [AdminTeacherController::class, 'index']);
-Route::post('/admin/teacher', [AdminTeacherController::class, 'store']);
-Route::put('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'update']);
-Route::delete('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'destroy']);
-
-//admin grade
-Route::get('/admin/grade',[AdminGradeController::class, 'index']);
-Route::post('/admin/grade', [AdminGradeController::class, 'store']);
-Route::delete('/admin/grade/{kelasId}', [AdminGradeController::class, 'destroy']);
-Route::put('/admin/grade/{kelasId}', [AdminGradeController::class, 'update']);
-
-// admin group
-Route::post('/admin/group',[AdminGroupController::class, 'store']);
-Route::put('/admin/group/{groupId}', [AdminGroupController::class, 'update']);
-Route::delete('/admin/group/{groupId}',[AdminGroupController::class, 'destroy']);
-
-// admin student
-Route::get('/admin/student', [AdminStudentController::class, 'index']);
-Route::post('/admin/student', [AdminStudentController::class, 'store']);
-Route::delete('/admin/student/{studentId}', [AdminStudentController::class, 'destroy']);
-Route::put('/admin/student/{studentId}', [AdminStudentController::class, 'update']);
-
-
-//admin subject
-Route::get('/admin/subject', [AdminSubjectController::class, 'index']);
-Route::post('/admin/subject', [AdminSubjectController::class, 'store']);
-Route::delete('/admin/subject/{subjectId}', [AdminSubjectController::class, 'destroy']);
-Route::put('/admin/subject/{subjectId}', [AdminSubjectController::class, 'update']);
-
-// admin schedule
-Route::get('/admin/schedule', [AdminScheduleController::class, 'index']);
-Route::post('/admin/schedule', [AdminScheduleController::class, 'store']);
-Route::delete('/admin/schedule/{scheduleId}', [AdminScheduleController::class, 'destroy']);
-Route::put('/admin/schedule/{scheduleId}', [AdminScheduleController::class, 'update']);
-
-// admin activity
-Route::get('/admin/activity', [AdminActivityController::class, 'index']);
-Route::post('/admin/activity', [AdminActivityController::class, 'store']);
-Route::put('/admin/activity/{activityId}', [AdminActivityController::class, 'update']);
-Route::delete('/admin/activity/{activityId}', [AdminActivityController::class, 'destroy']);
