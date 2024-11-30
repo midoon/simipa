@@ -81,8 +81,39 @@ class AdminScheduleController extends Controller
     public function destroy($scheduleId){
         try{
             DB::table('schedules')->delete($scheduleId);
+            return redirect('/admin/schedule');
         } catch (Exception $e) {
-            return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
+            return back()->withErrors(['error' => "Terjadi kesalahan saat menghapus data: {$e->getMessage()}"]);
+        }
+    }
+
+    public function update(Request $request, $scheduleId){
+        try {
+            $validator = Validator::make($request->all(),[
+                'group_id' => 'required',
+                'teacher_id' => 'required',
+                'subject_id' => 'required',
+                'day_of_week' => 'required',
+                'start_time' => 'required|date_format:H:i',
+                'end_time' => 'required|date_format:H:i|after:start_time',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+
+            DB::table('schedules')->where('id', $scheduleId)->update([
+                'group_id' => $request->group_id,
+                'teacher_id' => $request->teacher_id,
+                'subject_id' => $request->subject_id,
+                'day_of_week' => $request->day_of_week,
+                'start_time' => $request->start_time,
+                'end_time' => $request->end_time,
+            ]);
+
+            return redirect('/admin/schedule');
+        }catch(Exception $e){
+              return back()->withErrors(['error' => "Terjadi kesalahan saat mengubah data: {$e->getMessage()}"]);
         }
     }
 }

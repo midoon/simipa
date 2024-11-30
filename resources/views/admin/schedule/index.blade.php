@@ -154,7 +154,7 @@
                                 </td>
                                 <td class="px-6 py-4 ">
                                     <div class="flex gap-3">
-                                        <button onclick="" data-target="">
+                                        <button onclick="openEditScheduleModal({{ $schedule->id }})" data-target="">
                                             <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" fill="none" viewBox="0 0 24 24">
@@ -180,6 +180,8 @@
                                     </div>
                                 </td>
                             </tr>
+                            <x-modal-edit-schedule :groups="$groups" :teachers="$teachers" :subjects="$subjects"
+                                :schedule="$schedule"></x-modal-edit-schedule>
                         @endforeach
 
 
