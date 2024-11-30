@@ -55,6 +55,41 @@ class AuthTeacherController extends Controller
     }
 
     public function login(Request $request){
-        dd($request);
+        try {
+            $validator = Validator::make($request->all(),[
+                'nik' => 'required|numeric',
+                'password' => 'required'
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+
+            $isTeacherEsixt = DB::table('teachers')->where('nik', $request->nik)->exists();
+            if (!$isTeacherEsixt) {
+               return back()->withErrors(['error' => "NIK atau password salah"]);
+            }
+
+            $teacher = DB::table('teachers')->where('nik', $request->nik)->get();
+            $isAccountExist = DB::table('teacher_accounts')->where('teacher_id', $teacher[0]->id)->exists();
+            if (!$isAccountExist){
+                 return back()->withErrors(['error' => "NIK atau Password salah"]);
+            }
+
+            $account = DB::table('teacher_accounts')->where('teacher_id', $teacher[0]->id)->get();
+            if (!Hash::check($request->password, $account[0]->password)){
+                 return back()->withErrors(['error' => "NIK atau Password salah"]);
+            }
+
+            $userDataSession = [
+                'name' => $teacher[0]->name,
+                'role' => json_decode($teacher[0]->role)
+            ];
+
+            session(['teacher' => $userDataSession]);
+            return redirect('/teacher/dashboard');
+        } catch (Exception $e){
+            return back()->withErrors(['error' => "Terjadi kesalahan saat login: {$e->getMessage()}"]);
+        }
     }
 }

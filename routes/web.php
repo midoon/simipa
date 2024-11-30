@@ -78,3 +78,4 @@ Route::middleware([AdminMiddleware::class])->group(function(){
 Route::get('/teacher/register', [AuthTeacherController::class, 'showRegister']);
 Route::post('/teacher/register', [AuthTeacherController::class, 'register']);
 Route::get('/teacher/login', [AuthTeacherController::class, 'showLogin']);
+Route::post('/teacher/login', [AuthTeacherController::class, 'login']);
