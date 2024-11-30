@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminScheduleController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminSubjectController;
 use App\Http\Controllers\AdminTeacherController;
+use App\Http\Controllers\AuthTeacherController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -19,8 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => redirect('/teacher/login'));
 
-Route::get('/register', fn () => view('auth.register'));
-Route::get('/teacher/login', fn () => view('auth.login_teacher'));
 
 // auth admin
 Route::get('/admin/login', [LoginAdminController::class, 'index']);
@@ -74,3 +73,8 @@ Route::middleware([AdminMiddleware::class])->group(function(){
 });
 // admin
 
+
+//  teacher auth
+Route::get('/teacher/register', [AuthTeacherController::class, 'showRegister']);
+Route::post('/teacher/register', [AuthTeacherController::class, 'register']);
+Route::get('/teacher/login', [AuthTeacherController::class, 'showLogin']);

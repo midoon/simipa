@@ -3,8 +3,23 @@
     <div class="w-full bg-simipa-5 border">
         <div class="w-full flex justify-center items-center min-h-screen  px-8">
             <div class="w-full md:max-w-sm rounded-xl bg-white p-10 border">
+                @if (session('error'))
+                    <div class=" text-red-700 p-4 rounded mb-4 text-center">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                        <ul class="mt-2 list-disc list-inside">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <h1 class="text-center text-3xl font-bold text-simipa-1">Registrasi</h1>
-                <form action="" class="mt-10">
+                <form action="/teacher/register" class="mt-10" method="POST">
+                    @csrf
                     <div class="mb-10">
                         <input type="text" name="nik" id="nik" placeholder="nik "
                             class="border-b-2 w-full focus:outline-none py-1.5">
