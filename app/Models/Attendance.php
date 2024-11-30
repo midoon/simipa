@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Presence extends Model
+class Attendance extends Model
 {
     protected $guarded = ['id'];
 
@@ -13,8 +13,8 @@ class Presence extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function presenceCategory(): BelongsTo{
-        return $this->belongsTo(PresenceCategory::class);
+    public function activity(): BelongsTo{
+        return $this->belongsTo(Activity::class);
     }
 
     public function group(): BelongsTo{

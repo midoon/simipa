@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PresenceCategory;
+use App\Models\Activity;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class AdminActivityController extends Controller
 {
     public function index(){
-        $activities = PresenceCategory::all();
+        $activities = Activity::all();
         return view('admin.activity.index', ['activities' => $activities]);
     }
 
@@ -26,7 +26,7 @@ class AdminActivityController extends Controller
                 return back()->withErrors($validator);
             }
 
-            PresenceCategory::create([
+            Activity::create([
                 'name' => $request->name,
                 'description' => $request->description
             ]);
@@ -48,7 +48,7 @@ class AdminActivityController extends Controller
                 return back()->withErrors($validator);
             }
 
-            DB::table('presence_categories')->where('id', $activityId)->update([
+            DB::table('activities')->where('id', $activityId)->update([
                  'name' => $request->name,
                 'description' => $request->description
             ]);
@@ -61,7 +61,7 @@ class AdminActivityController extends Controller
 
     public function destroy($activityId) {
         try {
-            DB::table('presence_categories')->delete($activityId);
+            DB::table('activities')->delete($activityId);
             return redirect('/admin/activity');
         } catch (Exception $e) {
              return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
