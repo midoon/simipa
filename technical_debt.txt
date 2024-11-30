@@ -1,0 +1,3 @@
+- implementasi pagination [student-admin, schedule-admin,]
+- implementasi account registered indicator in teacher page admin
+- Implementasi batasan untuk yang bisa diassign dalam jadwal hanya staff yang memiliki role guru

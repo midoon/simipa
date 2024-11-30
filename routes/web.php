@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminActivityController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminGradeController;
 use App\Http\Controllers\AdminGroupController;
@@ -57,8 +58,12 @@ Route::post('/admin/subject', [AdminSubjectController::class, 'store']);
 Route::delete('/admin/subject/{subjectId}', [AdminSubjectController::class, 'destroy']);
 Route::put('/admin/subject/{subjectId}', [AdminSubjectController::class, 'update']);
 
+// admin schedule
 Route::get('/admin/schedule', [AdminScheduleController::class, 'index']);
 Route::post('/admin/schedule', [AdminScheduleController::class, 'store']);
 Route::delete('/admin/schedule/{scheduleId}', [AdminScheduleController::class, 'destroy']);
 Route::put('/admin/schedule/{scheduleId}', [AdminScheduleController::class, 'update']);
 
+// admin activity
+Route::get('/admin/activity', [AdminActivityController::class, 'index']);
+Route::post('/admin/activity', [AdminActivityController::class, 'store']);
