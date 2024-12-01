@@ -15,7 +15,7 @@
         {{-- content mobile --}}
         <div class="px-4 sm:flex sm:flex-wrap sm:justify-evenly sm:gap-4">
             @foreach ($days as $day)
-                <div class="block max-w-sm p-4 text-simipa-1 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 w-full mb-2 sm:py-2 sm:h-[80px]"
+                <div class="block max-w-sm px-4 py-6 text-simipa-1 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 w-full mb-3 sm:py-2 sm:h-[80px]"
                     onclick="openShowScheduleTeacher('{{ $day }}')">
                     <div class="flex justify-between sm:h-full">
                         <p class="font-semibold text-simipa-1 sm:self-start">{{ $day }} </p>
