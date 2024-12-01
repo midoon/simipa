@@ -22,7 +22,5 @@ class Student extends Model
     return $this->hasMany(Payment::class);
    }
 
-   public function presences(): HasMany{
-    return $this->hasMany(Presence::class);
-   }
+
 }

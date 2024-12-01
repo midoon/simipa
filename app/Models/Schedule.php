@@ -14,6 +14,7 @@ class Schedule extends Model
     ];
    protected $guarded = ['id'];
 
+
    public function getStartTimeAttribute($value)
     {
         return \Carbon\Carbon::createFromFormat('H:i:s', $value)->format('H:i');

@@ -83,3 +83,4 @@ Route::post('/teacher/login', [AuthTeacherController::class, 'login']);
 
 // Route
 Route::get('/teacher/dashboard', [TeacherController::class, 'index']);
+Route::get('/teacher/schedule', [TeacherController::class, 'showSchedule']);
