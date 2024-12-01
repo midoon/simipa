@@ -83,6 +83,7 @@ class AuthTeacherController extends Controller
 
             $userDataSession = [
                 'name' => $teacher[0]->name,
+                'teacherId' => $teacher[0]->id,
                 'role' => json_decode($teacher[0]->role)
             ];
 

@@ -34,7 +34,7 @@
                             class="border-0 border-b-2 w-full focus:outline-none py-1.5">
                     </div>
                     <div class="w-full text-center">
-                        <button type="submit" class="px-20 py-2 bg-simipa-2 text-white rounded-full">Login
+                        <button type="submit" class="px-16 py-2 bg-simipa-2 text-white rounded-full lg:px-20">Login
                             Guru</button>
                     </div>
                 </form>

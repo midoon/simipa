@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminSubjectController;
 use App\Http\Controllers\AdminTeacherController;
 use App\Http\Controllers\AuthTeacherController;
 use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -79,3 +80,6 @@ Route::get('/teacher/register', [AuthTeacherController::class, 'showRegister']);
 Route::post('/teacher/register', [AuthTeacherController::class, 'register']);
 Route::get('/teacher/login', [AuthTeacherController::class, 'showLogin']);
 Route::post('/teacher/login', [AuthTeacherController::class, 'login']);
+
+// Route
+Route::get('/teacher/dashboard', [TeacherController::class, 'index']);
