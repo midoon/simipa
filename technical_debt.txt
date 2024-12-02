@@ -2,3 +2,4 @@
 - implementasi account registered indicator in teacher page admin
 - Implementasi batasan untuk yang bisa diassign dalam jadwal hanya staff yang memiliki role guru
 - Create validation for nik in admin
+- in modal create attendance, for groups section, filter group with teacher has assigned in schedule of groups

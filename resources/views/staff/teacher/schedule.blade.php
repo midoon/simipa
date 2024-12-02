@@ -1,7 +1,7 @@
 <x-layout title="Jadwal | Guru">
     <x-navbar-teacher></x-navbar-teacher>
     {{-- container --}}
-    <div class="mp-4 sm:mx-[250px]">
+    <div class="px-4 sm:mx-[250px] mb-10">
         @if ($errors->any())
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                 <ul class="mt-2 list-disc list-inside">
@@ -13,7 +13,7 @@
         @endif
 
         {{-- content mobile --}}
-        <div class="px-4 sm:flex sm:flex-wrap sm:justify-evenly sm:gap-4">
+        <div class="sm:flex sm:flex-wrap sm:justify-evenly sm:gap-4">
             @foreach ($days as $day)
                 <div class="block max-w-sm px-4 py-6 text-simipa-1 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 w-full mb-3 sm:py-2 sm:h-[80px]"
                     onclick="openShowScheduleTeacher('{{ $day }}')">

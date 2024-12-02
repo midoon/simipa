@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminSubjectController;
 use App\Http\Controllers\AdminTeacherController;
 use App\Http\Controllers\AuthTeacherController;
 use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\TeacherAttendanceController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -84,3 +85,6 @@ Route::post('/teacher/login', [AuthTeacherController::class, 'login']);
 // Route
 Route::get('/teacher/dashboard', [TeacherController::class, 'index']);
 Route::get('/teacher/schedule', [TeacherController::class, 'showSchedule']);
+Route::get('/teacher/attendance', [TeacherController::class, 'showAttendance']);
+
+Route::post('/teacher/attendance/create', [TeacherAttendanceController::class, 'createInit']);
