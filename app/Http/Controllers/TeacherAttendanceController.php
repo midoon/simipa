@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class TeacherAttendanceController extends Controller
 {
-    public function createInit(Request $request){
+    public function index(Request $request){
 
         try{
             $validator = Validator::make($request->all(),[
@@ -29,6 +29,10 @@ class TeacherAttendanceController extends Controller
         } catch (Exception $e){
             return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
         }
+    }
+
+    public function store(Request $request){
+        return response()->json(['message' => $request->all()]);
     }
 
 
