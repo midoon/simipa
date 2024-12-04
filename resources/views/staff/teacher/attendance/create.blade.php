@@ -3,7 +3,7 @@
 
     </x-navbar-teacher>
 
-    <div class="container px-4">
+    <div class=" px-4 sm:mx-[250px]">
         <div class="flex flex-col items-center mb-4 border-b-2 text-simipa-2">
             <h1 class="judul">Tambah presensi {{ $group[0]->name }} <span class="hidden">{{ $group[0]->id }}</span>
             </h1>
@@ -21,10 +21,10 @@
             </div>
         </div>
 
-        <div class="max-h-[60vh] overflow-y-auto">
+        <div class="max-h-[60vh] overflow-y-auto sm:flex sm:flex-col sm:items-center">
             @forelse ($students as $student)
                 <div
-                    class="block max-w-sm px-4 py-4 text-simipa-1 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 w-full mb-3 sm:py-2 sm:h-[80px]">
+                    class="block px-4 py-4 text-simipa-1 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 w-full mb-3 sm:py-2 sm:h-[70px] ">
                     <div class="flex justify-between sm:h-full">
                         <p class="font-semibold text-simipa-1 sm:self-start">{{ $student->name }} </p>
                         <select class="form-control status p-2 rounded-lg border" data-id="{{ $student->id }}">

@@ -1,6 +1,6 @@
 <x-layout title="Presensi | Guru">
     <x-navbar-teacher></x-navbar-teacher>
-    <div class="container px-4">
+    <div class="px-4 sm:mx-[250px] sm:flex sm:flex-col sm:justify-center sm:items-center">
         @if ($errors->any())
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                 <ul class="mt-2 list-disc list-inside">
@@ -12,8 +12,8 @@
         @endif
 
         {{-- card-fitur --}}
-        <div class="grid grid-cols-2 gap-3">
-            <div class="shadow-md border aspect-[4/3] gap-4 rounded-lg flex flex-col items-center justify-center "
+        <div class="grid grid-cols-2 gap-3 sm:w-3/4 sm:grid-cols-3 ">
+            <div class="shadow-md border aspect-[4/3] gap-4 rounded-lg flex flex-col items-center justify-center sm:hover:cursor-pointer"
                 onclick="openCreateAttendance()">
                 <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                     height="24" fill="none" viewBox="0 0 24 24">
@@ -22,7 +22,8 @@
                 </svg>
                 <h1>Tambah Presensi</h1>
             </div>
-            <div class="shadow-md border aspect-[4/3] gap-4 rounded-lg flex flex-col items-center justify-center ">
+            <div
+                class="shadow-md border aspect-[4/3] gap-4 rounded-lg flex flex-col items-center justify-center sm:hover:cursor-pointer">
                 <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                     height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -31,7 +32,8 @@
 
                 <h1>Lihat Presensi</h1>
             </div>
-            <div class="shadow-md border aspect-[4/3] gap-4 rounded-lg flex flex-col items-center justify-center ">
+            <div
+                class="shadow-md border aspect-[4/3] gap-4 rounded-lg flex flex-col items-center justify-center sm:hover:cursor-pointer">
                 <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                     height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
