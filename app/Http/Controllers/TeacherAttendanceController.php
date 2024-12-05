@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,24 @@ class TeacherAttendanceController extends Controller
     }
 
     public function store(Request $request){
-        return response()->json(['message' => $request->all()]);
+        try {
+            $presensi = $request->input('presensi');
+
+            foreach ($presensi as $data) {
+                Attendance::create([
+                    'student_id' => $data['student_id'],
+                    'status' => $data['status'],
+                    'activity_id' => $data['activity_id'],
+                    'group_id' => $data['group_id'],
+                    'day' => $data['day']
+                ]);
+            }
+
+            return response()->json(['message' => 'Presensi berhasil disimpan!']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
+        }
+        // return response()->json(['message' => $request->all()]);
     }
 
 

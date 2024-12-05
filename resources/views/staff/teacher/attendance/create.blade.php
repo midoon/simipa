@@ -86,7 +86,7 @@
                 .then(data => {
                     alert(data.message); // Tampilkan pesan sukses
                     console.log(data)
-                    // location.reload(); // Muat ulang halaman jika diperlukan
+                    window.location.href = '/teacher/attendance';
                 })
                 .catch(error => {
                     console.error('Error:', error);
