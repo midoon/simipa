@@ -12,7 +12,7 @@
         @endif
 
         {{-- card-fitur --}}
-        <div class="grid grid-cols-2 gap-3 sm:w-3/4 sm:grid-cols-3 ">
+        <div class="grid grid-cols-2 gap-3 sm:w-3/4 sm:grid-cols-3">
             <div class="shadow-md border aspect-[4/3] gap-4 rounded-lg flex flex-col items-center justify-center sm:hover:cursor-pointer"
                 onclick="openCreateAttendance()">
                 <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -22,8 +22,8 @@
                 </svg>
                 <h1>Tambah Presensi</h1>
             </div>
-            <div
-                class="shadow-md border aspect-[4/3] gap-4 rounded-lg flex flex-col items-center justify-center sm:hover:cursor-pointer">
+            <div class="shadow-md border aspect-[4/3] gap-4 rounded-lg flex flex-col items-center justify-center sm:hover:cursor-pointer"
+                onclick=" openReadAttendance()">
                 <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                     height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -46,6 +46,7 @@
     </div>
 
     <x-teacher-modal-create-attendance :activities="$activities" :groups="$groups"></x-teacher-modal-create-attendance>
+    <x-teacher-modal-read-attendance :activities="$activities" :groups="$groups"></x-teacher-modal-read-attendance>
 
     <script>
         function openCreateAttendance() {
@@ -54,6 +55,14 @@
 
         function closeCreateAttendance() {
             document.getElementById('createAttendance').classList.add('hidden');
+        }
+
+        function openReadAttendance() {
+            document.getElementById('readAttendance').classList.remove('hidden');
+        }
+
+        function closeReadAttendance() {
+            document.getElementById('readAttendance').classList.add('hidden');
         }
     </script>
 

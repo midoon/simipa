@@ -1,10 +1,10 @@
 @props(['groups', 'activities'])
 
-<div id="createAttendance" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 hidden">
+<div id="readAttendance" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 hidden">
     <div class="h-full flex items-center justify-center">
         <div class="bg-white rounded-lg w-10/12 p-4 sm:w-1/2 sm:py-10">
-            <h1 class="font-bold text-center mb-5">Tambah Presensi</h1>
-            <form action="/teacher/attendance/create" method="POST">
+            <h1 class="font-bold text-center mb-5">Lihat Presensi</h1>
+            <form action="/teacher/attendance/read" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="block font-semibold mb-1">Rombongan Belajar</label>
@@ -28,7 +28,7 @@
                     <input type="date" id="day" name="day" class="w-full px-2 py-2 border rounded-lg">
                 </div>
                 <div class="flex justify-end mt-3">
-                    <button type="button" onclick="closeCreateAttendance()"
+                    <button type="button" onclick="closeReadAttendance()"
                         class="px-4 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 mr-2">Tutup</button>
                     <button type="submit"
                         class="px-4 py-1 bg-simipa-2 text-white rounded hover:bg-gray-400 mr-2">Buat</button>

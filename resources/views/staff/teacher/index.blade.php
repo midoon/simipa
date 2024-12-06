@@ -34,10 +34,9 @@
                         </div>
                     </div>
                 @empty
-                    <tr>
-                        <td colspan="4" class="border px-4 py-2 text-center text-gray-500">Tidak ada jadwal
-                            mengajar hari ini</td>
-                    </tr>
+                    <div>
+                        <p class="text-center">Tidak ada jadwal mengajar hari ini</p>
+                    </div>
                 @endforelse
             </div>
         </div>
