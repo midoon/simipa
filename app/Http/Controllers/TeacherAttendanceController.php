@@ -24,7 +24,7 @@ class TeacherAttendanceController extends Controller
             }
 
             $group = DB::table('groups')->where('id', $request->group_id)->get();
-            $activity = DB::table('activities')->where('id', $request->group_id)->get();
+            $activity = DB::table('activities')->where('id', $request->activity_id)->get();
             $students = DB::table('students')->where('group_id', $request->group_id)->get();
             return view('staff.teacher.attendance.create', ['students' => $students, 'group' => $group, 'activity' => $activity, 'day' => $request->day]);
         } catch (Exception $e){
@@ -51,6 +51,29 @@ class TeacherAttendanceController extends Controller
             return response()->json(['message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
         }
         // return response()->json(['message' => $request->all()]);
+    }
+
+    public function showList(Request $request){
+        try {
+
+            $validator = Validator::make($request->all(),[
+                'group_id' => 'required',
+                'activity_id' => 'required',
+                'day' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+            $group = DB::table('groups')->where('id', $request->group_id)->get();
+            $activity = DB::table('activities')->where('id', $request->group_id)->get();
+
+            $attendances = DB::table('attendances')->where('group_id',  $request->group_id)->where('activity_id',$request->activity_id )->where('day', $request->day)->get();
+            dd($attendances);
+            return view('staff.teacher.attendance.read',  ['attendances' => $attendances, 'group' => $group, 'activity' => $activity, 'day' => $request->day]);
+        } catch( Exception $e){
+             return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
+        }
     }
 
 
