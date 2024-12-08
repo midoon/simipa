@@ -65,12 +65,11 @@ class TeacherAttendanceController extends Controller
             if ($validator->fails()) {
                 return back()->withErrors($validator);
             }
+            $day = $request->day;
             $group = DB::table('groups')->where('id', $request->group_id)->get();
             $activity = DB::table('activities')->where('id', $request->group_id)->get();
-
-            $attendances = DB::table('attendances')->where('group_id',  $request->group_id)->where('activity_id',$request->activity_id )->where('day', $request->day)->get();
-            dd($attendances);
-            return view('staff.teacher.attendance.read',  ['attendances' => $attendances, 'group' => $group, 'activity' => $activity, 'day' => $request->day]);
+            $attendances = Attendance::where('group_id', $request->group_id)->where('activity_id', $request->activity_id)->where('day', $request->day)->with('student')->get();
+            return view('staff.teacher.attendance.read',  ['attendances' => $attendances, 'group' => $group, 'activity' => $activity, 'day' => $day]);
         } catch( Exception $e){
              return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
         }
