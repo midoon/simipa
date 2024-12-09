@@ -45,4 +45,8 @@ class TeacherController extends Controller
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
         }
     }
+
+    public function showPayment(){
+        return view('staff.teacher.payment.index');
+    }
 }

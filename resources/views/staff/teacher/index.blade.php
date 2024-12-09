@@ -12,7 +12,7 @@
             </div>
         @endif
 
-        <div class="container">
+        <div class="">
             <h1 class="text-2xl mb-4 text-simipa-7  font-semibold text-center">Jadwal
                 Hari {{ \Carbon\Carbon::now()->isoFormat('dddd') }}</h1>
             <div class="sm:flex sm:flex-wrap sm justify-center ">

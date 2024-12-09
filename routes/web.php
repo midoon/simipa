@@ -86,6 +86,7 @@ Route::post('/teacher/login', [AuthTeacherController::class, 'login']);
 Route::get('/teacher/dashboard', [TeacherController::class, 'index']);
 Route::get('/teacher/schedule', [TeacherController::class, 'showSchedule']);
 Route::get('/teacher/attendance', [TeacherController::class, 'showAttendance']);
+Route::get('/teacher/payment', [TeacherController::class, 'showPayment']);
 
 Route::post('/teacher/attendance/create', [TeacherAttendanceController::class, 'index']);
 Route::post('/teacher/attendance/store', [TeacherAttendanceController::class, 'store']);
