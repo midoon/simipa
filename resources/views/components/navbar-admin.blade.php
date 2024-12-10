@@ -83,7 +83,7 @@
                     <p class="ml-2">Kegiatan</p>
                 </div>
             </a>
-            <a href="#"
+            <a href="/admin/payment"
                 class="text-simipa-1 font-semibold transition-colors hover:text-simipa-6 block py-3 px-4 rounded-lg hover:bg-simipa-2 group">
                 <div class="flex ml-5">
                     <svg class="w-6 h-6 text-simipa-1 transition-colors group-hover:text-simipa-6" aria-hidden="true"
