@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminGradeController;
 use App\Http\Controllers\AdminGroupController;
 use App\Http\Controllers\AdminPaymentController;
+use App\Http\Controllers\AdminPaymentTypeController;
 use App\Http\Controllers\AdminScheduleController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminSubjectController;
@@ -75,8 +76,9 @@ Route::middleware([AdminMiddleware::class])->group(function(){
     Route::delete('/admin/activity/{activityId}', [AdminActivityController::class, 'destroy']);
 
     // admin payment
-    Route::get('/admin/payment', [AdminPaymentController::class, 'index']);
-    Route::post('/admin/payment', [AdminPaymentController::class, 'store']);
+    Route::get('/admin/payment/type', [AdminPaymentTypeController::class, 'index']);
+    Route::post('/admin/payment/type', [AdminPaymentTypeController::class, 'store']);
+    Route::put('/admin/payment/type/{paymentTypeId}', [AdminPaymentTypeController::class, 'update']);
 });
 // admin
 

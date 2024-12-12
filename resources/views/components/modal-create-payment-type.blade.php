@@ -6,7 +6,7 @@
         <div class="bg-white rounded-lg w-1/3 p-6">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Tambah Data Tipe Pembayaran</h2>
             <!-- Formulir Tambah Data -->
-            <form action="/admin/payment" method="POST">
+            <form action="/admin/payment/type" method="POST">
                 @csrf
                 <div class="mb-3">
                     <div class="flex-1 space-y-2 md:flex md:items-center md:space-x-3 md:space-y-0">
