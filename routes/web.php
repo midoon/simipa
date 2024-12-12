@@ -79,6 +79,7 @@ Route::middleware([AdminMiddleware::class])->group(function(){
     Route::get('/admin/payment/type', [AdminPaymentTypeController::class, 'index']);
     Route::post('/admin/payment/type', [AdminPaymentTypeController::class, 'store']);
     Route::put('/admin/payment/type/{paymentTypeId}', [AdminPaymentTypeController::class, 'update']);
+    Route::delete('/admin/payment/type/{paymentTypeId}', [AdminPaymentTypeController::class, 'destroy']);
 });
 // admin
 

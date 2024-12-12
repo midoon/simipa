@@ -35,7 +35,7 @@ class AdminPaymentTypeController extends Controller
             ]);
             return redirect('/admin/payment/type');
         } catch (Exception $e){
-            return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
+            return back()->withErrors(['error' => "Terjadi kesalahan saat menyimpan data: {$e->getMessage()}"]);
         }
     }
 
@@ -56,7 +56,29 @@ class AdminPaymentTypeController extends Controller
             ]);
             return redirect('/admin/payment/type');
         } catch (Exception $e){
-            return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
+            return back()->withErrors(['error' => "Terjadi kesalahan saat mengedit data: {$e->getMessage()}"]);
+        }
+    }
+
+    public function destroy($paymentTypeId){
+        try {
+             $exisData = [];
+            if (DB::table('fees')->where('payment_type_id', $paymentTypeId)->exists()) {
+                array_push($existData,'tagihan');
+            }
+
+            if (DB::table('payments')->where('payment_type_id', $paymentTypeId)->exists()) {
+                array_push($existData,'pembayaran');
+            }
+
+            if (count($exisData) != 0){
+                return back()->withErrors(['error' =>"data yang ingin anda hapus masih digunakan di data " . implode(", ",$existData)]);
+            }
+
+            DB::table('payment_types')->delete($paymentTypeId);
+             return redirect('/admin/payment/type');
+        } catch (Exception $e) {
+            return back()->withErrors(['error' => "Terjadi kesalahan saat menghapus data: {$e->getMessage()}"]);
         }
     }
 }
