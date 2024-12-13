@@ -99,3 +99,4 @@ Route::get('/teacher/payment', [TeacherController::class, 'showPayment']);
 Route::post('/teacher/attendance/create', [TeacherAttendanceController::class, 'index']);
 Route::post('/teacher/attendance/store', [TeacherAttendanceController::class, 'store']);
 Route::post('/teacher/attendance/read', [TeacherAttendanceController::class, 'showList']);
+Route::post('/teacher/attendance/Edit', [TeacherAttendanceController::class, 'edit']);

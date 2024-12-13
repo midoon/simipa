@@ -13,6 +13,9 @@
         <div class="hidden sm:flex sm:gap-2">
             <a href="/teacher/attendance" class="bg-simipa-2 text-white px-8 py-2 rounded-full">Presensi</a>
             <a href="/teacher/schedule" class="bg-simipa-2 text-white px-8 py-2 rounded-full">Jadwal</a>
+            @if (session('teacher')['role'][1] == 'bendahara' || session('teacher')['role'][0] == 'bendahara')
+                <a href="/teacher/payment" class="bg-simipa-2 text-white px-8 py-2 rounded-full">Pembayaran</a>
+            @endif
         </div>
     </nav>
 </div>

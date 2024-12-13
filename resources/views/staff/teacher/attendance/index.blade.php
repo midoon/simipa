@@ -12,7 +12,7 @@
         @endif
 
         {{-- card-fitur --}}
-        <div class="grid grid-cols-2 gap-3 sm:w-3/4 sm:grid-cols-3">
+        <div class="grid grid-cols-2 gap-3 sm:w-3/4 sm:grid-cols-4">
             <div class="shadow-md border aspect-[4/3] gap-4 rounded-lg flex flex-col items-center justify-center sm:hover:cursor-pointer"
                 onclick="openCreateAttendance()">
                 <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -32,6 +32,16 @@
 
                 <h1>Lihat Presensi</h1>
             </div>
+            <div class="shadow-md border aspect-[4/3] gap-4 rounded-lg flex flex-col items-center justify-center sm:hover:cursor-pointer"
+                onclick=" openEditAttendance()">
+                <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 5h6m-6 4h6M10 3v4h4V3h-4Z" />
+                </svg>
+
+                <h1>Edit Presensi</h1>
+            </div>
             <div
                 class="shadow-md border aspect-[4/3] gap-4 rounded-lg flex flex-col items-center justify-center sm:hover:cursor-pointer">
                 <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -47,6 +57,7 @@
 
     <x-teacher-modal-create-attendance :activities="$activities" :groups="$groups"></x-teacher-modal-create-attendance>
     <x-teacher-modal-read-attendance :activities="$activities" :groups="$groups"></x-teacher-modal-read-attendance>
+    <x-teacher-modal-edit-attendance :activities="$activities" :groups="$groups"></x-teacher-modal-edit-attendance>
 
     <script>
         function openCreateAttendance() {
@@ -57,12 +68,22 @@
             document.getElementById('createAttendance').classList.add('hidden');
         }
 
+        // read
         function openReadAttendance() {
             document.getElementById('readAttendance').classList.remove('hidden');
         }
 
         function closeReadAttendance() {
             document.getElementById('readAttendance').classList.add('hidden');
+        }
+
+        //edit
+        function openEditAttendance() {
+            document.getElementById('editAttendance').classList.remove('hidden');
+        }
+
+        function closeEditAttendance() {
+            document.getElementById('editAttendance').classList.add('hidden');
         }
     </script>
 
