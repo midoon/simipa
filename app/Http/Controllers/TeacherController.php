@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activity;
-use App\Models\Group;
+
 use App\Models\Schedule;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class TeacherController extends Controller
 {
@@ -36,17 +34,5 @@ class TeacherController extends Controller
         }
     }
 
-    public function showAttendance(){
-        try {
-            $activities = Activity::all();
-            $groups = Group::all();
-            return view('staff.teacher.attendance.index', ['activities' => $activities, 'groups' => $groups]);
-        } catch (Exception $e){
-            return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
-        }
-    }
 
-    public function showPayment(){
-        return view('staff.teacher.payment.index');
-    }
 }

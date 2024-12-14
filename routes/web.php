@@ -93,10 +93,17 @@ Route::post('/teacher/login', [AuthTeacherController::class, 'login']);
 // Route
 Route::get('/teacher/dashboard', [TeacherController::class, 'index']);
 Route::get('/teacher/schedule', [TeacherController::class, 'showSchedule']);
-Route::get('/teacher/attendance', [TeacherController::class, 'showAttendance']);
-Route::get('/teacher/payment', [TeacherController::class, 'showPayment']);
 
-Route::post('/teacher/attendance/create', [TeacherAttendanceController::class, 'index']);
+
+//Presensi
+Route::get('/teacher/attendance/read', [TeacherAttendanceController::class, 'filterRead']);
+Route::post('/teacher/attendance/read', [TeacherAttendanceController::class, 'showRead']);
+
+Route::get('/teacher/attendance/create', [TeacherAttendanceController::class, 'filterCreate']);
+Route::post('/teacher/attendance/create', [TeacherAttendanceController::class, 'showCreate']);
 Route::post('/teacher/attendance/store', [TeacherAttendanceController::class, 'store']);
-Route::post('/teacher/attendance/read', [TeacherAttendanceController::class, 'showList']);
-Route::post('/teacher/attendance/Edit', [TeacherAttendanceController::class, 'edit']);
+
+
+
+
+// Route::post('/teacher/attendance/Edit', [TeacherAttendanceController::class, 'edit']);

@@ -2,23 +2,25 @@
     <x-navbar-teacher>
 
     </x-navbar-teacher>
+    <div class="data-presensi hidden">
+        <div class="rombel"><span>{{ $group[0]->id }}</span></div>
+        <div class="tanggal"><span>{{ $day }}</span></div>
+        <div class="kegiatan"><span>{{ $activity[0]->id }}</span></div>
+    </div>
 
     <div class=" px-4 sm:mx-[250px]">
         <div class="flex flex-col items-center mb-4 border-b-2 text-simipa-2">
-            <h1 class="judul">Tambah presensi {{ $group[0]->name }} <span class="hidden">{{ $group[0]->id }}</span>
+            <h1 class="judul">Tambah presensi {{ $activity[0]->name }} {{ $group[0]->name }}
+
             </h1>
-            <p class="tanggal">{{ \Carbon\Carbon::parse($day)->format('d-m-Y') }} <span
-                    class="hidden">{{ $day }}</span></p>
+            <p class="">{{ \Carbon\Carbon::parse($day)->format('d-m-Y') }}
         </div>
 
         <div class="flex justify-between items-center mb-4">
-            <p class="kegiatan border p-2 rounded-md ">Tipe: {{ $activity[0]->name }} <span
-                    class="hidden">{{ $activity[0]->id }}</span>
-            </p>
-            <div>
-                <button type="button"
-                    class="submit-attendance-btn px-4 py-1 bg-simipa-2 text-white rounded hover:bg-gray-400 mr-2">Simpan</button>
-            </div>
+            <button type="button" onclick="cancelCreate()"
+                class="cancel-attendance-btn px-6 py-1 bg-red-500 text-white rounded hover:bg-gray-400 mr-2">Batal</button>
+            <button type="button"
+                class="submit-attendance-btn px-4 py-1 bg-simipa-2 text-white rounded hover:bg-gray-400 mr-2">Simpan</button>
         </div>
 
         <div class="max-h-[60vh] overflow-y-auto sm:flex sm:flex-col sm:items-center">
@@ -46,12 +48,19 @@
 
 
     <script>
+        function cancelCreate() {
+            window.location.href = '/teacher/dashboard';
+        }
+
         document.querySelector('.submit-attendance-btn').addEventListener('click', function() {
             const presensiData = [];
 
-            const activityId = document.querySelector('.kegiatan').querySelector('span').textContent
-            const groupId = document.querySelector('.judul').querySelector('span').textContent
-            const day = document.querySelector('.tanggal').querySelector('span').textContent
+            const activityId = document.querySelector('.data-presensi').querySelector('.kegiatan').querySelector(
+                'span').textContent
+            const groupId = document.querySelector('.data-presensi').querySelector('.rombel').querySelector(
+                'span').textContent
+            const day = document.querySelector('.data-presensi').querySelector('.tanggal').querySelector(
+                'span').textContent
 
             // Kumpulkan semua data presensi
             document.querySelectorAll('.status').forEach(select => {
@@ -71,6 +80,8 @@
 
 
 
+
+
             // Kirim data ke controller
             fetch('/teacher/attendance/store', {
                     method: 'POST',
@@ -85,8 +96,8 @@
                 .then(response => response.json())
                 .then(data => {
                     alert(data.message); // Tampilkan pesan sukses
-                    console.log(data)
-                    window.location.href = '/teacher/attendance';
+                    // redirect ke halaman lihat presensi dengan filter tertentu
+                    window.location.href = '/teacher/dashboard';
                 })
                 .catch(error => {
                     console.error('Error:', error);
