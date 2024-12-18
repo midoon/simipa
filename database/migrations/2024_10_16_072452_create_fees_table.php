@@ -23,7 +23,7 @@ return new class extends Migration
             $table->float('amount');
             $table->date('due_date');
             $table->enum('status', ['paid', 'unpaid', 'partial']);
-            $table->float('remaining_amount');
+            $table->float('paid_amount');
             $table->timestamps();
         });
     }
