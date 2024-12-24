@@ -4,8 +4,8 @@
 
     <div class=" px-4 sm:mx-[250px]">
 
-        <div class="p-2 border rounded-md shadow-sm">
-            <h1 class="font-bold text-center mb-5">Lihat Presensi</h1>
+        <div class="p-2 border rounded-md shadow-sm sm:px-10">
+            <h1 class="font-bold text-center text-simipa-1 mb-5 sm:text-xl">Lihat Presensi</h1>
             <form action="/teacher/attendance/read" method="POST">
                 @csrf
                 <div class="mb-3">

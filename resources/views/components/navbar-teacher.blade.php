@@ -11,9 +11,18 @@
         </div>
 
         <div class="hidden sm:flex sm:gap-2">
-            <a href="/teacher/attendance" class="bg-simipa-2 text-white px-8 py-2 rounded-full">Presensi</a>
+            <div>
+                <button onclick="toggleDropdown('presensiDropdown')"
+                    class="bg-simipa-2 text-white px-8 py-2 rounded-full">Presensi</button>
+                <div id="presensiDropdown"
+                    class="hidden absolute bg-white text-gray-800 rounded-md shadow-md mt-2 w-48 z-10">
+                    <a href="/teacher/attendance/read" class="block px-4 py-2 hover:bg-gray-200">Lihat Presensi</a>
+                    <a href="/teacher/attendance/create" class="block px-4 py-2 hover:bg-gray-200">Tambah Presensi</a>
+                    <a href="/rekap-presensi" class="block px-4 py-2 hover:bg-gray-200">Rekap Presensi</a>
+                </div>
+            </div>
             <a href="/teacher/schedule" class="bg-simipa-2 text-white px-8 py-2 rounded-full">Jadwal</a>
-            @if (session('teacher')['role'][1] == 'bendahara' || session('teacher')['role'][0] == 'bendahara')
+            @if (collect(session('teacher')['role'])->contains('bendahara'))
                 <a href="/teacher/payment" class="bg-simipa-2 text-white px-8 py-2 rounded-full">Pembayaran</a>
             @endif
         </div>
@@ -33,8 +42,8 @@
 
 
     <a href="/teacher/schedule" class="bg-simipa-2 text-white px-4 py-1 rounded-full">Jadwal</a>
-    @if (session('teacher')['role'][1] == 'bendahara' || session('teacher')['role'][0] == 'bendahara')
-        <a href="/teacher/payment" class="bg-simipa-2 text-white px-4 py-1 rounded-full">Pembayaran</a>
+    @if (collect(session('teacher')['role'])->contains('bendahara'))
+        <a href="/teacher/payment" class="bg-simipa-2 text-white px-8 py-2 rounded-full">Pembayaran</a>
     @endif
 </div>
 
