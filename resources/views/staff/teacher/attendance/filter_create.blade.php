@@ -33,7 +33,7 @@
                     <button type="button" onclick="batal()"
                         class="px-4 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 mr-2">Batal</button>
                     <button type="submit"
-                        class="px-4 py-1 bg-simipa-2 text-white rounded hover:bg-gray-400 mr-2">Lihat</button>
+                        class="px-4 py-1 bg-simipa-2 text-white rounded hover:bg-gray-400 mr-2">Tambah</button>
                 </div>
             </form>
         </div>

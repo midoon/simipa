@@ -103,7 +103,9 @@ Route::get('/teacher/attendance/create', [TeacherAttendanceController::class, 'f
 Route::post('/teacher/attendance/create', [TeacherAttendanceController::class, 'showCreate']);
 Route::post('/teacher/attendance/store', [TeacherAttendanceController::class, 'store']);
 
+Route::put('/teacher/attendance/update', [TeacherAttendanceController::class, 'update']);
 
+Route::delete('/teacher/attendance/delete/{attendanceId}', [TeacherAttendanceController::class, 'destroy']);
 
 
 // Route::post('/teacher/attendance/Edit', [TeacherAttendanceController::class, 'edit']);

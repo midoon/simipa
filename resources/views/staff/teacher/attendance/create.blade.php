@@ -1,4 +1,4 @@
-<x-layout title="Presensi | Siswa">
+<x-layout title="Presensi | Tambah">
     <x-navbar-teacher>
 
     </x-navbar-teacher>
@@ -67,8 +67,6 @@
                 const siswaId = select.getAttribute('data-id');
                 const status = select.value;
 
-
-
                 presensiData.push({
                     student_id: siswaId,
                     status: status,
@@ -77,9 +75,6 @@
                     day: day
                 });
             });
-
-
-
 
 
             // Kirim data ke controller

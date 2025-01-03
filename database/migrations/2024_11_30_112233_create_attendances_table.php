@@ -23,7 +23,7 @@ return new class extends Migration
                  table: 'groups', indexName: 'presence_group_id'
             );
             $table->date('day');
-            $table->enum('status', ['hadir', 'sakit', 'ijin', 'alpha']);
+            $table->enum('status', ['hadir', 'sakit', 'izin', 'alpha']);
             $table->timestamps();
         });
     }

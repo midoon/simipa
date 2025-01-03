@@ -94,12 +94,29 @@ class TeacherAttendanceController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
         }
-        // return response()->json(['message' => $request->all()]);
+
     }
 
 
 
-    public function edit(Request $request){
+
+    public function update(Request $request){
+        try {
+            $presensi = $request->input('presensi');
+
+            foreach ($presensi as $data) {
+                Attendance::where('id', $data['attendance_id'])->update([
+                    'status' => $data['status'],
+                ]);
+            }
+
+            return response()->json(['message' => 'Presensi berhasil diubah!']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function destroy($attendanceId){
 
     }
 

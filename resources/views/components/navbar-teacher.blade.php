@@ -12,9 +12,9 @@
 
         <div class="hidden sm:flex sm:gap-2">
             <div>
-                <button onclick="toggleDropdown('presensiDropdown')"
+                <button onclick="toggleDropdown('presensiDropdownDesktop')"
                     class="bg-simipa-2 text-white px-8 py-2 rounded-full">Presensi</button>
-                <div id="presensiDropdown"
+                <div id="presensiDropdownDesktop"
                     class="hidden absolute bg-white text-gray-800 rounded-md shadow-md mt-2 w-48 z-10">
                     <a href="/teacher/attendance/read" class="block px-4 py-2 hover:bg-gray-200">Lihat Presensi</a>
                     <a href="/teacher/attendance/create" class="block px-4 py-2 hover:bg-gray-200">Tambah Presensi</a>
@@ -31,9 +31,10 @@
 
 <div class=" flex justify-center mb-10 gap-3  sm:hidden">
     <div>
-        <button onclick="toggleDropdown('presensiDropdown')"
+        <button onclick="toggleDropdown('presensiDropdownMobile')"
             class="bg-simipa-2 text-white px-4 py-1 rounded-full">Presensi</button>
-        <div id="presensiDropdown" class="hidden absolute bg-white text-gray-800 rounded-md shadow-md mt-2 w-48 z-10">
+        <div id="presensiDropdownMobile"
+            class="hidden absolute bg-white text-gray-800 rounded-md shadow-md mt-2 w-48 z-10">
             <a href="/teacher/attendance/read" class="block px-4 py-2 hover:bg-gray-200">Lihat Presensi</a>
             <a href="/teacher/attendance/create" class="block px-4 py-2 hover:bg-gray-200">Tambah Presensi</a>
             <a href="/rekap-presensi" class="block px-4 py-2 hover:bg-gray-200">Rekap Presensi</a>
