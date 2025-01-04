@@ -116,8 +116,18 @@ class TeacherAttendanceController extends Controller
         }
     }
 
-    public function destroy($attendanceId){
+    public function destroy(Request $request){
+        try {
+            $presensi = $request->input('presensi');
 
+            foreach ($presensi as $data) {
+                Attendance::where('id', $data['attendance_id'])->delete();
+            }
+
+            return response()->json(['message' => 'Presensi berhasil dihapus!']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
+        }
     }
 
 

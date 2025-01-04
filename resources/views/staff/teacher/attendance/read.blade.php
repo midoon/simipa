@@ -15,7 +15,7 @@
         <div class="flex justify-between mb-4">
             <button type="button" class="btn-edit py-2 px-4 rounded-md bg-yellow-500 text-white"
                 onclick="return confirmEdit()">Edit</button>
-            <a href="#" class="py-2 px-4 rounded-md bg-red-500 text-white">Hapus</a>
+            <button type="button" class="btn-delete py-2 px-4 rounded-md bg-red-500 text-white">Hapus</button>
         </div>
 
         <div class="max-h-[60vh] overflow-y-auto sm:flex sm:flex-col sm:items-center">
@@ -53,7 +53,11 @@
 
         document.querySelector('.btn-edit').addEventListener('click', function() {
             const presensiData = [];
-
+            rows = document.querySelectorAll('.status');
+            if (rows.length == 0) {
+                alert('Data presensi kosong');
+                return;
+            }
 
             // Kumpulkan semua data presensi
             document.querySelectorAll('.status').forEach(select => {
@@ -90,6 +94,45 @@
                     alert('Terjadi kesalahan saat menyimpan data presensi.');
                 });
         });
+
+        document.querySelector('.btn-delete').addEventListener('click', function() {
+            const presensiData = [];
+            rows = document.querySelectorAll('.status');
+            if (rows.length == 0) {
+                alert('Data presensi kosong');
+                return;
+            }
+
+            // Kumpulkan semua data presensi
+            document.querySelectorAll('.status').forEach(select => {
+                const attendanceId = select.getAttribute('data-id');
+                presensiData.push({
+                    attendance_id: attendanceId,
+                });
+            });
+
+            fetch('/teacher/attendance/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        presensi: presensiData
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message); // Tampilkan pesan sukses
+                    // console.log(data);
+                    // redirect ke halaman lihat presensi dengan filter tertentu
+                    window.location.href = '/teacher/dashboard';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat menghapus data presensi.');
+                });
+        })
     </script>
 
 

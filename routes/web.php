@@ -105,7 +105,7 @@ Route::post('/teacher/attendance/store', [TeacherAttendanceController::class, 's
 
 Route::put('/teacher/attendance/update', [TeacherAttendanceController::class, 'update']);
 
-Route::delete('/teacher/attendance/delete/{attendanceId}', [TeacherAttendanceController::class, 'destroy']);
+Route::post('/teacher/attendance/delete', [TeacherAttendanceController::class, 'destroy']);
 
 
 // Route::post('/teacher/attendance/Edit', [TeacherAttendanceController::class, 'edit']);
