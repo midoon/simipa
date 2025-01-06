@@ -15,6 +15,7 @@ use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\TeacherAttendanceController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\TeacherMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -90,24 +91,28 @@ Route::post('/teacher/register', [AuthTeacherController::class, 'register']);
 Route::get('/teacher/login', [AuthTeacherController::class, 'showLogin']);
 Route::post('/teacher/login', [AuthTeacherController::class, 'login']);
 
-Route::delete('/teacher/logout', [AuthTeacherController::class, 'logout']);
+Route::middleware([TeacherMiddleware::class])->group(function(){
+    Route::delete('/teacher/logout', [AuthTeacherController::class, 'logout']);
 
-// Route
-Route::get('/teacher/dashboard', [TeacherController::class, 'index']);
-Route::get('/teacher/schedule', [TeacherController::class, 'showSchedule']);
+    // Route
+    Route::get('/teacher/dashboard', [TeacherController::class, 'index']);
+    Route::get('/teacher/schedule', [TeacherController::class, 'showSchedule']);
 
 
-//Presensi
-Route::get('/teacher/attendance/read', [TeacherAttendanceController::class, 'filterRead']);
-Route::post('/teacher/attendance/read', [TeacherAttendanceController::class, 'showRead']);
+    //Presensi
+    Route::get('/teacher/attendance/read', [TeacherAttendanceController::class, 'filterRead']);
+    Route::post('/teacher/attendance/read', [TeacherAttendanceController::class, 'showRead']);
 
-Route::get('/teacher/attendance/create', [TeacherAttendanceController::class, 'filterCreate']);
-Route::post('/teacher/attendance/create', [TeacherAttendanceController::class, 'showCreate']);
-Route::post('/teacher/attendance/store', [TeacherAttendanceController::class, 'store']);
+    Route::get('/teacher/attendance/create', [TeacherAttendanceController::class, 'filterCreate']);
+    Route::post('/teacher/attendance/create', [TeacherAttendanceController::class, 'showCreate']);
+    Route::post('/teacher/attendance/store', [TeacherAttendanceController::class, 'store']);
 
-Route::put('/teacher/attendance/update', [TeacherAttendanceController::class, 'update']);
+    Route::put('/teacher/attendance/update', [TeacherAttendanceController::class, 'update']);
 
-Route::post('/teacher/attendance/delete', [TeacherAttendanceController::class, 'destroy']);
+    Route::post('/teacher/attendance/delete', [TeacherAttendanceController::class, 'destroy']);
+});
+
+
 
 
 // Route::post('/teacher/attendance/Edit', [TeacherAttendanceController::class, 'edit']);
