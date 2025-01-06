@@ -90,6 +90,8 @@ Route::post('/teacher/register', [AuthTeacherController::class, 'register']);
 Route::get('/teacher/login', [AuthTeacherController::class, 'showLogin']);
 Route::post('/teacher/login', [AuthTeacherController::class, 'login']);
 
+Route::delete('/teacher/logout', [AuthTeacherController::class, 'logout']);
+
 // Route
 Route::get('/teacher/dashboard', [TeacherController::class, 'index']);
 Route::get('/teacher/schedule', [TeacherController::class, 'showSchedule']);

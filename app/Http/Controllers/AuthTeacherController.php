@@ -93,4 +93,13 @@ class AuthTeacherController extends Controller
             return back()->withErrors(['error' => "Terjadi kesalahan saat login: {$e->getMessage()}"]);
         }
     }
+
+    public function logout(Request $request){
+        // Hapus session
+        $request->session()->forget('teacher');
+        $request->session()->flush();
+
+        // Redirect ke halaman login
+        return redirect('/teacher/login')->with('success', 'Anda berhasil logout');
+    }
 }
