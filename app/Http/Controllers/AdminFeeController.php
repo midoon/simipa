@@ -50,4 +50,21 @@ class AdminFeeController extends Controller
             return back()->withErrors(['error' => "Terjadi kesalahan saat menyimpan data: {$e->getMessage()}"]);
         }
     }
+
+    public function destroy($gradeFeeId){
+        try {
+           $gradeFee = GradeFee::find($gradeFeeId);
+           $students = Student::whereHas('group.grade', function ($q) use ($gradeFee) {
+                $q->where('id', $gradeFee->grade_id);
+            })->get();
+            foreach($students as $s){
+                $fee = Fee::where('student_id', $s->id)->where('payment_type_id', $gradeFee->payment_type_id)->first();
+                $fee->delete();
+            }
+            $gradeFee->delete();
+            return redirect('/admin/payment/type');
+        } catch (Exception $e){
+            return back()->withErrors(['error' => "Terjadi kesalahan saat menghapus data: {$e->getMessage()}"]);
+        }
+    }
 }

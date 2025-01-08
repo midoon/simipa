@@ -85,6 +85,7 @@ Route::middleware([AdminMiddleware::class])->group(function(){
 
     // Fee
     Route::post('/admin/payment/fee', [AdminFeeController::class, 'store']);
+    Route::delete('/admin/payment/fee/{gradeFeeId}', [AdminFeeController::class, 'destroy']);
 });
 // admin
 
