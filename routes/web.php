@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminActivityController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminFeeController;
 use App\Http\Controllers\AdminGradeController;
 use App\Http\Controllers\AdminGroupController;
 use App\Http\Controllers\AdminPaymentController;
@@ -81,6 +82,9 @@ Route::middleware([AdminMiddleware::class])->group(function(){
     Route::post('/admin/payment/type', [AdminPaymentTypeController::class, 'store']);
     Route::put('/admin/payment/type/{paymentTypeId}', [AdminPaymentTypeController::class, 'update']);
     Route::delete('/admin/payment/type/{paymentTypeId}', [AdminPaymentTypeController::class, 'destroy']);
+
+    // Fee
+    Route::post('/admin/payment/fee', [AdminFeeController::class, 'store']);
 });
 // admin
 
@@ -110,6 +114,7 @@ Route::middleware([TeacherMiddleware::class])->group(function(){
     Route::put('/teacher/attendance/update', [TeacherAttendanceController::class, 'update']);
 
     Route::post('/teacher/attendance/delete', [TeacherAttendanceController::class, 'destroy']);
+
 });
 
 

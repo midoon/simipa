@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grade;
+use App\Models\GradeFee;
 use App\Models\PaymentType;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,7 +15,9 @@ class AdminPaymentTypeController extends Controller
     public function index(){
         try {
             $paymentTypes = PaymentType::all();
-            return view('admin.payment.index', ['paymentTypes' => $paymentTypes]);
+            $grades = Grade::all();
+            $gradeFees = GradeFee::all();
+            return view('admin.payment.index', ['paymentTypes' => $paymentTypes , 'grades' => $grades, 'gradeFees' => $gradeFees]);
         } catch (Exception $e){
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
         }

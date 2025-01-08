@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\StudentAssignedToGroup;
 use App\Models\Grade;
 use App\Models\Group;
 use App\Models\Student;
@@ -59,25 +60,29 @@ class AdminStudentController extends Controller
 
 
     public function store(Request $request) {
-
-        $validator = Validator::make($request->all(),[
-            'name' => 'required',
-            'group_id' => 'required',
-            'nisn' => 'required',
-            'gender' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return back()->withErrors($validator);
-        }
-
         try{
-            Student::create([
+            $validator = Validator::make($request->all(),[
+                'name' => 'required',
+                'group_id' => 'required',
+                'nisn' => 'required',
+                'gender' => 'required'
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+
+
+            $student = Student::create([
             'name' => $request->name,
             'group_id' => $request->group_id,
             'nisn' => $request->nisn,
             'gender' => $request->gender,
             ]);
+
+            // event(new StudentAssignedToGroup($student));
+            StudentAssignedToGroup::dispatch($student);
+
             return redirect('/admin/student');
         } catch (QueryException $e){
             if ($e->errorInfo[1] == 1062)//kode mysql untuk duplicate data

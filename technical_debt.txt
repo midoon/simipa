@@ -6,3 +6,5 @@
 - Add create fees in admin
 - Filter duplicate data in create presence *
 - lakukan migrate untuk enum status attendance
+
+-* bagaimana caranya agar ketika terdapat tagihan pada kelas tertentu, dan ketika admin menambahkan siswa setelah tagihan terassign, siswa otomatis mempunyai tagihan yang sama dengan kelas atau grup yang dikaitkan pada dirinya
