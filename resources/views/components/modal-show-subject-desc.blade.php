@@ -9,7 +9,7 @@
             <!-- Formulir Tambah Data -->
             <h1>{{ $subject->description }}</h1>
             <div class="flex justify-end">
-                <button type="button" onclick="closeShowDescription({{ $subject->id }})"
+                <button type="button" onclick="showDescription({{ $subject->id }})"
                     class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 mr-2">Tutup</button>
 
             </div>

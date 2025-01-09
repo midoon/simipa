@@ -4,7 +4,7 @@
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Kegiatan Siswa</h1>
             <div>
-                <button onclick="openCreateActivityModal()"
+                <button onclick="createActivityModal()"
                     class="px-2 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 w-full">
                     Tambah Data Kegiatan
                 </button>
@@ -62,7 +62,7 @@
 
                             <td class="px-6 py-4 ">
                                 <div class="flex gap-3">
-                                    <button onclick="openEditActivityModal({{ $activity->id }})" data-target="">
+                                    <button onclick="editActivityModal({{ $activity->id }})" data-target="">
                                         <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             fill="none" viewBox="0 0 24 24">
@@ -101,21 +101,15 @@
         }
 
         // create
-        function openCreateActivityModal() {
-            document.getElementById('createModalActivity').classList.remove('hidden');
+        function createActivityModal() {
+            document.getElementById('createModalActivity').classList.toggle('hidden');
         }
 
-        function closeCreateActivityModal() {
-            document.getElementById('createModalActivity').classList.add('hidden');
-        }
+
 
         // edit
-        function openEditActivityModal(id) {
-            document.getElementById('editModalActivity' + id).classList.remove('hidden');
-        }
-
-        function closeEditActivityModal(id) {
-            document.getElementById('editModalActivity' + id).classList.add('hidden');
+        function editActivityModal(id) {
+            document.getElementById('editModalActivity' + id).classList.toggle('hidden');
         }
     </script>
 </x-layout>

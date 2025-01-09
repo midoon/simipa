@@ -6,7 +6,7 @@
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Siswa</h1>
             <div>
-                <button onclick="openCreateStudenModal()"
+                <button onclick="createStudenModal()"
                     class="px-2 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 w-full">
                     Tambah Data Siswa
                 </button>
@@ -136,7 +136,7 @@
                                 </td>
                                 <td class="px-6 py-4 ">
                                     <div class="flex gap-3">
-                                        <button onclick="openEditStudenModal({{ $student->id }})" data-target="">
+                                        <button onclick="editStudenModal({{ $student->id }})" data-target="">
                                             <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" fill="none" viewBox="0 0 24 24">
@@ -178,21 +178,15 @@
             return confirm("Apakah Anda yakin ingin menghapusnya?");
         }
 
-        function openCreateStudenModal() {
-            document.getElementById('createModalStudent').classList.remove('hidden');
+        function createStudenModal() {
+            document.getElementById('createModalStudent').classList.toggle('hidden');
         }
 
-        function closeCreateStudentModal() {
-            document.getElementById('createModalStudent').classList.add('hidden');
-        }
+
 
         // edit
-        function openEditStudenModal(id) {
-            document.getElementById('editModalStudent' + id).classList.remove('hidden');
-        }
-
-        function closeEditStudentModal(id) {
-            document.getElementById('editModalStudent' + id).classList.add('hidden');
+        function editStudenModal(id) {
+            document.getElementById('editModalStudent' + id).classList.toggle('hidden');
         }
     </script>
 </x-layout>

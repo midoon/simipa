@@ -51,7 +51,7 @@
                 </div>
                 <!-- Tombol Aksi -->
                 <div class="flex justify-end">
-                    <button type="button" onclick="closeCreateModal()"
+                    <button type="button" onclick="createModalTeacher()"
                         class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 mr-2">Batal</button>
                     <button type="submit"
                         class="px-4 py-2 bg-simipa-1 text-white rounded hover:bg-simipa-2">Simpan</button>

@@ -5,7 +5,8 @@
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Guru</h1>
             <div>
-                <button onclick="openCreateModal()" class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
+                <button onclick="createModalTeacher()"
+                    class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
                     Tambah Data Guru
                 </button>
             </div>
@@ -67,7 +68,7 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex gap-3">
-                                        <button onclick="openEditModal({{ $teacher->id }})"
+                                        <button onclick="editModalTeacher({{ $teacher->id }})"
                                             data-target="#editModalTeacher{{ $teacher->id }}">
                                             <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -112,20 +113,14 @@
             return confirm("Apakah Anda yakin ingin menghapusnya?");
         }
 
-        function openCreateModal() {
-            document.getElementById('createModalTeacher').classList.remove('hidden');
+        function createModalTeacher() {
+            document.getElementById('createModalTeacher').classList.toggle('hidden');
         }
 
-        function closeCreateModal() {
-            document.getElementById('createModalTeacher').classList.add('hidden');
-        }
 
-        function openEditModal(id) {
-            document.getElementById('editModalTeacher' + id).classList.remove('hidden');
-        }
 
-        function closeEditModal(id) {
-            document.getElementById('editModalTeacher' + id).classList.add('hidden');
+        function editModalTeacher(id) {
+            document.getElementById('editModalTeacher' + id).classList.toggle('hidden');
         }
     </script>
 

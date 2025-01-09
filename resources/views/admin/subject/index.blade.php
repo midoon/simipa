@@ -4,7 +4,7 @@
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Mata Pelajaran</h1>
             <div>
-                <button onclick="openCreateSubjectModal()"
+                <button onclick="createSubjectModal()"
                     class="px-2 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 w-full">
                     Tambah Data Mapel
                 </button>
@@ -96,11 +96,11 @@
                                 </td>
                                 <td class="px-6 py-4 ">
                                     <p class="hover:text-blue-500 hover:cursor-pointer"
-                                        onclick="openShowDescription({{ $subject->id }})">Lihat selengkapnya...</p>
+                                        onclick="showDescription({{ $subject->id }})">Lihat selengkapnya...</p>
                                 </td>
                                 <td class="px-6 py-4 ">
                                     <div class="flex gap-3">
-                                        <button onclick="openEditSubjectModal({{ $subject->id }})">
+                                        <button onclick="editSubjectModal({{ $subject->id }})">
                                             <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" fill="none" viewBox="0 0 24 24">
@@ -142,30 +142,22 @@
         }
 
         // create
-        function openCreateSubjectModal() {
-            document.getElementById('createModalSubject').classList.remove('hidden');
+        function createSubjectModal() {
+            document.getElementById('createModalSubject').classList.toggle('hidden');
         }
 
-        function closeCreateSubjectModal() {
-            document.getElementById('createModalSubject').classList.add('hidden');
-        }
+
 
         // edit
-        function openEditSubjectModal(id) {
-            document.getElementById('editModalSubject' + id).classList.remove('hidden');
+        function editSubjectModal(id) {
+            document.getElementById('editModalSubject' + id).classList.toggle('hidden');
         }
 
-        function closeEditSubjectModal(id) {
-            document.getElementById('editModalSubject' + id).classList.add('hidden');
-        }
+
 
         // show more
-        function openShowDescription(id) {
-            document.getElementById('showModalSubjectDesc' + id).classList.remove('hidden');
-        }
-
-        function closeShowDescription(id) {
-            document.getElementById('showModalSubjectDesc' + id).classList.add('hidden');
+        function showDescription(id) {
+            document.getElementById('showModalSubjectDesc' + id).classList.toggle('hidden');
         }
     </script>
 

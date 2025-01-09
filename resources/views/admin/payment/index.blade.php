@@ -4,11 +4,11 @@
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Tipe Pembayaran</h1>
             <div class="flex gap-3">
-                <button onclick="openCreatePaymentModal()"
+                <button onclick="createPaymentModal()"
                     class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 w-full whitespace-nowrap">
                     Tambah Tipe Pembayaran
                 </button>
-                <button onclick="openCreateFeeModal()"
+                <button onclick="createModalFee()"
                     class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 w-full">
                     Tambah tagihan
                 </button>
@@ -59,7 +59,7 @@
 
                                 <td class="px-6 py-4 ">
                                     <div class="flex gap-3">
-                                        <button onclick="openEditPaymentModal({{ $pt->id }})">
+                                        <button onclick="editPaymentModal({{ $pt->id }})">
                                             <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" fill="none" viewBox="0 0 24 24">
@@ -174,31 +174,19 @@
 
         // payment type
         // create
-        function openCreatePaymentModal() {
-            document.getElementById('createModalPayment').classList.remove('hidden');
+        function createPaymentModal() {
+            document.getElementById('createModalPayment').classList.toggle('hidden');
         }
-
-        function closeCreatePaymentModal() {
-            document.getElementById('createModalPayment').classList.add('hidden');
-        }
-
         // edit
-        function openEditPaymentModal(id) {
-            document.getElementById('editModalPayment' + id).classList.remove('hidden');
+        function editPaymentModal(id) {
+            document.getElementById('editModalPayment' + id).classList.toggle('hidden');
         }
 
-        function closeEditPaymentModal(id) {
-            document.getElementById('editModalPayment' + id).classList.add('hidden');
-        }
 
         // fee
         // create
-        function openCreateFeeModal() {
-            document.getElementById('createModalFee').classList.remove('hidden');
-        }
-
-        function closeCreateFeeModal() {
-            document.getElementById('createModalFee').classList.add('hidden');
+        function createModalFee() {
+            document.getElementById('createModalFee').classList.toggle('hidden');
         }
     </script>
 </x-layout>

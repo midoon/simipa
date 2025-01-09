@@ -4,7 +4,7 @@
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Jadwal Guru</h1>
             <div>
-                <button onclick="openCreateScheduleModal()"
+                <button onclick="createScheduleModal()"
                     class="px-2 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 w-full">
                     Tambah Data Jadwal
                 </button>
@@ -154,7 +154,7 @@
                                 </td>
                                 <td class="px-6 py-4 ">
                                     <div class="flex gap-3">
-                                        <button onclick="openEditScheduleModal({{ $schedule->id }})" data-target="">
+                                        <button onclick="editScheduleModal({{ $schedule->id }})" data-target="">
                                             <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" fill="none" viewBox="0 0 24 24">
@@ -199,21 +199,14 @@
         }
 
         // create
-        function openCreateScheduleModal() {
-            document.getElementById('createModalSchedule').classList.remove('hidden');
+        function createScheduleModal() {
+            document.getElementById('createModalSchedule').classList.toggle('hidden');
         }
 
-        function closeCreateScheduleModal() {
-            document.getElementById('createModalSchedule').classList.add('hidden');
-        }
 
         // edit
-        function openEditScheduleModal(id) {
-            document.getElementById('editModalSchedule' + id).classList.remove('hidden');
-        }
-
-        function closeEditScheduleModal(id) {
-            document.getElementById('editModalSchedule' + id).classList.add('hidden');
+        function editScheduleModal(id) {
+            document.getElementById('editModalSchedule' + id).classList.toggle('hidden');
         }
     </script>
 </x-layout>
