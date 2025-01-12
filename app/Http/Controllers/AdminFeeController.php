@@ -67,4 +67,45 @@ class AdminFeeController extends Controller
             return back()->withErrors(['error' => "Terjadi kesalahan saat menghapus data: {$e->getMessage()}"]);
         }
     }
+
+    public function update(Request $request, $gradeFeeId){
+        try {
+            $validator = Validator::make($request->all(),[
+                'payment_type_id' => 'required',
+                'amount' => 'required',
+                'due_date' => 'required',
+            ]);
+
+             if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+
+            $gradeFee = GradeFee::find($gradeFeeId);
+            $gradeFee->update([
+                'payment_type_id' => $request->payment_type_id,
+                'amount' => $request->amount,
+                'due_date' => $request->due_date,
+            ]);
+
+            $students = Student::whereHas('group.grade', function ($q) use ($request) {
+                $q->where('id', $request->grade_id);
+            })->get();
+
+
+            foreach($students as $s){
+                $fee = Fee::where('student_id', $s->id)->where('payment_type_id', $request->payment_type_id)->first();
+                $fee->update([
+                    'payment_type_id' => $request->payment_type_id,
+                    'student_id' => $s->id,
+                    'amount' => $request->amount,
+                    'due_date' => $request->due_date,
+                    'status' => 'unpaid',
+                    'paid_amount' => 0,
+                ]);
+            }
+            return redirect('/admin/payment/type');
+        } catch (Exception $e){
+            return back()->withErrors(['error' => "Terjadi kesalahan saat mengupdate data: {$e->getMessage()}"]);
+        }
+    }
 }

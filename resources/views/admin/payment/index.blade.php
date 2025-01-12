@@ -129,7 +129,7 @@
                                 </td>
                                 <td class="px-6 py-4 ">
                                     <div class="flex gap-3">
-                                        <button onclick="openEditPaymentModal({{ $pt->id }})">
+                                        <button onclick="editModalFee({{ $gf->id }})">
                                             <svg class="w-6 h-6 text-gray-800 hover:text-simipa-2 mx-1"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" fill="none" viewBox="0 0 24 24">
@@ -154,7 +154,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <x-modal-edit-payment-type :paymentType="$pt"></x-modal-edit-payment-type>
+                            <x-modal-edit-fee :grades="$grades" :paymentTypes="$paymentTypes" :gradeFee="$gf"></x-modal-edit-fee>
                         @endforeach
                     </tbody>
                 </table>
@@ -187,6 +187,11 @@
         // create
         function createModalFee() {
             document.getElementById('createModalFee').classList.toggle('hidden');
+        }
+
+        // edit
+        function editModalFee(id) {
+            document.getElementById('editModalFee' + id).classList.toggle('hidden');
         }
     </script>
 </x-layout>
