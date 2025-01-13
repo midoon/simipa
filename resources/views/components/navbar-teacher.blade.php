@@ -11,7 +11,7 @@
         </div>
 
         <div class="sm:flex">
-            <div class="hidden sm:flex sm:gap-2">
+            <div class="hidden sm:flex sm:gap-2 sm:items-center">
                 <div>
                     <button onclick="toggleDropdown('presensiDropdownDesktop')"
                         class="bg-simipa-2 text-white px-8 py-2 rounded-full">Presensi</button>
@@ -57,7 +57,7 @@
 
     <a href="/teacher/schedule" class="bg-simipa-2 text-white px-4 py-1 rounded-full">Jadwal</a>
     @if (collect(session('teacher')['role'])->contains('bendahara'))
-        <a href="/teacher/payment" class="bg-simipa-2 text-white px-8 py-2 rounded-full">Pembayaran</a>
+        <a href="/teacher/payment" class="bg-simipa-2 text-white px-4 py-1 rounded-full">Pembayaran</a>
     @endif
 </div>
 
