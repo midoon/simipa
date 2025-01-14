@@ -130,5 +130,60 @@ class TeacherAttendanceController extends Controller
         }
     }
 
+    public function filterReport(){
+        try{
+            $activities = Activity::all();
+            $groups = Group::all();
+            return view('staff.teacher.attendance.filter_report', ['activities' => $activities, 'groups' => $groups]);
+        } catch (Exception $e){
+            return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
+        }
+    }
+
+    public function report(Request $request){
+        try {
+            $validator = Validator::make($request->all(),[
+                'group_id' => 'required',
+                'activity_id' => 'required',
+                'start_date' => 'required',
+                'end_date' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+            $attendances = Attendance::whereBetween('day', [$request->start_date, $request->end_date])->where('group_id', $request->group_id)->where('activity_id', $request->activity_id)->with('student')->orderBy('day', 'asc')->get();
+
+            $reportMap = [];
+            foreach ($attendances as $at) {
+                if (!isset($reportMap[$at->student_id])) {
+
+                $reportMap[$at->student_id] = [
+                    'name' => $at->student->name,
+                    'hadir' => 0,
+                    'sakit' => 0,
+                    'izin' => 0,
+                    'alpha' => 0
+                ];
+                }
+
+                // Update value berdasarkan status
+                if ($at->status == 'hadir') {
+                    $reportMap[$at->student_id]['hadir'] += 1;
+                } else if ($at->status == 'sakit') {
+                    $reportMap[$at->student_id]['sakit'] += 1;
+                } else if ($at->status == 'izin') {
+                    $reportMap[$at->student_id]['izin'] += 1;
+                } else if ($at->status == 'alpha') {
+                    $reportMap[$at->student_id]['alpha'] += 1;
+                }
+
+            }
+            dd($reportMap);
+        } catch( Exception $e){
+             return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
+        }
+    }
+
 
 }

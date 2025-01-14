@@ -10,3 +10,5 @@
 
 - refactore modal javascript using toggle
 
+-change atribute day in attendance table become "date"
+

@@ -108,14 +108,13 @@ Route::middleware([TeacherMiddleware::class])->group(function(){
     //Presensi
     Route::get('/teacher/attendance/read', [TeacherAttendanceController::class, 'filterRead']);
     Route::post('/teacher/attendance/read', [TeacherAttendanceController::class, 'showRead']);
-
     Route::get('/teacher/attendance/create', [TeacherAttendanceController::class, 'filterCreate']);
     Route::post('/teacher/attendance/create', [TeacherAttendanceController::class, 'showCreate']);
     Route::post('/teacher/attendance/store', [TeacherAttendanceController::class, 'store']);
-
     Route::put('/teacher/attendance/update', [TeacherAttendanceController::class, 'update']);
-
     Route::post('/teacher/attendance/delete', [TeacherAttendanceController::class, 'destroy']);
+    Route::get('/teacher/attendance/report', [TeacherAttendanceController::class, 'filterReport']);
+    Route::post('/teacher/attendance/report', [TeacherAttendanceController::class, 'report']);
 
 });
 
