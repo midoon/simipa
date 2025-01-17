@@ -31,7 +31,8 @@
 
         <div class="flex justify-between items-center mb-5">
             <h1 class="font-bold text-2xl text-simipa-1">Rekapitulasi Presensi</h1>
-            <button class="py-2 px-4 bg-simipa-1 text-white rounded-lg download-btn">Download</button>
+            <a href="/teacher/attendance/report/generate?group_id={{ $group_id }}&activity_id={{ $activity_id }}&start_date={{ $start_date }}&end_date={{ $end_date }}&export=pdf"
+                class="py-2 px-4 bg-simipa-1 text-white rounded-lg download-btn">Download</a>
         </div>
 
 
@@ -100,42 +101,7 @@
     </div>
 
 
-    <script>
-        const dataReport = document.querySelector('.data-report');
-        const group = dataReport.querySelector('.group').textContent;
-        const activity = dataReport.querySelector('.activity').textContent;
-        const startDate = dataReport.querySelector('.start-date').textContent;
-        const endDate = dataReport.querySelector('.end-date').textContent;
-        const reportMap = JSON.parse(dataReport.querySelector('.reportMap').textContent);
 
-        const downloadButton = document.querySelector('.download-btn');
-
-        const reportRequest = {
-            group,
-            activity,
-            startDate,
-            endDate,
-            reportMap
-        };
-        downloadButton.addEventListener('click', () => {
-            fetch('/teacher/attendance/report/download', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify(reportRequest)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data)
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat rekapitulasi presensi.');
-                });
-        });
-    </script>
 
 
 

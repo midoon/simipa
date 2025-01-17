@@ -10,5 +10,6 @@
 
 - refactore modal javascript using toggle
 
--change atribute day in attendance table become "date"
+-change http method in filter attendance from post to get
 
+- change style report template

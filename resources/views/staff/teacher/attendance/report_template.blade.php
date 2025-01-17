@@ -1,72 +1,76 @@
-<x-layout title="Presensi | Lihat">
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="flex flex-col items-center p-10">
-        <h1 class="font-bold text-2xl ">REKAPITULASI KEHADIRAN SISWA</h1>
-        <h1 class="font-bold text-2xl">MI PANCASILA MOJOSARI MOJOKERTO</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presensi | Lihat</title>
+</head>
 
-        <div class="grid grid-cols-4 gap-4 mt-4 w-full mb-5">
-            <div class=" col-span-3">
-                <table>
-                    <tr class="font-bold">
-                        <td>Rombel</td>
-                        <td> :</td>
-                        <td>{{ $group }}</td>
-                    </tr>
+<body style="font-family: Arial, sans-serif; margin: 20px; padding: 10px;">
+    <div style="text-align: center; padding: 20px;">
+        <h1 style="font-weight: bold; font-size: 24px; margin: 10px 0;">REKAPITULASI KEHADIRAN SISWA</h1>
+        <h1 style="font-weight: bold; font-size: 24px; margin: 10px 0;">MI PANCASILA MOJOSARI MOJOKERTO</h1>
+    </div>
 
-                    <tr class="font-bold">
-                        <td>Activity</td>
-                        <td> :</td>
-                        <td>{{ $activity }}</td>
-                    </tr>
-
-                </table>
-            </div>
-            <div class="">
-                <table>
-                    <tr class="font-bold">
-                        <td>Dari</td>
-                        <td>:</td>
-                        <td>{{ $start_date }}</td>
-                    </tr>
-                    <tr class="font-bold">
-                        <td>Sampai</td>
-                        <td>:</td>
-                        <td>{{ $end_date }}</td>
-                    </tr>
-                </table>
-            </div>
+    <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 20px; margin-bottom: 30px;">
+        <div>
+            <table style="width: 100%; font-size: 14px;">
+                <tr style="font-weight: bold;">
+                    <td style="padding: 5px;">Rombel</td>
+                    <td style="padding: 5px;">:</td>
+                    <td style="padding: 5px;">{{ $group }}</td>
+                </tr>
+                <tr style="font-weight: bold;">
+                    <td style="padding: 5px;">Activity</td>
+                    <td style="padding: 5px;">:</td>
+                    <td style="padding: 5px;">{{ $activity }}</td>
+                </tr>
+            </table>
         </div>
-
-        <div class="rounded-md w-full">
-            <table class="w-full text-sm text-left rtl:text-right">
-                <thead class="text-white bg-simipa-2">
-                    <tr>
-                        <th class="border p-2">No</th>
-                        <th class="border p-2">Nama</th>
-                        <th class="border p-2">Hadir</th>
-                        <th class="border p-2">Alpha</th>
-                        <th class="border p-2">Izin</th>
-                        <th class="border p-2">Sakit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($reportMap as $student_id => $data)
-                        <tr class="bg-simipa-6 border">
-                            <td class="px-2 py-1 border">{{ $loop->iteration }}</td>
-                            <td class="px-2 py-1 border">{{ $data['name'] }}</td>
-                            <td class="px-2 py-1 border">{{ $data['hadir'] }}</td>
-                            <td class="px-2 py-1 border">{{ $data['sakit'] }}</td>
-                            <td class="px-2 py-1 border">{{ $data['izin'] }}</td>
-                            <td class="px-2 py-1 border">{{ $data['alpha'] }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
+        <div>
+            <table style="width: 100%; font-size: 14px;">
+                <tr style="font-weight: bold;">
+                    <td style="padding: 5px;">Dari</td>
+                    <td style="padding: 5px;">:</td>
+                    <td style="padding: 5px;">{{ $start_date }}</td>
+                </tr>
+                <tr style="font-weight: bold;">
+                    <td style="padding: 5px;">Sampai</td>
+                    <td style="padding: 5px;">:</td>
+                    <td style="padding: 5px;">{{ $end_date }}</td>
+                </tr>
             </table>
         </div>
     </div>
 
+    <div style="border: 1px solid #ccc; border-radius: 5px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+            <thead style="background-color: #004085; color: white;">
+                <tr>
+                    <th style="border: 1px solid #ccc; padding: 10px; text-align: center;">No</th>
+                    <th style="border: 1px solid #ccc; padding: 10px; text-align: center;">Nama</th>
+                    <th style="border: 1px solid #ccc; padding: 10px; text-align: center;">Hadir</th>
+                    <th style="border: 1px solid #ccc; padding: 10px; text-align: center;">Alpha</th>
+                    <th style="border: 1px solid #ccc; padding: 10px; text-align: center;">Izin</th>
+                    <th style="border: 1px solid #ccc; padding: 10px; text-align: center;">Sakit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($reportMap as $student_id => $data)
+                    <tr style="background-color: #f9f9f9; border: 1px solid #ccc;">
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">{{ $loop->iteration }}
+                        </td>
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">{{ $data['name'] }}</td>
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">{{ $data['hadir'] }}</td>
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">{{ $data['alpha'] }}</td>
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">{{ $data['izin'] }}</td>
+                        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">{{ $data['sakit'] }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</body>
 
-
-
-
-</x-layout>
+</html>

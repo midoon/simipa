@@ -20,8 +20,8 @@
 
         <div class="p-2 border rounded-md shadow-sm sm:px-10">
             <h1 class="font-bold text-center text-simipa-1 mb-5 sm:text-xl">Rekapitulasi Presensi</h1>
-            <form action="/teacher/attendance/report" method="POST">
-                @csrf
+            <form action="/teacher/attendance/report/generate" method="GET">
+
                 <div class="mb-3">
                     <label for="name" class="block font-semibold mb-1">Rombongan Belajar</label>
                     <select name="group_id" id="groupSelect" class="border w-full rounded-lg px-2 py-1.5" required>

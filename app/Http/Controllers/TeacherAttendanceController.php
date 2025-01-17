@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\Attendance;
 use App\Models\Group;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -183,21 +184,17 @@ class TeacherAttendanceController extends Controller
 
             }
 
-            // return view('staff.teacher.attendance.report_template', ['reportMap' => $reportMap, 'group' => $attendances[0]->group->name, 'activity' => $attendances[0]->activity->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date, 'group_id' => $request->group_id, 'activity_id' => $request->activity_id], );
+            if ($request->get('export')== 'pdf'){
+                $pdf = Pdf::loadView('staff.teacher.attendance.report_template',  ['reportMap' => $reportMap, 'group' => $attendances[0]->group->name, 'activity' => $attendances[0]->activity->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date, 'group_id' => $request->group_id, 'activity_id' => $request->activity_id]);
+                return $pdf->download('laporan-presensi.pdf');
+            }
             return view('staff.teacher.attendance.report', ['reportMap' => $reportMap, 'group' => $attendances[0]->group->name, 'activity' => $attendances[0]->activity->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date, 'group_id' => $request->group_id, 'activity_id' => $request->activity_id], );
         } catch( Exception $e){
              return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
         }
     }
 
-    public function downloadReport(Request $request){
-        try {
 
-            return response()->json(['message' => $request->all()]);
-        } catch( Exception $e){
-             return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
-        }
-    }
 
 
 }
