@@ -1,0 +1,142 @@
+<x-layout title="Presensi | Lihat">
+    <x-navbar-teacher>
+
+    </x-navbar-teacher>
+
+
+
+    <div class=" px-4 sm:mx-[250px]">
+        @if (session('error'))
+            <div class=" text-red-700 p-4 rounded mb-4 text-center">
+                {{ session('error') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <ul class="mt-2 list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="hidden data-report">
+            <span class="group">{{ $group }}</span>
+            <span class="activity">{{ $activity }}</span>
+            <span class="start-date">{{ $start_date }}</span>
+            <span class="end-date">{{ $end_date }}</span>
+            <span class="reportMap">{{ json_encode($reportMap) }}</span>
+        </div>
+
+        <div class="flex justify-between items-center mb-5">
+            <h1 class="font-bold text-2xl text-simipa-1">Rekapitulasi Presensi</h1>
+            <button class="py-2 px-4 bg-simipa-1 text-white rounded-lg download-btn">Download</button>
+        </div>
+
+
+
+        <div class="border w-full mb-5 grid grid-cols-2 p-2">
+            <div>
+                <table>
+                    <tr class="">
+                        <td>Rombel</td>
+                        <td> :</td>
+                        <td>{{ $group }}</td>
+                    </tr>
+
+                    <tr class="">
+                        <td>Activity</td>
+                        <td> :</td>
+                        <td>{{ $activity }}</td>
+                    </tr>
+
+                </table>
+            </div>
+            <div>
+                <table>
+                    <tr class="">
+                        <td>Dari</td>
+                        <td>:</td>
+                        <td>{{ $start_date }}</td>
+                    </tr>
+                    <tr class="">
+                        <td>Sampai</td>
+                        <td>:</td>
+                        <td>{{ $end_date }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        {{-- table --}}
+        <div class="relative overflow-x-auto rounded-md ">
+            <table class="w-full text-sm text-left rtl:text-right">
+                <thead class="text-white bg-simipa-2">
+                    <tr>
+                        <th class="border p-2">No</th>
+                        <th class="border p-2">Nama</th>
+                        <th class="border p-2">Hadir</th>
+                        <th class="border p-2">Alpha</th>
+                        <th class="border p-2">Izin</th>
+                        <th class="border p-2">Sakit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($reportMap as $student_id => $data)
+                        <tr class="bg-simipa-6 border">
+                            <td class="px-2 py-1 border">{{ $loop->iteration }}</td>
+                            <td class="px-2 py-1 border">{{ $data['name'] }}</td>
+                            <td class="px-2 py-1 border">{{ $data['hadir'] }}</td>
+                            <td class="px-2 py-1 border">{{ $data['sakit'] }}</td>
+                            <td class="px-2 py-1 border">{{ $data['izin'] }}</td>
+                            <td class="px-2 py-1 border">{{ $data['alpha'] }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <script>
+        const dataReport = document.querySelector('.data-report');
+        const group = dataReport.querySelector('.group').textContent;
+        const activity = dataReport.querySelector('.activity').textContent;
+        const startDate = dataReport.querySelector('.start-date').textContent;
+        const endDate = dataReport.querySelector('.end-date').textContent;
+        const reportMap = JSON.parse(dataReport.querySelector('.reportMap').textContent);
+
+        const downloadButton = document.querySelector('.download-btn');
+
+        const reportRequest = {
+            group,
+            activity,
+            startDate,
+            endDate,
+            reportMap
+        };
+        downloadButton.addEventListener('click', () => {
+            fetch('/teacher/attendance/report/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify(reportRequest)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat rekapitulasi presensi.');
+                });
+        });
+    </script>
+
+
+
+</x-layout>

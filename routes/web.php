@@ -115,6 +115,7 @@ Route::middleware([TeacherMiddleware::class])->group(function(){
     Route::post('/teacher/attendance/delete', [TeacherAttendanceController::class, 'destroy']);
     Route::get('/teacher/attendance/report', [TeacherAttendanceController::class, 'filterReport']);
     Route::post('/teacher/attendance/report', [TeacherAttendanceController::class, 'report']);
+    Route::post('/teacher/attendance/report/download', [TeacherAttendanceController::class, 'downloadReport']);
 
 });
 

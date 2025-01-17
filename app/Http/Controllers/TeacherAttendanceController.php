@@ -152,6 +152,9 @@ class TeacherAttendanceController extends Controller
             if ($validator->fails()) {
                 return back()->withErrors($validator);
             }
+
+
+
             $attendances = Attendance::whereBetween('day', [$request->start_date, $request->end_date])->where('group_id', $request->group_id)->where('activity_id', $request->activity_id)->with('student')->orderBy('day', 'asc')->get();
 
             $reportMap = [];
@@ -179,7 +182,18 @@ class TeacherAttendanceController extends Controller
                 }
 
             }
-            dd($reportMap);
+
+            // return view('staff.teacher.attendance.report_template', ['reportMap' => $reportMap, 'group' => $attendances[0]->group->name, 'activity' => $attendances[0]->activity->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date, 'group_id' => $request->group_id, 'activity_id' => $request->activity_id], );
+            return view('staff.teacher.attendance.report', ['reportMap' => $reportMap, 'group' => $attendances[0]->group->name, 'activity' => $attendances[0]->activity->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date, 'group_id' => $request->group_id, 'activity_id' => $request->activity_id], );
+        } catch( Exception $e){
+             return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
+        }
+    }
+
+    public function downloadReport(Request $request){
+        try {
+
+            return response()->json(['message' => $request->all()]);
         } catch( Exception $e){
              return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
         }
