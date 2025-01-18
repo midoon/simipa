@@ -188,6 +188,9 @@ class TeacherAttendanceController extends Controller
                 $pdf = Pdf::loadView('staff.teacher.attendance.report_template',  ['reportMap' => $reportMap, 'group' => $attendances[0]->group->name, 'activity' => $attendances[0]->activity->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date, 'group_id' => $request->group_id, 'activity_id' => $request->activity_id]);
                 return $pdf->download('laporan-presensi.pdf');
             }
+
+
+
             return view('staff.teacher.attendance.report', ['reportMap' => $reportMap, 'group' => $attendances[0]->group->name, 'activity' => $attendances[0]->activity->name, 'start_date' => $request->start_date, 'end_date' => $request->end_date, 'group_id' => $request->group_id, 'activity_id' => $request->activity_id], );
         } catch( Exception $e){
              return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);

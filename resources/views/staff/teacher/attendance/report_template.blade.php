@@ -13,40 +13,40 @@
         <h1 style="font-weight: bold; font-size: 24px; margin: 10px 0;">MI PANCASILA MOJOSARI MOJOKERTO</h1>
     </div>
 
-    <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 20px; margin-bottom: 30px;">
+    <div style="margin-bottom: 30px;">
         <div>
-            <table style="width: 100%; font-size: 14px;">
-                <tr style="font-weight: bold;">
-                    <td style="padding: 5px;">Rombel</td>
-                    <td style="padding: 5px;">:</td>
-                    <td style="padding: 5px;">{{ $group }}</td>
-                </tr>
-                <tr style="font-weight: bold;">
-                    <td style="padding: 5px;">Activity</td>
-                    <td style="padding: 5px;">:</td>
-                    <td style="padding: 5px;">{{ $activity }}</td>
-                </tr>
-            </table>
-        </div>
-        <div>
-            <table style="width: 100%; font-size: 14px;">
-                <tr style="font-weight: bold;">
-                    <td style="padding: 5px;">Dari</td>
-                    <td style="padding: 5px;">:</td>
-                    <td style="padding: 5px;">{{ $start_date }}</td>
-                </tr>
-                <tr style="font-weight: bold;">
-                    <td style="padding: 5px;">Sampai</td>
-                    <td style="padding: 5px;">:</td>
-                    <td style="padding: 5px;">{{ $end_date }}</td>
-                </tr>
-            </table>
+            <div
+                style="display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: bold; font-size: 14px;">
+                <span style="width: 5%; text-align: left; white-space: nowrap;">Rombel</span>
+                <span style="width: 1%; text-align: center;">:</span>
+                <span style="width: 94%; text-align: left;">{{ $group }}</span>
+            </div>
+            <div
+                style="display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: bold; font-size: 14px;">
+                <span style="width: 5%; text-align: left; white-space: nowrap;">Jenis</span>
+                <span style="width: 1%; text-align: center;">:</span>
+                <span style="width: 94%; text-align: left;">{{ $activity }}</span>
+            </div>
+            <div
+                style="display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: bold; font-size: 14px;">
+                <span style="width: 5%; text-align: left; white-space: nowrap;">Dari</span>
+                <span style="width: 1%; text-align: center;">:</span>
+                <span style="width: 94%; text-align: left;">{{ $start_date }}</span>
+            </div>
+            <div
+                style="display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: bold; font-size: 14px;">
+                <span style="width: 5%; text-align: left; white-space: nowrap;">Sampai</span>
+                <span style="width: 1%; text-align: center;">:</span>
+                <span style="width: 94%; text-align: left;">{{ $end_date }}</span>
+            </div>
         </div>
     </div>
 
+
+
     <div style="border: 1px solid #ccc; border-radius: 5px; overflow: hidden;">
         <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-            <thead style="background-color: #004085; color: white;">
+            <thead style="background-color: #708871; color: white;">
                 <tr>
                     <th style="border: 1px solid #ccc; padding: 10px; text-align: center;">No</th>
                     <th style="border: 1px solid #ccc; padding: 10px; text-align: center;">Nama</th>
@@ -71,6 +71,8 @@
             </tbody>
         </table>
     </div>
+
+
 </body>
 
 </html>
