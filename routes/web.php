@@ -15,6 +15,7 @@ use App\Http\Controllers\AuthTeacherController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\TeacherAttendanceController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\TeacherPaymentController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\TeacherMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -117,7 +118,8 @@ Route::middleware([TeacherMiddleware::class])->group(function(){
     Route::get('/teacher/attendance/report/generate', [TeacherAttendanceController::class, 'report']);
 
     // Payment
-
+    Route::get('/teacher/payment/filter/create', [TeacherPaymentController::class, 'filterCreate']);
+    Route::get('/teacher/payment/create', [TeacherPaymentController::class, 'showCreate']);
 
 });
 

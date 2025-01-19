@@ -33,7 +33,7 @@
                             class="hidden absolute bg-white text-gray-800 rounded-md shadow-md mt-2 w-48 z-10">
                             <a href="/teacher/payment/read" class="block px-4 py-2 hover:bg-gray-200">Lihat
                                 Pembayaran</a>
-                            <a href="/teacher/payment/create" class="block px-4 py-2 hover:bg-gray-200">Tambah
+                            <a href="/teacher/payment/filter/create" class="block px-4 py-2 hover:bg-gray-200">Tambah
                                 Pembayaran</a>
                             <a href="/teacher/payment/report" class="block px-4 py-2 hover:bg-gray-200">Rekap
                                 Pembayaran</a>
@@ -75,7 +75,7 @@
             <div id="paymentDropdownMobile"
                 class="hidden absolute bg-white text-gray-800 rounded-md shadow-md mt-2 w-48 z-10">
                 <a href="/teacher/payment/read" class="block px-4 py-2 hover:bg-gray-200">Lihat Pembayaran</a>
-                <a href="/teacher/payment/create" class="block px-4 py-2 hover:bg-gray-200">Tambah Pembayaran</a>
+                <a href="/teacher/payment/filter/create" class="block px-4 py-2 hover:bg-gray-200">Tambah Pembayaran</a>
                 <a href="/teacher/payment/report" class="block px-4 py-2 hover:bg-gray-200">Rekap Pembayaran</a>
             </div>
         </div>
