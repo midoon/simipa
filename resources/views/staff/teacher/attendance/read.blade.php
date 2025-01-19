@@ -5,9 +5,24 @@
 
     <div class=" px-4 sm:mx-[250px]">
 
+        @if (session('error'))
+            <div class=" text-red-700 p-4 rounded mb-4 text-center">
+                {{ session('error') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <ul class="mt-2 list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
 
         <div class="flex flex-col items-center mb-4 border-b-2 text-simipa-2">
-            <h1 class="judul">Presensi {{ $group[0]->name }} : {{ $activity[0]->name }}
+            <h1 class="judul">Presensi {{ $group[0]->name }} {{ $activity[0]->name }}
             </h1>
             <p class="tanggal">{{ \Carbon\Carbon::parse($day)->format('d-m-Y') }} </p>
         </div>

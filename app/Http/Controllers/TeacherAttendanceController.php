@@ -26,7 +26,6 @@ class TeacherAttendanceController extends Controller
 
     public function showRead(Request $request){
         try {
-
             $validator = Validator::make($request->all(),[
                 'group_id' => 'required',
                 'activity_id' => 'required',
@@ -38,8 +37,9 @@ class TeacherAttendanceController extends Controller
             }
             $day = $request->day;
             $group = DB::table('groups')->where('id', $request->group_id)->get();
-            $activity = DB::table('activities')->where('id', $request->group_id)->get();
+            $activity = DB::table('activities')->where('id', $request->activity_id)->get();
             $attendances = Attendance::where('group_id', $request->group_id)->where('activity_id', $request->activity_id)->where('day', $request->day)->with('student')->get();
+
             return view('staff.teacher.attendance.read',  ['attendances' => $attendances, 'group' => $group, 'activity' => $activity, 'day' => $day]);
         } catch( Exception $e){
              return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
