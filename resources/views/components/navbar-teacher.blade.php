@@ -13,9 +13,9 @@
         <div class="sm:flex">
             <div class="hidden sm:flex sm:gap-2 sm:items-center">
                 <div>
-                    <button onclick="toggleDropdown('presensiDropdownDesktop')"
+                    <button onclick="toggleDropdown('attendanceDropdownDesktop')"
                         class="bg-simipa-2 text-white px-8 py-2 rounded-full">Presensi</button>
-                    <div id="presensiDropdownDesktop"
+                    <div id="attendanceDropdownDesktop"
                         class="hidden absolute bg-white text-gray-800 rounded-md shadow-md mt-2 w-48 z-10">
                         <a href="/teacher/attendance/read" class="block px-4 py-2 hover:bg-gray-200">Lihat Presensi</a>
                         <a href="/teacher/attendance/create" class="block px-4 py-2 hover:bg-gray-200">Tambah
@@ -24,17 +24,30 @@
                             Presensi</a>
                     </div>
                 </div>
-                <a href="/teacher/schedule" class="bg-simipa-2 text-white px-8 py-2 rounded-full">Jadwal</a>
+
                 @if (collect(session('teacher')['role'])->contains('bendahara'))
-                    <a href="/teacher/payment" class="bg-simipa-2 text-white px-8 py-2 rounded-full">Pembayaran</a>
+                    <div>
+                        <button onclick="toggleDropdown('paymentDropdownDesktop')"
+                            class="bg-simipa-2 text-white px-8 py-2 rounded-full">Pembayaran</button>
+                        <div id="paymentDropdownDesktop"
+                            class="hidden absolute bg-white text-gray-800 rounded-md shadow-md mt-2 w-48 z-10">
+                            <a href="/teacher/payment/read" class="block px-4 py-2 hover:bg-gray-200">Lihat
+                                Pembayaran</a>
+                            <a href="/teacher/payment/create" class="block px-4 py-2 hover:bg-gray-200">Tambah
+                                Pembayaran</a>
+                            <a href="/teacher/payment/report" class="block px-4 py-2 hover:bg-gray-200">Rekap
+                                Pembayaran</a>
+                        </div>
+                    </div>
                 @endif
+                <a href="/teacher/schedule" class="bg-simipa-2 text-white px-8 py-2 rounded-full">Jadwal</a>
             </div>
 
 
             <form action="/teacher/logout" method="POST" class="m-3 sm:ml-3">
                 @method('DELETE')
                 @csrf
-                <button type="submit" class="px-4 py-2 bg-red-500 text-center w-full rounded-full text-white">
+                <button type="submit" class="px-4 py-2 bg-red-500 text-center w-full rounded-lg text-white">
                     Logout
                 </button>
             </form>
@@ -45,9 +58,9 @@
 
 <div class=" flex justify-center mb-10 gap-3  sm:hidden">
     <div>
-        <button onclick="toggleDropdown('presensiDropdownMobile')"
+        <button onclick="toggleDropdown('attendanceDropdownMobile')"
             class="bg-simipa-2 text-white px-4 py-1 rounded-full">Presensi</button>
-        <div id="presensiDropdownMobile"
+        <div id="attendanceDropdownMobile"
             class="hidden absolute bg-white text-gray-800 rounded-md shadow-md mt-2 w-48 z-10">
             <a href="/teacher/attendance/read" class="block px-4 py-2 hover:bg-gray-200">Lihat Presensi</a>
             <a href="/teacher/attendance/create" class="block px-4 py-2 hover:bg-gray-200">Tambah Presensi</a>
@@ -55,11 +68,19 @@
         </div>
     </div>
 
-
-    <a href="/teacher/schedule" class="bg-simipa-2 text-white px-4 py-1 rounded-full">Jadwal</a>
     @if (collect(session('teacher')['role'])->contains('bendahara'))
-        <a href="/teacher/payment" class="bg-simipa-2 text-white px-4 py-1 rounded-full">Pembayaran</a>
+        <div>
+            <button onclick="toggleDropdown('paymentDropdownMobile')"
+                class="bg-simipa-2 text-white px-4 py-1 rounded-full">Pembayaran</button>
+            <div id="paymentDropdownMobile"
+                class="hidden absolute bg-white text-gray-800 rounded-md shadow-md mt-2 w-48 z-10">
+                <a href="/teacher/payment/read" class="block px-4 py-2 hover:bg-gray-200">Lihat Pembayaran</a>
+                <a href="/teacher/payment/create" class="block px-4 py-2 hover:bg-gray-200">Tambah Pembayaran</a>
+                <a href="/teacher/payment/report" class="block px-4 py-2 hover:bg-gray-200">Rekap Pembayaran</a>
+            </div>
+        </div>
     @endif
+    <a href="/teacher/schedule" class="bg-simipa-2 text-white px-4 py-1 rounded-full">Jadwal</a>
 </div>
 
 <script>

@@ -116,6 +116,8 @@ Route::middleware([TeacherMiddleware::class])->group(function(){
     Route::get('/teacher/attendance/report', [TeacherAttendanceController::class, 'filterReport']);
     Route::get('/teacher/attendance/report/generate', [TeacherAttendanceController::class, 'report']);
 
+    // Payment
+
 
 });
 
