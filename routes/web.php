@@ -120,6 +120,7 @@ Route::middleware([TeacherMiddleware::class])->group(function(){
     // Payment
     Route::get('/teacher/payment/filter/create', [TeacherPaymentController::class, 'filterCreate']);
     Route::get('/teacher/payment/create', [TeacherPaymentController::class, 'showCreate']);
+    Route::post('/teacher/payment/create', [TeacherPaymentController::class, 'store']);
 
 });
 

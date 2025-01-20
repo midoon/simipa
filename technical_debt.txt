@@ -8,8 +8,8 @@
 
 - optimasi query DB (fee & grade fee dengan membuat relasi 1 to n)
 
-- refactore modal javascript using toggle
-
 -change http method in filter attendance from post to get
 
-- change style report template
+- Teacher-payment-create: add logic sisa kembalian, sisa yang harus dibayar atau sisa tagihan
+
+
