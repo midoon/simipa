@@ -1,4 +1,4 @@
-<x-layout title="Pembayaran | Tambah">
+<x-layout title="Pembayaran | Lihat">
     <x-navbar-teacher>
 
     </x-navbar-teacher>
@@ -27,9 +27,8 @@
 
 
         <div class="flex flex-col items-center mb-4 border-b-2 text-simipa-2">
-            <h1 class="judul">Pembayaran {{ $paymentType->name }} {{ $group->name }}
+            <h1 class="judul sm:mb-6"> Daftar Pembayaran {{ $paymentType->name }} {{ $group->name }}
             </h1>
-            <p class="tanggal">{{ \Carbon\Carbon::parse($date)->format('d-m-Y') }} </p>
         </div>
 
         <div class="max-h-[60vh] overflow-y-auto sm:flex sm:flex-col sm:items-center">
@@ -40,15 +39,12 @@
                     <div class="flex justify-between sm:h-full">
                         <p class="font-semibold text-simipa-1 sm:self-start">{{ $student->name }} </p>
                         <div class="flex items-center">
-                            <button type="button" onclick="amountCreatePayment({{ $student->id }})"
-                                class="bg-simipa-3 text-white px-4 py-1 rounded-lg hover:bg-simipa-2 sm:px-8 sm:py-2">
-                                Bayar
-                            </button>
+                            <a href="/teacher/payment/read/detail?student_id={{ $student->id }}&payment_type_id={{ $paymentType->id }}"
+                                class="bg-simipa-2 text-white py-2 px-4 rounded-lg sm:px-8 sm:py-2">Detail</a>
                         </div>
                     </div>
                 </div>
-                <x-teacher-modal-create-payment :student="$student" :paymentType="$paymentType"
-                    :date="$date"></x-teacher-modal-create-payment>
+
             @empty
                 <h1>Data kosong</h1>
             @endforelse
@@ -59,11 +55,7 @@
 
 
 
-    <script>
-        function amountCreatePayment(id) {
-            document.getElementById('amountCreatePayment' + id).classList.toggle('hidden')
-        }
-    </script>
+
 
 
 

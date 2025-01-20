@@ -19,8 +19,8 @@
         @endif
 
         <div class="p-2 border rounded-md shadow-sm sm:p-6">
-            <h1 class="font-bold text-center mb-5">Tambah Pembayaran</h1>
-            <form action="/teacher/payment/create" method="GET">
+            <h1 class="font-bold text-center mb-5">Lihat Pembayaran</h1>
+            <form action="/teacher/payment/read" method="GET">
 
                 <div class="mb-3">
                     <label for="name" class="block font-semibold mb-1">Rombongan Belajar</label>
@@ -40,15 +40,11 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="mb-10">
-                    <label for="date" class="block font-semibold mb-1">Tanggal</label>
-                    <input type="date" id="date" name="date" class="w-full px-2 py-2 border rounded-lg">
-                </div>
                 <div class="flex justify-end mt-3">
                     <button type="button" onclick="batal()"
                         class="px-4 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 mr-2">Batal</button>
                     <button type="submit"
-                        class="px-4 py-1 bg-simipa-2 text-white rounded hover:bg-gray-400 mr-2">Tambah</button>
+                        class="px-4 py-1 bg-simipa-2 text-white rounded hover:bg-gray-400 mr-2">Lihat</button>
                 </div>
             </form>
         </div>

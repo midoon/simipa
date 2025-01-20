@@ -6,6 +6,7 @@ use App\Models\Fee;
 use App\Models\Group;
 use App\Models\Payment;
 use App\Models\PaymentType;
+use App\Models\Student;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -90,6 +91,66 @@ class TeacherPaymentController extends Controller
              return back()->with('success', 'Pembayaran berhasil disimpan');
         } catch (Exception $e){
             return back()->withErrors(['error' => "Terjadi kesalahan saat menyimpan data: {$e->getMessage()}"]);
+        }
+    }
+
+    public function filterRead(){
+        try{
+            $paymentTypes = PaymentType::all();
+            $groups = Group::all();
+            return view('staff.teacher.payment.filter_read', ['paymentTypes' => $paymentTypes, 'groups' => $groups]);
+        } catch (Exception $e){
+            return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
+        }
+    }
+
+    public function showRead(Request $request){
+        try{
+            $validator = Validator::make($request->all(),[
+                'group_id' => 'required',
+                'payment_type_id' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+
+            $group = Group::find($request->group_id);
+            $students = $group->students;
+            $paymentType = PaymentType::find($request->payment_type_id);
+
+            return view('staff.teacher.payment.read' , ['students' => $students, 'group' => $group, 'paymentType' => $paymentType]);
+        } catch (Exception $e){
+            return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
+        }
+    }
+
+    public function showDetail(Request $request){
+        try{
+            $validator = Validator::make($request->all(),[
+                'student_id' => 'required',
+                'payment_type_id' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+
+            $student = Student::find($request->student_id);
+            $paymentType = PaymentType::find($request->payment_type_id);
+            $payments = Payment::where('student_id', $request->student_id)
+                ->where('payment_type_id', $request->payment_type_id)
+                ->get();
+
+            $fee = Fee::where('student_id', $request->student_id)
+                ->where('payment_type_id', $request->payment_type_id)
+                ->first();
+
+            $remainingAmount = $fee->amount - $fee->paid_amount;
+
+            return view('staff.teacher.payment.read_detail', ['student' => $student, 'paymentType' => $paymentType, 'payments' => $payments, 'remainingAmount' => $remainingAmount]);
+        } catch (Exception $e){
+            return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
         }
     }
 }
