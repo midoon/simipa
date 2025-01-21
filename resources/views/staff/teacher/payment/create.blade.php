@@ -36,11 +36,11 @@
             @forelse ($students as $student)
                 <div
                     class="block px-4 py-4 text-simipa-1 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 w-full mb-3 sm:py-2 sm:h-[70px] ">
-                    <div class="data-presensi hidden">{{ $student->id }}</div>
+                    <div class="data-presensi hidden">{{ $student['id'] }}</div>
                     <div class="flex justify-between sm:h-full">
-                        <p class="font-semibold text-simipa-1 sm:self-start">{{ $student->name }} </p>
+                        <p class="font-semibold text-simipa-1 sm:self-start">{{ $student['name'] }} </p>
                         <div class="flex items-center">
-                            <button type="button" onclick="amountCreatePayment({{ $student->id }})"
+                            <button type="button" onclick="amountCreatePayment({{ $student['id'] }})"
                                 class="bg-simipa-3 text-white px-4 py-1 rounded-lg hover:bg-simipa-2 sm:px-8 sm:py-2">
                                 Bayar
                             </button>
