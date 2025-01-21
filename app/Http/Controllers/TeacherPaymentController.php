@@ -62,8 +62,6 @@ class TeacherPaymentController extends Controller
                 ];
             }
 
-            // dd($studentData);
-
             return view('staff.teacher.payment.create', ['students' => $studentData, 'group' => $group, 'paymentType' => $paymentType, 'date' => $request->date]);
         } catch (Exception $e){
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
@@ -179,6 +177,40 @@ class TeacherPaymentController extends Controller
             return view('staff.teacher.payment.read_detail', ['student' => $student, 'paymentType' => $paymentType, 'payments' => $payments, 'remainingAmount' => $remainingAmount]);
         } catch (Exception $e){
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
+        }
+    }
+
+    public function destroy(Request $request) {
+        try {
+            $validator = Validator::make($request->all(),[
+                'payment_id' => 'required',
+
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+
+            $payment = Payment::find($request->payment_id);
+            $fee = Fee::where('student_id', $payment->student_id)
+                ->where('payment_type_id', $payment->payment_type_id)
+                ->first();
+
+            $statusFee = "partial";
+            if ($fee){
+                if ($fee->paid_amount - $payment->amount == 0){
+                    $statusFee = "unpaid";
+                }
+                $fee->paid_amount = $fee->paid_amount - $payment->amount;
+                $fee->status = $statusFee;
+                $fee->save();
+            }
+
+           DB::table('payments')->delete($request->payment_id);
+           return back()->with('success', 'Pembayaran berhasil dihapus');
+
+        } catch (Exception $e){
+             return back()->withErrors(['error' => "Terjadi kesalahan saat menghapus data: {$e->getMessage()}"]);
         }
     }
 }
