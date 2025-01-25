@@ -21,13 +21,7 @@
             </div>
         @endif
 
-        <div class="hidden data-report">
-            <span class="group">{{ $group }}</span>
-            <span class="activity">{{ $activity }}</span>
-            <span class="start-date">{{ $start_date }}</span>
-            <span class="end-date">{{ $end_date }}</span>
-            <span class="reportMap">{{ json_encode($reportMap) }}</span>
-        </div>
+
 
         <div class="flex justify-between items-center mb-5">
             <h1 class="font-bold text-2xl text-simipa-1">Rekapitulasi Presensi</h1>
@@ -57,14 +51,14 @@
             <div>
                 <table>
                     <tr class="">
-                        <td>Dari</td>
+                        <td>Tanggal Awal</td>
                         <td>:</td>
-                        <td>{{ $start_date }}</td>
+                        <td>{{ \Carbon\Carbon::parse($start_date)->format('d-m-Y') }}</td>
                     </tr>
                     <tr class="">
-                        <td>Sampai</td>
+                        <td>Tanggal Akhir</td>
                         <td>:</td>
-                        <td>{{ $end_date }}</td>
+                        <td>{{ \Carbon\Carbon::parse($end_date)->format('d-m-Y') }}</td>
                     </tr>
                 </table>
             </div>
