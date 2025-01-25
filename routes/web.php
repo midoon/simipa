@@ -18,6 +18,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TeacherPaymentController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\TeacherMiddleware;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
 
 
@@ -126,6 +127,9 @@ Route::middleware([TeacherMiddleware::class])->group(function(){
     Route::get('/teacher/payment/read', [TeacherPaymentController::class, 'showRead']);
     Route::get('/teacher/payment/read/detail', [TeacherPaymentController::class, 'showDetail']);
     Route::delete('/teacher/payment/delete', [TeacherPaymentController::class, 'destroy']);
+
+    Route::get('/teacher/payment/filter/report', [TeacherPaymentController::class, 'filterReport']);
+    Route::get('/teacher/payment/report/generate', [TeacherPaymentController::class, 'report']);
 
 });
 

@@ -73,4 +73,5 @@
                 return confirm("Apakah Anda yakin ingin menghapusnya?");
             }
         </script>
+    </div>
 </x-layout>
