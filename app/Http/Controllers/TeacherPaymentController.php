@@ -174,7 +174,12 @@ class TeacherPaymentController extends Controller
                 ->where('payment_type_id', $request->payment_type_id)
                 ->first();
 
-            $remainingAmount = $fee->amount - $fee->paid_amount;
+
+
+            $remainingAmount = 0;
+            if ($fee != null){
+                $remainingAmount = $fee->amount - $fee->paid_amount;
+            }
 
             return view('staff.teacher.payment.read_detail', ['student' => $student, 'paymentType' => $paymentType, 'payments' => $payments, 'remainingAmount' => $remainingAmount]);
         } catch (Exception $e){
