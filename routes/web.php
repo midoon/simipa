@@ -119,16 +119,16 @@ Route::middleware([TeacherMiddleware::class])->group(function(){
     Route::get('/teacher/attendance/report/generate', [TeacherAttendanceController::class, 'report']);
 
     // Payment
-    Route::get('/teacher/payment/filter/create', [TeacherPaymentController::class, 'filterCreate']);
+    Route::get('/teacher/payment/create/filter', [TeacherPaymentController::class, 'filterCreate']);
     Route::get('/teacher/payment/create', [TeacherPaymentController::class, 'showCreate']);
     Route::post('/teacher/payment/create', [TeacherPaymentController::class, 'store']);
 
-    Route::get('/teacher/payment/filter/read', [TeacherPaymentController::class, 'filterRead']);
+    Route::get('/teacher/payment/read/filter', [TeacherPaymentController::class, 'filterRead']);
     Route::get('/teacher/payment/read', [TeacherPaymentController::class, 'showRead']);
     Route::get('/teacher/payment/read/detail', [TeacherPaymentController::class, 'showDetail']);
     Route::delete('/teacher/payment/delete', [TeacherPaymentController::class, 'destroy']);
 
-    Route::get('/teacher/payment/filter/report', [TeacherPaymentController::class, 'filterReport']);
+    Route::get('/teacher/payment/report/filter', [TeacherPaymentController::class, 'filterReport']);
     Route::get('/teacher/payment/report/generate', [TeacherPaymentController::class, 'report']);
 
 });
