@@ -16,7 +16,8 @@ class TeacherMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-        if ($request->session()->get('teacher')['role'] == 'teacher' || collect(session('teacher')['role'])->contains('bendahara')) {
+
+        if (collect(session('teacher')['role'])->contains('guru') || collect(session('teacher')['role'])->contains('bendahara')) {
             return $next($request);
         }
 
