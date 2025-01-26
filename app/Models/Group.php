@@ -23,7 +23,7 @@ class Group extends Model
         return $this->hasMany(Student::class);
     }
 
-    public function presences(): HasMany{
-        return $this->hasMany(Presence::class);
+    public function attendance(): HasMany{
+        return $this->hasMany(Attendance::class);
     }
 }

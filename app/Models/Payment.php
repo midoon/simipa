@@ -10,10 +10,6 @@ class Payment extends Model
 {
     protected $guarded = ['id'];
 
-    public function paymentInstallments(): HasMany{
-        return $this->hasMany(PaymentInstallment::class);
-    }
-
     public function paymentType(): BelongsTo{
         return $this->belongsTo(PaymentType::class);
     }
