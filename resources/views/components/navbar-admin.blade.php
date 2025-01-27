@@ -1,10 +1,10 @@
 <div class=" flex min-h-screen">
     <aside class="bg-simipa-6 w-64 text-gray-100 flex-shrink-0 fixed h-full">
 
-        <div class="py-3 mt-5 flex gap-2 justify-center items-center ">
+        <a href="/admin/dashboard" class="py-3 mt-5 flex gap-2 justify-center items-center hover:cursor-pointer">
             <img src="{{ asset('images/logo.png') }}" alt="logo.png" width="50">
             <p class=" text-simipa-1 font-bold ">Selamat datang</p>
-        </div>
+        </a>
         <nav class="mt-8">
             <a href="/admin/teacher"
                 class="text-simipa-1 font-semibold transition-colors hover:text-simipa-6 block py-3 px-4 rounded-lg hover:bg-simipa-2 group">

@@ -17,6 +17,7 @@
     "dependencies": {
         "@alpinejs/intersect": "^3.14.3",
         "alpinejs": "^3.14.3",
+        "chart.js": "^4.4.7",
         "flowbite": "^2.5.2"
     }
 }
