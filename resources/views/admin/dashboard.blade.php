@@ -36,8 +36,8 @@
                     <p class="mt-2 text-gray-600">{{ $cTeacherAccount }} guru sudah mendaftar pada sistem</p>
                 </div>
                 <div class="p-6 bg-gray-100 rounded-lg shadow">
-                    <h3 class="text-xl font-semibold">Revenue</h3>
-                    <p class="mt-2 text-gray-600">Display revenue summary</p>
+                    <h3 class="text-xl font-semibold">Total Tagihar Terbayar</h3>
+                    <p class="mt-2 text-gray-600">Rp. {{ $paidFee }} terbayar dari Rp. {{ $totalFee }}</p>
                 </div>
             </section>
 
