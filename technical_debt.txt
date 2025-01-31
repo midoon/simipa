@@ -10,8 +10,8 @@
 
 
 ERROR SECTION:
-- payment read -> detail payment (jika tidak terdapat tagihan di table fee, datanya kosongkan)
 - REFACTORE ERROR MESSAGE FOR PROD
+- DUPLICATE ADD ATTENDANCE *
 
 
 SECURITY SECTION:
@@ -20,4 +20,4 @@ SECURITY SECTION:
 
 
 REFACTOR SECTION:
-- Refactor report template CSS to stand alone file .css
+- TYLYINH

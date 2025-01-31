@@ -18,8 +18,8 @@
             </div>
         @endif
 
-        <div class="p-2 border rounded-md shadow-sm sm:p-6">
-            <h1 class="font-bold text-center mb-5">Rekapitulasi Pembayaran</h1>
+        <div class="p-2 border rounded-md shadow-sm sm:p-10 sm:w-2/3 sm:mx-auto">
+            <h1 class="font-bold text-center text-simipa-1 mb-5 sm:text-xl">Rekapitulasi Pembayaran</h1>
             <form action="/teacher/payment/report/generate" method="GET">
 
                 <div class="mb-3">
@@ -31,7 +31,7 @@
 
                     </select>
                 </div>
-                <div class="mb-3">
+                <div class="mb-10">
                     <label for="payment_type" class="block font-semibold mb-1">Jenis Pembayaran</label>
                     <select name="payment_type_id" id="payment_type" class="border w-full rounded-lg px-2 py-1.5"
                         required>

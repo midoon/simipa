@@ -102,7 +102,8 @@
                     alert(data.message); // Tampilkan pesan sukses
                     // console.log(data);
                     // redirect ke halaman lihat presensi dengan filter tertentu
-                    window.location.href = '/teacher/dashboard';
+                    // window.location.href = '/teacher/dashboard';
+
                 })
                 .catch(error => {
                     console.error('Error:', error);

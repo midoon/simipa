@@ -18,7 +18,7 @@
             </div>
         @endif
 
-        <div class="p-2 border rounded-md shadow-sm sm:px-10">
+        <div class="p-2 border rounded-md shadow-sm sm:px-10 sm:w-2/3 sm:mx-auto">
             <h1 class="font-bold text-center text-simipa-1 mb-5 sm:text-xl">Rekapitulasi Presensi</h1>
             <form action="/teacher/attendance/report/generate" method="GET">
 

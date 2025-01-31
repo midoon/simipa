@@ -18,8 +18,8 @@
             </div>
         @endif
 
-        <div class="p-2 border rounded-md shadow-sm sm:p-6">
-            <h1 class="font-bold text-center mb-5">Tambah Pembayaran</h1>
+        <div class="p-2 border rounded-md shadow-sm sm:p-10 sm:w-2/3 sm:mx-auto">
+            <h1 class="font-bold text-center text-simipa-1 mb-5 sm:text-xl">Tambah Pembayaran</h1>
             <form action="/teacher/payment/create" method="GET">
 
                 <div class="mb-3">

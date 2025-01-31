@@ -4,8 +4,23 @@
 
     <div class=" px-4 sm:mx-[250px]">
 
-        <div class="p-2 border rounded-md shadow-sm">
-            <h1 class="font-bold text-center mb-5">Tambah Presensi</h1>
+        @if (session('error'))
+            <div class=" text-red-700 p-4 rounded mb-4 text-center">
+                {{ session('error') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <ul class="mt-2 list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="p-2 border rounded-md shadow-sm sm:px-10 sm:w-2/3 sm:mx-auto">
+            <h1 class="font-bold text-center text-simipa-1 mb-5 sm:text-xl">Tambah Presensi</h1>
             <form action="/teacher/attendance/create" method="GET">
                 <div class="mb-3">
                     <label for="name" class="block font-semibold mb-1">Rombongan Belajar</label>
