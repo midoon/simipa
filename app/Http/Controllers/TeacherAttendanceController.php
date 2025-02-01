@@ -68,6 +68,12 @@ class TeacherAttendanceController extends Controller
                 return back()->withErrors($validator);
             }
 
+            $paymentIsCreated = DB::table('attendances')->where('group_id', $request->group_id)->where('activity_id', $request->activity_id)->where('day', $request->day)->count() > 0;
+
+            if ($paymentIsCreated) {
+                return back()->withErrors(['error' => 'Presensi untuk kegiatan dan hari tersebut sudah dibuat!']);
+            }
+
             $group = DB::table('groups')->where('id', $request->group_id)->get();
             $activity = DB::table('activities')->where('id', $request->activity_id)->get();
             $students = DB::table('students')->where('group_id', $request->group_id)->get();
