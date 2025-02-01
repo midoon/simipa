@@ -39,19 +39,25 @@ class AdminSubjectController extends Controller
 
     public function store(Request $request) {
         try {
+            $defaultDescription = $request->name;
+            if ($request->description != null){
+                $defaultDescription = $request->description;
+            }
+
             $validator = Validator::make($request->all(),[
             'name' => 'required',
             'grade_id' => 'required',
-            'description' => 'required',
             ]);
 
             if ($validator->fails()) {
                 return back()->withErrors($validator);
             }
+
+
             Subject::create([
                 'name' => $request->name,
                 'grade_id' => $request->grade_id,
-                'description' => $request->description
+                'description' =>  $defaultDescription,
             ]);
 
             return redirect('/admin/subject');

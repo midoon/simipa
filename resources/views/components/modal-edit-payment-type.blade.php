@@ -1,7 +1,7 @@
 <!-- Modal Tambah Data Siswa -->
 @props(['paymentType'])
 
-<div id="editModalPayment{{ $paymentType->id }}" class="fixed inset-0 bg-gray-900 bg-opacity-50  hidden">
+<div id="editModalPayment{{ $paymentType->id }}" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50  hidden">
     <div class="h-full flex items-center justify-center">
         <div class="bg-white rounded-lg w-1/3 p-6">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Edit Data Tipe Pembayaran</h2>

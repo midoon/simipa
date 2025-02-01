@@ -24,10 +24,14 @@ class AdminPaymentTypeController extends Controller
     }
 
     public function store(Request $request){
-        try {
-             $validator = Validator::make($request->all(),[
+        try{
+            $defDesc = $request->name;
+            if ($request->description != null){
+                $defDesc = $request->description;
+            }
+
+            $validator = Validator::make($request->all(),[
                 'name' => 'required',
-                'description' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -35,7 +39,7 @@ class AdminPaymentTypeController extends Controller
             }
             PaymentType::create([
                 'name' => $request->name,
-                'description' => $request->description
+                'description' =>$defDesc
             ]);
             return redirect('/admin/payment/type');
         } catch (Exception $e){

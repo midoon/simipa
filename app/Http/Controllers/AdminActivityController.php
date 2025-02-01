@@ -17,9 +17,12 @@ class AdminActivityController extends Controller
 
     public function store(Request $request){
         try {
+            $defaultDesc = $request->name;
+            if ($request->description != null){
+                $defaultDesc = $request->description;
+            }
             $validator = Validator::make($request->all(),[
                 'name' => 'required',
-                'description' => 'required'
             ]);
 
             if ($validator->fails()) {
@@ -28,7 +31,7 @@ class AdminActivityController extends Controller
 
             Activity::create([
                 'name' => $request->name,
-                'description' => $request->description
+                'description' => $defaultDesc
             ]);
 
             return redirect('/admin/activity');
