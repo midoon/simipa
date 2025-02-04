@@ -14,6 +14,7 @@ class AdminFeeController extends Controller
 {
     public function store(Request $request){
         try {
+
             $validator = Validator::make($request->all(),[
                 'payment_type_id' => 'required',
                 'grade_id' => 'required',
@@ -23,6 +24,12 @@ class AdminFeeController extends Controller
 
              if ($validator->fails()) {
                 return back()->withErrors($validator);
+            }
+
+            $isFeeExsit = GradeFee::where('payment_type_id', $request->payment_type_id)->where('grade_id', $request->grade_id)->count();
+
+            if($isFeeExsit != 0){
+                return back()->withErrors(['error' => "Tagihan untuk kelas ini sudah ada"]);
             }
 
             GradeFee::create([
