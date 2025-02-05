@@ -7,9 +7,10 @@
 - optimasi query DB (fee & grade fee dengan membuat relasi 1 to n)
 
 FIEATURE:
-- EDIT PAYMENT (BENDAHARA)
+- EDIT PAYMENT (BENDAHARA) - progress
 - LIHAT FEE
 - IMPORT FILE
+- ADD TRANSACTION QUERY in create Payment
 
 
 ERROR SECTION:
@@ -24,3 +25,7 @@ SECURITY SECTION:
 
 REFACTOR SECTION:
 - PESAN ERROR JADI INDONESIA (data kosong)
+
+BUG:
+- CASCADE WHEN FEE GRADE DELETED
+- ADD PYMENT WHEN FEE 0 or FEE not assign

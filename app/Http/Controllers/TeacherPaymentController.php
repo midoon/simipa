@@ -283,4 +283,49 @@ class TeacherPaymentController extends Controller
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
         }
     }
+
+    public function update(Request $request, $paymentId){
+        try{
+            $validator = Validator::make($request->all(),[
+                'date' => 'required',
+                'amount' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+
+            $payment = Payment::find($paymentId);
+            if (!$payment) {
+                return back()->withErrors(['error' => "Pembayaran tidak ditemukan"]);
+            }
+
+            $fee = Fee::where('student_id', $payment->student_id)
+                ->where('payment_type_id', $payment->payment_type_id)
+                ->first();
+
+            $isOverpaid = $fee->paid_amount - $payment->amount + $request->amount;
+            $overpaid = $isOverpaid - $fee->amount;
+            if ($isOverpaid  > $fee->amount) {
+                return back()->withErrors(['error' => "Pembayaran melebihi jumlah tagihan. Kelebihan sebesar Rp. {$overpaid}. Silakan sesuaikan nominal pembayaran."]);
+            }
+
+            DB::transaction(function () use ($request, $payment, $fee) {
+
+                $fee->update([
+                    'paid_amount' => $fee->paid_amount - $payment->amount + $request->amount,
+                    'status' => $fee->paid_amount - $payment->amount + $request->amount == $fee->amount ? 'paid' : 'partial',
+                ]);
+
+                $payment->update([
+                    'payment_date' => $request->date,
+                    'amount' => $request->amount,
+                ]);
+            });
+
+            return back()->with('success', 'Pembayaran berhasil disimpan');
+        } catch (Exception $e){
+            return back()->withErrors(['error' => "Terjadi kesalahan saat mengubah data: {$e->getMessage()}"]);
+        }
+    }
 }

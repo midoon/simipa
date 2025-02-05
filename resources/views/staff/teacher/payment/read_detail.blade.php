@@ -43,34 +43,54 @@
                                 <p class="font-semibold text-simipa-1 sm:self-start">{{ $p->payment_date }} : </p>
                                 <p>Rp. {{ $p->amount }}</p>
                             </div>
-                            <form action="/teacher/payment/delete" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="text" name="payment_id" id="payment_id" class="hidden"
-                                    value="{{ $p->id }}">
-                                <button type="submit" class="bg-red-500 py-2 px-4 rounded-md"
-                                    onclick="return confirmDeletePayment()">
-                                    <svg class="w-6 h-6 text-white" aria-hidden="true"
+                            <div class="flex gap-2">
+                                <button type="button" class="bg-yellow-500 py-2 px-4 rounded-md"
+                                    onclick="editPayment({{ $p->id }})">
+                                    <svg class="w-6 h-6 text-white hover:text-simipa-2 mx-1" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                         viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2"
-                                            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                            d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                     </svg>
                                 </button>
-                            </form>
+                                <form action="/teacher/payment/delete" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="text" name="payment_id" id="payment_id" class="hidden"
+                                        value="{{ $p->id }}">
+                                    <button type="submit" class="bg-red-500 py-2 px-4 rounded-md"
+                                        onclick="return confirmDeletePayment()">
+                                        <svg class="w-6 h-6 text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
 
                         </div>
                     </div>
                 </div>
+
+                <x-teacher-modal-edit-payment :payment="$p"></x-teacher-modal-edit-payment>
             @empty
                 <h1>Belum Melakukan Pembayaran</h1>
             @endforelse
         </div>
 
+
+
         <script>
             function confirmDeletePayment() {
                 return confirm("Apakah Anda yakin ingin menghapusnya?");
+            }
+
+            function editPayment(id) {
+                document.getElementById('editPayment' + id).classList.toggle('hidden')
             }
         </script>
     </div>

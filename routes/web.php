@@ -127,6 +127,7 @@ Route::middleware([TeacherMiddleware::class])->group(function(){
     Route::get('/teacher/payment/read', [TeacherPaymentController::class, 'showRead']);
     Route::get('/teacher/payment/read/detail', [TeacherPaymentController::class, 'showDetail']);
     Route::delete('/teacher/payment/delete', [TeacherPaymentController::class, 'destroy']);
+    Route::put('/teacher/payment/update/{paymentId}', [TeacherPaymentController::class, 'update']);
 
     Route::get('/teacher/payment/report/filter', [TeacherPaymentController::class, 'filterReport']);
     Route::get('/teacher/payment/report/generate', [TeacherPaymentController::class, 'report']);
