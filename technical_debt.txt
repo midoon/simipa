@@ -7,7 +7,6 @@
 - optimasi query DB (fee & grade fee dengan membuat relasi 1 to n)
 
 FIEATURE:
-- EDIT PAYMENT (BENDAHARA) - progress
 - LIHAT FEE
 - IMPORT FILE
 - ADD TRANSACTION QUERY in create Payment
@@ -28,4 +27,4 @@ REFACTOR SECTION:
 
 BUG:
 - CASCADE WHEN FEE GRADE DELETED
-- ADD PYMENT WHEN FEE 0 or FEE not assign
+

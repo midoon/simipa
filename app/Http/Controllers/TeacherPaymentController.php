@@ -87,6 +87,10 @@ class TeacherPaymentController extends Controller
                 ->where('payment_type_id', $request->payment_type_id)
                 ->first();
 
+            if (!$fee) {
+                return back()->withErrors(['error' => "Tagihan tidak ditemukan"]);
+            }
+
             if ($fee->status == 'paid') {
                 return back()->withErrors(['error' => "Siswa sudah membayar {$fee->paymentType->name}"]);
             }
