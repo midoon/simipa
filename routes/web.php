@@ -15,6 +15,7 @@ use App\Http\Controllers\AuthTeacherController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\TeacherAttendanceController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\TeacherFeeController;
 use App\Http\Controllers\TeacherPaymentController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\TeacherMiddleware;
@@ -131,6 +132,9 @@ Route::middleware([TeacherMiddleware::class])->group(function(){
 
     Route::get('/teacher/payment/report/filter', [TeacherPaymentController::class, 'filterReport']);
     Route::get('/teacher/payment/report/generate', [TeacherPaymentController::class, 'report']);
+
+    Route::get('/teacher/payment/fee/filter', [TeacherFeeController::class, 'filterRead']);
+    Route::get('/teacher/payment/fee', [TeacherFeeController::class, 'showRead']);
 
 });
 

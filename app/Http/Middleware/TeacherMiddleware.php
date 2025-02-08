@@ -17,10 +17,14 @@ class TeacherMiddleware
     {
 
 
-        if (collect(session('teacher')['role'])->contains('guru') || collect(session('teacher')['role'])->contains('bendahara')) {
-            return $next($request);
-        }
+        try{
+            if (collect(session('teacher')['role'])->contains('guru') || collect(session('teacher')['role'])->contains('bendahara')) {
+                return $next($request);
+            }
 
-         return redirect('/teacher/login')->with('error', 'Akses ditolak. Silakan login sebagai guru.');
+            return redirect('/teacher/login')->with('error', 'Akses ditolak. Silakan login sebagai guru.');
+        } catch (\Exception $e){
+            return redirect('/teacher/login')->with('error', 'Akses ditolak. Silakan login sebagai guru.');
+        }
     }
 }
