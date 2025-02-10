@@ -70,16 +70,13 @@ class AdminPaymentTypeController extends Controller
 
     public function destroy($paymentTypeId){
         try {
-             $exisData = [];
+            $existData = [];
             if (DB::table('fees')->where('payment_type_id', $paymentTypeId)->exists()) {
+
                 array_push($existData,'tagihan');
             }
 
-            if (DB::table('payments')->where('payment_type_id', $paymentTypeId)->exists()) {
-                array_push($existData,'pembayaran');
-            }
-
-            if (count($exisData) != 0){
+            if (count($existData) != 0){
                 return back()->withErrors(['error' =>"data yang ingin anda hapus masih digunakan di data " . implode(", ",$existData)]);
             }
 

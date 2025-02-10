@@ -8,7 +8,7 @@
 
 FIEATURE:
 - IMPORT FILE
-- ADD TRANSACTION QUERY in create Payment
+- DB TRANSACTION ADMIN FEE
 
 ERROR SECTION:
 - REFACTORE ERROR MESSAGE FOR PROD
@@ -23,4 +23,11 @@ REFACTOR SECTION:
 
 BUG:
 - CASCADE WHEN FEE GRADE DELETED
+- jika tagihan dihapus (grade fee), apa yang terjadi pada create paymentnya dan history paymentnya [B:2]
+- Edit Grade Fee (apa yang terjadi jika nominal edit grade fee lebih rendah dari yang sebelumnya dan terdapat siswa yang sudah lunas) []
+
+SOLVING_BUG:
+[B:2]
+- kasih alert jika semua pembayaran siwa belum lunas
+- Jika lunas semua, kasih cascade deleted payment based on gradeFee
 
