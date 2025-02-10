@@ -7,15 +7,11 @@
 - optimasi query DB (fee & grade fee dengan membuat relasi 1 to n)
 
 FIEATURE:
-- LIHAT FEE
 - IMPORT FILE
 - ADD TRANSACTION QUERY in create Payment
 
-
 ERROR SECTION:
 - REFACTORE ERROR MESSAGE FOR PROD
-
-
 
 SECURITY SECTION:
 - kirim data ke view yang diperlukan aja

@@ -104,23 +104,22 @@ class TeacherPaymentController extends Controller
                 return back()->withErrors(['error' => "Jumlah pembayaran melebihi tagihan, sisa tagihan: Rp. {$remainingFee}"]);
             }
 
+            DB::transaction(function() use ($request, $fee, $statusFee) {
 
+                $fee->update([
+                    'status' => $statusFee,
+                    'paid_amount' => $fee->paid_amount + $request->amount,
+                ]);
 
-            $fee->update([
-                'status' => $statusFee,
-                'paid_amount' => $fee->paid_amount + $request->amount,
-            ]);
-
-            Payment::create([
-                'payment_type_id' => $request->payment_type_id,
-                'payment_date' => $request->date,
-                'amount' => $request->amount,
-                'student_id' => $request->student_id,
-                "description" => $request->description,
-            ]);
-
-
-             return back()->with('success', 'Pembayaran berhasil disimpan');
+                Payment::create([
+                    'payment_type_id' => $request->payment_type_id,
+                    'payment_date' => $request->date,
+                    'amount' => $request->amount,
+                    'student_id' => $request->student_id,
+                    "description" => $request->description,
+                ]);
+            });
+            return back()->with('success', 'Pembayaran berhasil disimpan');
         } catch (Exception $e){
             return back()->withErrors(['error' => "Terjadi kesalahan saat menyimpan data: {$e->getMessage()}"]);
         }
