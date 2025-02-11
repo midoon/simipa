@@ -12,15 +12,7 @@
             <form action="/admin/payment/fee/{{ $gradeFee->id }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="mb-3">
-                    <label for="gradeSelect">Pilih Tipe Pembayaran</label>
-                    <select name="payment_type_id" id="gradeSelect" class="border px-2 py-2 w-full">
-                        @foreach ($paymentTypes as $pt)
-                            <option value="{{ $pt->id }}" @if ($pt->id == $gradeFee->payment_type_id) selected @endif>
-                                {{ $pt->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+
                 <div class="mb-3">
                     <label for="amount">Nominal Tagihan</label>
                     <input type="number" name="amount" id="amount" class="border px-2 py-2 w-full"

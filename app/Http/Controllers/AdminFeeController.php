@@ -32,26 +32,28 @@ class AdminFeeController extends Controller
                 return back()->withErrors(['error' => "Tagihan untuk kelas ini sudah ada"]);
             }
 
-            GradeFee::create([
-                'payment_type_id' => $request->payment_type_id,
-                'grade_id' => $request->grade_id,
-                'amount' => $request->amount,
-                'due_date' => $request->due_date,
-            ]);
-
-            $students = Student::whereHas('group.grade', function ($q) use ($request) {
-                $q->where('id', $request->grade_id);
-            })->get();
-            foreach($students as $s){
-                Fee::create([
+            DB::transaction(function() use($request){
+                GradeFee::create([
                     'payment_type_id' => $request->payment_type_id,
-                    'student_id' => $s->id,
+                    'grade_id' => $request->grade_id,
                     'amount' => $request->amount,
                     'due_date' => $request->due_date,
-                    'status' => 'unpaid',
-                    'paid_amount' => 0,
                 ]);
-            }
+
+                $students = Student::whereHas('group.grade', function ($q) use ($request) {
+                    $q->where('id', $request->grade_id);
+                })->get();
+                foreach($students as $s){
+                    Fee::create([
+                        'payment_type_id' => $request->payment_type_id,
+                        'student_id' => $s->id,
+                        'amount' => $request->amount,
+                        'due_date' => $request->due_date,
+                        'status' => 'unpaid',
+                        'paid_amount' => 0,
+                    ]);
+                }
+            });
             return redirect('/admin/payment/type');
         } catch (Exception $e){
             return back()->withErrors(['error' => "Terjadi kesalahan saat menyimpan data: {$e->getMessage()}"]);
@@ -64,11 +66,13 @@ class AdminFeeController extends Controller
            $students = Student::whereHas('group.grade', function ($q) use ($gradeFee) {
                 $q->where('id', $gradeFee->grade_id);
             })->get();
-            foreach($students as $s){
-                $fee = Fee::where('student_id', $s->id)->where('payment_type_id', $gradeFee->payment_type_id)->first();
-                $fee->delete();
-            }
-            $gradeFee->delete();
+            DB::transaction(function() use($gradeFee, $students){
+                foreach($students as $s){
+                    $fee = Fee::where('student_id', $s->id)->where('payment_type_id', $gradeFee->payment_type_id)->first();
+                    $fee->delete();
+                    $gradeFee->delete();
+                }
+            });
             return redirect('/admin/payment/type');
         } catch (Exception $e){
             return back()->withErrors(['error' => "Terjadi kesalahan saat menghapus data: {$e->getMessage()}"]);
@@ -87,29 +91,31 @@ class AdminFeeController extends Controller
                 return back()->withErrors($validator);
             }
 
-            $gradeFee = GradeFee::find($gradeFeeId);
-            $gradeFee->update([
-                'payment_type_id' => $request->payment_type_id,
-                'amount' => $request->amount,
-                'due_date' => $request->due_date,
-            ]);
 
-            $students = Student::whereHas('group.grade', function ($q) use ($request) {
-                $q->where('id', $request->grade_id);
-            })->get();
-
-
-            foreach($students as $s){
-                $fee = Fee::where('student_id', $s->id)->where('payment_type_id', $request->payment_type_id)->first();
-                $fee->update([
+            DB::transaction(function() use ($request, $gradeFeeId){
+                $gradeFee = GradeFee::find($gradeFeeId);
+                $gradeFee->update([
                     'payment_type_id' => $request->payment_type_id,
-                    'student_id' => $s->id,
                     'amount' => $request->amount,
                     'due_date' => $request->due_date,
-                    'status' => 'unpaid',
-                    'paid_amount' => 0,
                 ]);
-            }
+
+                $students = Student::whereHas('group.grade', function ($q) use ($request) {
+                    $q->where('id', $request->grade_id);
+                })->get();
+
+
+                foreach($students as $s){
+                    $fee = Fee::where('student_id', $s->id)->where('payment_type_id', $request->payment_type_id)->first();
+                    $fee->update([
+                        'payment_type_id' => $request->payment_type_id,
+                        'amount' => $request->amount,
+                        'due_date' => $request->due_date,
+                    ]);
+                }
+            });
+
+
             return redirect('/admin/payment/type');
         } catch (Exception $e){
             return back()->withErrors(['error' => "Terjadi kesalahan saat mengupdate data: {$e->getMessage()}"]);
