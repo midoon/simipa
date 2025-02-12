@@ -105,12 +105,24 @@ class AdminFeeController extends Controller
                 })->get();
 
 
+
+
                 foreach($students as $s){
                     $fee = Fee::where('student_id', $s->id)->where('payment_type_id', $request->payment_type_id)->first();
+
+                    $status = $fee->status;
+                    $isPaid = true;
+                    if ($request->amount > $fee->paid_amount){
+                        $isPaid = false;
+                    }
+                    if ($isPaid){
+                        $status = 'paid';
+                    }
                     $fee->update([
                         'payment_type_id' => $request->payment_type_id,
                         'amount' => $request->amount,
                         'due_date' => $request->due_date,
+                        'status' => $status,
                     ]);
                 }
             });

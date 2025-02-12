@@ -24,6 +24,8 @@
                         value="{{ $gradeFee->due_date }}">
                 </div>
                 <input type="text" name="grade_id" id="grade_id" class="hidden" value="{{ $gradeFee->grade_id }}">
+                <input type="text" name="payment_type_id" id="payment_type_id" class="hidden"
+                    value="{{ $gradeFee->payment_type_id }}">
                 <!-- Tombol Aksi -->
                 <div class="flex justify-end">
                     <button type="button" onclick="editModalFee({{ $gradeFee->id }})"

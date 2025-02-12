@@ -53,7 +53,7 @@ class TeacherPaymentController extends Controller
 
                 // Hitung total sisa tagihan untuk student ini
                 $remainingBalance = $studentFees->sum(function ($fee) {
-                    return $fee->amount - $fee->paid_amount;
+                    return  $fee->paid_amount - $fee->amount ;
                 });
 
                 // Tambahkan data student ke array
@@ -97,7 +97,7 @@ class TeacherPaymentController extends Controller
 
             $statusFee = 'partial';
             $remainingAmount = $fee->paid_amount + $request->amount;
-            $remainingFee = $fee->amount - $fee->paid_amount;
+            $remainingFee = $fee->paid_amount - $fee->amount;
             if ($remainingAmount == $fee->amount) {
                 $statusFee = 'paid';
             } else if ($remainingAmount > $fee->amount) {
@@ -181,7 +181,7 @@ class TeacherPaymentController extends Controller
 
             $remainingAmount = 0;
             if ($fee != null){
-                $remainingAmount = $fee->amount - $fee->paid_amount;
+                $remainingAmount =  $fee->paid_amount - $fee->amount ;
             }
 
             return view('staff.teacher.payment.read_detail', ['student' => $student, 'paymentType' => $paymentType, 'payments' => $payments, 'remainingAmount' => $remainingAmount]);
@@ -272,7 +272,7 @@ class TeacherPaymentController extends Controller
                     'id' => $student->id,
                     'name' => $student->name,
                     'status' => $studentFees->status,
-                    'remainingAmount' => $studentFees->amount - $studentFees->paid_amount
+                    'remainingAmount' =>  $studentFees->paid_amount - $studentFees->amount,
                 ];
             }
             if ($request->get('export') == 'pdf'){

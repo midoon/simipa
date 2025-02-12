@@ -46,7 +46,7 @@ class TeacherFeeController extends Controller
                     array_push($tempFee, [
                         'fee' => $fee->paymentType->name,
                         'amount' => $fee->amount,
-                        'remainingAmount' => $fee->amount-$fee->paid_amount,
+                        'remainingAmount' => $fee->paid_amount - $fee->amount,
                         'dueDate' => $fee->due_date,
                     ]);
                 }
