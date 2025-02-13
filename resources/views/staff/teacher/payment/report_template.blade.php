@@ -100,7 +100,7 @@
         <div class="row">
             <span style="width:10%;">Jenis</span>
             <span style="width: 1%; text-align: center;">:</span>
-            <span style="width: 89%;">{{ $paymentType }}</span>
+            <span style="width: 89%;">{{ $paymentType }} (Rp. {{ $feeAmount }})</span>
         </div>
         <div class="row">
             <span style="width:10%;">Tagihan per Kelas</span>

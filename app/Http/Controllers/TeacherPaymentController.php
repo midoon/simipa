@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fee;
+use App\Models\GradeFee;
 use App\Models\Group;
 use App\Models\Payment;
 use App\Models\PaymentType;
@@ -245,7 +246,11 @@ class TeacherPaymentController extends Controller
                 return back()->withErrors($validator);
             }
 
+
             $group = Group::find($request->group_id);
+            $feeAmount = GradeFee::where('grade_id', $group->grade->id)
+                ->where('payment_type_id', $request->payment_type_id)
+                ->first()->amount;
             $students = $group->students;
             $paymentType = PaymentType::find($request->payment_type_id);
             $groupId = $request->group_id;
@@ -276,12 +281,12 @@ class TeacherPaymentController extends Controller
                 ];
             }
             if ($request->get('export') == 'pdf'){
-                $pdf = Pdf::loadView('staff.teacher.payment.report_template', ['studentData' => $studentData, 'totalPaidFeeAmount' => $totalPaidFeeAmount, 'totalAmount' => $totalAmount ,'group' => $group->name, 'paymentType' => $paymentType->name, 'paymentTypeId' => $paymentType->id, 'groupId' => $group->id]);
+                $pdf = Pdf::loadView('staff.teacher.payment.report_template', ['studentData' => $studentData, 'totalPaidFeeAmount' => $totalPaidFeeAmount, 'totalAmount' => $totalAmount ,'group' => $group->name, 'paymentType' => $paymentType->name, 'paymentTypeId' => $paymentType->id, 'groupId' => $group->id, 'feeAmount' => $feeAmount]);
                 return $pdf->download('laporan-pembayaran.pdf');
             }
 
 
-            return view('staff.teacher.payment.report', ['studentData' => $studentData, 'totalPaidFeeAmount' => $totalPaidFeeAmount, 'totalAmount' => $totalAmount ,'group' => $group->name, 'paymentType' => $paymentType->name, 'paymentTypeId' => $paymentType->id, 'groupId' => $group->id]);
+            return view('staff.teacher.payment.report', ['studentData' => $studentData, 'totalPaidFeeAmount' => $totalPaidFeeAmount, 'totalAmount' => $totalAmount ,'group' => $group->name, 'paymentType' => $paymentType->name, 'paymentTypeId' => $paymentType->id, 'groupId' => $group->id, 'feeAmount' => $feeAmount]);
         } catch (Exception $e){
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
         }

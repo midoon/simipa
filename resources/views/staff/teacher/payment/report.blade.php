@@ -44,7 +44,7 @@
                     <tr class="">
                         <td>Jenis</td>
                         <td> :</td>
-                        <td>{{ $paymentType }}</td>
+                        <td>{{ $paymentType }} (Rp. {{ $feeAmount }})</td>
                     </tr>
 
                 </table>
