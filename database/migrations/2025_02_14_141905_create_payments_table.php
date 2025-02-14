@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('payment_type_id')->constrained(
-                 table: 'payment_types', indexName: 'payment_payment_types'
-            );
+            $table->foreignId('fee_id')->constrained(
+                 table: 'fees', indexName: 'payment_fee_id'
+            )->onDelete('cascade');
             $table->foreignId('student_id')->constrained(
                  table: 'students', indexName: 'payment_student_id'
-            );
+            )->onDelete('cascade');
             $table->float('amount');
             $table->date('payment_date');
             $table->longText('description');

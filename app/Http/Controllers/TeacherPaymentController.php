@@ -42,7 +42,7 @@ class TeacherPaymentController extends Controller
             $group = Group::find($request->group_id);
             $students = $group->students;
             $paymentType = PaymentType::find($request->payment_type_id);
-            $groupId = $request->group_id;
+            $groupId = $group->id; // perlu?
             $fees = Fee::whereHas('student.group', function ($query) use ($groupId) {
                     $query->where('id', $groupId);
             })->where('payment_type_id', $request->payment_type_id)->get();
@@ -105,6 +105,7 @@ class TeacherPaymentController extends Controller
                 return back()->withErrors(['error' => "Jumlah pembayaran melebihi tagihan, sisa tagihan: Rp. {$remainingFee}"]);
             }
 
+
             DB::transaction(function() use ($request, $fee, $statusFee) {
 
                 $fee->update([
@@ -113,7 +114,7 @@ class TeacherPaymentController extends Controller
                 ]);
 
                 Payment::create([
-                    'payment_type_id' => $request->payment_type_id,
+                    'fee_id' => $fee->id,
                     'payment_date' => $request->date,
                     'amount' => $request->amount,
                     'student_id' => $request->student_id,
@@ -168,17 +169,20 @@ class TeacherPaymentController extends Controller
                 return back()->withErrors($validator);
             }
 
-            $student = Student::find($request->student_id);
-            $paymentType = PaymentType::find($request->payment_type_id);
-            $payments = Payment::where('student_id', $request->student_id)
-                ->where('payment_type_id', $request->payment_type_id)
-                ->get();
-
             $fee = Fee::where('student_id', $request->student_id)
                 ->where('payment_type_id', $request->payment_type_id)
                 ->first();
 
+                // jika fee tidak ada?
+            $payments = [];
 
+            $student = Student::find($request->student_id);
+            $paymentType = PaymentType::find($request->payment_type_id);
+            if ($fee != null){
+                $payments = Payment::where('student_id', $request->student_id)
+                ->where('fee_id', $fee->id)
+                ->get();
+            }
 
             $remainingAmount = 0;
             if ($fee != null){
@@ -195,7 +199,6 @@ class TeacherPaymentController extends Controller
         try {
             $validator = Validator::make($request->all(),[
                 'payment_id' => 'required',
-
             ]);
 
             if ($validator->fails()) {
@@ -203,21 +206,21 @@ class TeacherPaymentController extends Controller
             }
 
             $payment = Payment::find($request->payment_id);
-            $fee = Fee::where('student_id', $payment->student_id)
-                ->where('payment_type_id', $payment->payment_type_id)
-                ->first();
 
-            $statusFee = "partial";
-            if ($fee){
+            $fee = $payment->fee;
+
+            DB::transaction(function() use($fee, $payment, $request) {
+                $statusFee = "partial";
+                if ($fee){
                 if ($fee->paid_amount - $payment->amount == 0){
                     $statusFee = "unpaid";
                 }
                 $fee->paid_amount = $fee->paid_amount - $payment->amount;
                 $fee->status = $statusFee;
                 $fee->save();
-            }
-
-           DB::table('payments')->delete($request->payment_id);
+                }
+                DB::table('payments')->delete($request->payment_id);
+            });
            return back()->with('success', 'Pembayaran berhasil dihapus');
 
         } catch (Exception $e){
@@ -303,14 +306,13 @@ class TeacherPaymentController extends Controller
                 return back()->withErrors($validator);
             }
 
+
             $payment = Payment::find($paymentId);
             if (!$payment) {
                 return back()->withErrors(['error' => "Pembayaran tidak ditemukan"]);
             }
 
-            $fee = Fee::where('student_id', $payment->student_id)
-                ->where('payment_type_id', $payment->payment_type_id)
-                ->first();
+            $fee = $payment->fee;
 
             $isOverpaid = $fee->paid_amount - $payment->amount + $request->amount;
             $overpaid = $isOverpaid - $fee->amount;

@@ -9,7 +9,6 @@ FITUR MENDATANG:
 
 FIEATURE:
 - IMPORT FILE
-- DB TRANSACTION ADMIN FEE
 - BUTTON CLOSE ALERT ERROR
 
 
@@ -23,14 +22,11 @@ SECURITY SECTION:
 
 REFACTOR SECTION:
 - PESAN ERROR JADI INDONESIA (data kosong)
-- UBAH atribute table payments dengan reference ke table fee
 
 BUG:
-- jika tagihan dihapus (grade fee), apa yang terjadi pada create paymentnya dan history paymentnya [B:2]
 
 SOLVING_BUG:
-[B:2]
-- kasih alert jika semua pembayaran siwa belum lunas
-- Jika lunas semua, kasih cascade deleted payment based on gradeFee
+
+
 
 
