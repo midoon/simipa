@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Fee;
 use App\Models\GradeFee;
+use App\Models\Payment;
 use App\Models\Student;
 use Exception;
 use Illuminate\Http\Request;
@@ -66,6 +67,10 @@ class AdminFeeController extends Controller
            $students = Student::whereHas('group.grade', function ($q) use ($gradeFee) {
                 $q->where('id', $gradeFee->grade_id);
             })->get();
+            // cek total amount is equal to total paid amount
+
+
+
             DB::transaction(function() use($gradeFee, $students){
                 foreach($students as $s){
                     $fee = Fee::where('student_id', $s->id)->where('payment_type_id', $gradeFee->payment_type_id)->first();
