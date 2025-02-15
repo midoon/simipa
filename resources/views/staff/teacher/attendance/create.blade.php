@@ -9,6 +9,20 @@
     </div>
 
     <div class=" px-4 sm:mx-[250px]">
+        @if ($errors->any())
+            <div id="error-any" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <div class="flex justify-between">
+                    <ul class="mt-2 list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button class="btn-error-any p-3" onclick="closeErrorBtn('error-any')">&#10006</button>
+                </div>
+            </div>
+        @endif
+
+
         <div class="flex flex-col items-center mb-4 border-b-2 text-simipa-2">
             <h1 class="judul">Tambah presensi {{ $activity[0]->name }} {{ $group[0]->name }}
 
@@ -48,6 +62,10 @@
 
 
     <script>
+        function closeErrorBtn(id) {
+            document.getElementById(id).classList.toggle('hidden');
+        }
+
         function cancelCreate() {
             window.location.href = '/teacher/dashboard';
         }

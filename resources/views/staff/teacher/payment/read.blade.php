@@ -4,24 +4,17 @@
     </x-navbar-teacher>
 
     <div class=" px-4 sm:mx-[250px]">
-        @if (session('success'))
-            <div class=" text-green-700 p-4 rounded mb-4 text-center">
-                {{ session('success') }}
-            </div>
-        @endif
 
-        @if (session('error'))
-            <div class=" text-red-700 p-4 rounded mb-4 text-center">
-                {{ session('error') }}
-            </div>
-        @endif
         @if ($errors->any())
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                <ul class="mt-2 list-disc list-inside">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+            <div id="error-any" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <div class="flex justify-between">
+                    <ul class="mt-2 list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button class="btn-error-any p-3" onclick="closeErrorBtn('error-any')">&#10006</button>
+                </div>
             </div>
         @endif
 
@@ -56,7 +49,11 @@
 
 
 
-
+    <script>
+        function closeErrorBtn(id) {
+            document.getElementById(id).classList.toggle('hidden');
+        }
+    </script>
 
 
 </x-layout>

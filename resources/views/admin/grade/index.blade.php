@@ -15,21 +15,18 @@
             </div>
         </header>
         <hr class="my-4">
-        @error('error')
-            <div class="flex justify-center my-3">
-                <div class="text-red-500 font-bold">{{ $message }}</div>
+        @if ($errors->any())
+            <div id="error-any" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <div class="flex justify-between">
+                    <ul class="mt-2 list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button class="btn-error-any p-3" onclick="closeErrorBtn('error-any')">&#10006</button>
+                </div>
             </div>
-        @enderror
-        @error('kelas')
-            <div class="flex justify-center my-3">
-                <div class="text-red-500 font-bold">{{ $message }}</div>
-            </div>
-        @enderror
-        @error('rombel')
-            <div class="flex justify-center my-3">
-                <div class="text-red-500 font-bold">{{ $message }}</div>
-            </div>
-        @enderror
+        @endif
 
 
         <div class="grid grid-cols-5 gap-6">
@@ -162,6 +159,10 @@
 
 
     <script>
+        function closeErrorBtn(id) {
+            document.getElementById(id).classList.toggle('hidden');
+        }
+
         function confirmDeletion() {
             return confirm("Apakah Anda yakin ingin menghapusnya?");
         }
