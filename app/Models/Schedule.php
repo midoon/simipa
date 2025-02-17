@@ -39,9 +39,7 @@ class Schedule extends Model
     return $this->belongsTo(Group::class);
    }
 
-//    public function room(): BelongsTo{
-//     return $this->belongsTo(Room::class);
-//    }
+
 
    public function subject(): BelongsTo{
     return $this->belongsTo(Subject::class);

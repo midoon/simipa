@@ -37,16 +37,19 @@ class AuthTeacherController extends Controller
                return back()->withErrors(['error' => "Anda belum tercatat sebagai guru di sistem, hubungi admin untuk mendaftarkan diri anda"]);
             }
 
-            $teacher = DB::table('teachers')->where('nik', $request->nik)->get('id');
+            $teacher = Teacher::where('nik', $request->nik)->first();
 
-            if (DB::table('teacher_accounts')->where('teacher_id', $teacher[0]->id)->exists()){
-                return back()->withErrors(['error' => "NIK sudah terdaftar"]);
+            if ($teacher->account){
+                 return back()->withErrors(['error' => "NIK sudah memiliki account"]);
             }
 
-            TeacherAccount::create([
-                'teacher_id' => $teacher[0]->id,
+
+            $teacher->update([
+                'account' => true,
                 'password' => Hash::make($request->password)
             ]);
+
+
 
             return redirect('/teacher/login')->with('success', 'Registrasi berhasil, silahkan login');
         } catch (Exception $e) {
@@ -65,26 +68,26 @@ class AuthTeacherController extends Controller
                 return back()->withErrors($validator);
             }
 
-            $isTeacherEsixt = DB::table('teachers')->where('nik', $request->nik)->exists();
-            if (!$isTeacherEsixt) {
+            // validasi nik
+            $teacher = Teacher::where('nik', $request->nik)->first();
+            if (!$teacher) {
                return back()->withErrors(['error' => "NIK atau password salah"]);
             }
 
-            $teacher = DB::table('teachers')->where('nik', $request->nik)->get();
-            $isAccountExist = DB::table('teacher_accounts')->where('teacher_id', $teacher[0]->id)->exists();
-            if (!$isAccountExist){
+            if (!Hash::check($request->password, $teacher->password)){
                  return back()->withErrors(['error' => "NIK atau Password salah"]);
             }
 
-            $account = DB::table('teacher_accounts')->where('teacher_id', $teacher[0]->id)->get();
-            if (!Hash::check($request->password, $account[0]->password)){
-                 return back()->withErrors(['error' => "NIK atau Password salah"]);
+            if (!$teacher->account){
+                 return back()->withErrors(['error' => "Belum memiliki account, silahkan registrasi"]);
             }
+
+
 
             $userDataSession = [
-                'name' => $teacher[0]->name,
-                'teacherId' => $teacher[0]->id,
-                'role' => json_decode($teacher[0]->role)
+                'name' => $teacher->name,
+                'teacherId' => $teacher->id,
+                'role' => $teacher->role // need solve
             ];
 
             session(['teacher' => $userDataSession]);

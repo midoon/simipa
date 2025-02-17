@@ -16,7 +16,7 @@ class AdminController extends Controller
         try {
             $cStudent = Student::count();
             $cTeacher = Teacher::count();
-            $cTeacherAccount = TeacherAccount::count();
+            $cTeacherAccount = DB::table('teachers')->where('account', true)->count();
             $paidFee = DB::table('fees')->sum('paid_amount');
             $totalFee =DB::table('fees')->sum('amount');
             return view('admin.dashboard', compact('cStudent', 'cTeacher', 'cTeacherAccount', 'paidFee', 'totalFee'));
