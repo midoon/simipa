@@ -40,7 +40,7 @@ class AuthTeacherController extends Controller
             $teacher = Teacher::where('nik', $request->nik)->first();
 
             if ($teacher->account){
-                 return back()->withErrors(['error' => "NIK sudah memiliki account"]);
+                 return back()->withErrors(['error' => "nik sudah digunakan oleh akun lain"]);
             }
 
 

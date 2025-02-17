@@ -82,9 +82,12 @@ class AdminGroupController extends Controller
                 'grade_id' => $request->grade_id
             ]);
             return redirect('/admin/grade');
-        } catch(Exception $e){
-            $msg = $e->getMessage();
-            return back()->withErrors(['error' => "Terjadi kesalahan saat mengupdate data : $msg"]);
+        } catch(QueryException $e){
+            if ($e->errorInfo[1] == 1062)//kode mysql untuk duplicate data
+            {
+                 return back()->withErrors(['rombel' => "rombel: $request->name sudah terdaftar."])->withInput();
+            }
+            return back()->withErrors(['error' => 'Terjadi kesalahan saat mengupdate data.'])->withInput();
         }
     }
 }
