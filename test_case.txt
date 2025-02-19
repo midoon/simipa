@@ -1,0 +1,65 @@
+####### ADMIN #######
+*** AUTH ***
+1. empty username || password
+2. wrong username || password
+3. correct username || passowrd
+
+*** TEACHER ***
+----Create
+1. Normal Create
+2. empty form [reject]
+3. duplicate nik [reject]
+----Update
+1. Normal Update
+2. empty form [reject]
+3. duplicate nik [reject]
+----Delete
+1. Normal delete
+
+*** GRADE ***
+----Create
+1. Normal Create
+2. empty form [reject]
+3. duplicate name [reject]
+----Update
+1. Normal Create
+2. empty form [reject]
+3. duplicate name [reject]
+----Delete
+1. Normal Delete
+
+*** GROUP ***
+----Create
+1. Normal Create
+2. empty form [reject]
+3. duplicate name [reject]
+----Update
+1. Normal Create
+2. empty form [reject]
+3. duplicate name [reject]
+----Delete
+1. Normal Delete
+
+*** STUDENTS ***
+----Create
+1. Normal Create
+2. empty form [reject]
+3. duplicate nisn [reject]
+----Update
+1. Normal Create
+2. empty form [reject]
+3. duplicate nisn [reject]
+----Delete
+1. Normal Delete
+
+*** SUBJECT ***
+----Create
+1. Normal Create
+2. empty form [reject]
+3. duplicate name [accept]
+----Update
+1. Normal Create
+2. empty form [reject]
+3. duplicate name [accept]
+----Delete
+1. Normal Delete

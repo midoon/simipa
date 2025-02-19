@@ -45,8 +45,8 @@ class AdminGroupController extends Controller
             if (DB::table('schedules')->where('group_id', $groupId)->exists()) {
                 array_push($existData,'jadwal');
             }
-            // nanti kita ubah mekanisme presensinya serta DB nya
-            if (DB::table('presences')->where('group_id', $groupId)->exists()) {
+
+            if (DB::table('attendances')->where('group_id', $groupId)->exists()) {
                 array_push($existData,'presensi');
             }
 
@@ -61,8 +61,16 @@ class AdminGroupController extends Controller
             DB::table('groups')->delete($groupId);
             return redirect('/admin/grade');
         }catch(Exception $e){
-            $msg = $e->getMessage();
-            return back()->withErrors(['error' => "Terjadi kesalahan saat menghapus data : $msg"]);
+            $env = config('app.env');
+             // Jika di production, tampilkan pesan error umum
+            if ($env === 'production') {
+                $msg = "Terjadi kesalahan saat menghapus data. Silakan coba lagi nanti.";
+            } else {
+                // Jika di development, tampilkan pesan error asli
+                $msg = $e->getMessage();
+            }
+
+            return back()->withErrors(['error' => $msg]);
         }
     }
 

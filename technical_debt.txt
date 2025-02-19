@@ -4,7 +4,8 @@ FITUR MENDATANG:
 - Create validation for nik in admin
 - Create mekanisme batch update grade ketika siswa naik kelas
 - Hapus kelas beserta semua turunannya (CASCADE)
-
+- SISWA onDelete-cascade
+- Reset password guru oleh admin
 
 
 FIEATURE:

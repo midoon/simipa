@@ -57,10 +57,6 @@ class AdminTeacherController extends Controller
                 array_push($existData,'jadwal');
             }
 
-             if (DB::table('teacher_accounts')->where('teacher_id', $teacherId)->exists()) {
-                DB::table('teacher_accounts')->delete($teacherId);
-            }
-
             if (count($existData) != 0) {
                 return back()->withErrors(['guru' =>"Guru yang ingin anda hapus masih digunakan di data " . implode(", ",$existData)]);
             }

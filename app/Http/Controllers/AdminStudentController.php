@@ -100,7 +100,7 @@ class AdminStudentController extends Controller
                 array_push($existData,'tagihan');
             }
             // nanti kita ubah mekanisme presensinya serta DB nya
-            if (DB::table('presences')->where('student_id', $studentId)->exists()) {
+            if (DB::table('attendances')->where('student_id', $studentId)->exists()) {
                 array_push($existData,'presensi');
             }
 
