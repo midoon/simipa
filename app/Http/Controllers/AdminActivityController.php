@@ -64,6 +64,15 @@ class AdminActivityController extends Controller
 
     public function destroy($activityId) {
         try {
+            $existData = [];
+            if (DB::table('attendances')->where('activity_id', $activityId)->exists()) {
+
+                array_push($existData,'presensi');
+            }
+
+            if (count($existData) != 0){
+                return back()->withErrors(['error' =>"data yang ingin anda hapus masih digunakan di data " . implode(", ",$existData)]);
+            }
             DB::table('activities')->delete($activityId);
             return redirect('/admin/activity');
         } catch (Exception $e) {

@@ -164,6 +164,10 @@ class TeacherAttendanceController extends Controller
 
             $attendances = Attendance::whereBetween('day', [$request->start_date, $request->end_date])->where('group_id', $request->group_id)->where('activity_id', $request->activity_id)->with('student')->orderBy('day', 'asc')->get();
 
+            if (count($attendances) == 0){
+                return back()->withErrors(['error' => "tidak ada presensi pada rentang tanggal tersebut"]);
+            }
+
             $reportMap = [];
             foreach ($attendances as $at) {
                 if (!isset($reportMap[$at->student_id])) {

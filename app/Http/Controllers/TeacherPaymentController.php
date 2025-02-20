@@ -251,9 +251,13 @@ class TeacherPaymentController extends Controller
 
 
             $group = Group::find($request->group_id);
-            $feeAmount = GradeFee::where('grade_id', $group->grade->id)
+            $feeGroup = GradeFee::where('grade_id', $group->grade->id)
                 ->where('payment_type_id', $request->payment_type_id)
-                ->first()->amount;
+                ->first();
+            if ($feeGroup == null){
+                return back()->withErrors(['error' => "Tidak terdapat pembayaran pada kategori tersebut"]);
+            }
+            $feeAmount = $feeGroup->amount;
             $students = $group->students;
             $paymentType = PaymentType::find($request->payment_type_id);
             $groupId = $request->group_id;
@@ -264,6 +268,7 @@ class TeacherPaymentController extends Controller
             if ($fees->isEmpty()) {
                 return back()->withErrors(['error' => "Tidak terdapat tagihan pembayaran pada kategori tersebut"]);
             }
+
 
             $studentData = [];
             $totalPaidFeeAmount = 0;

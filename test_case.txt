@@ -63,3 +63,74 @@
 3. duplicate name [accept]
 ----Delete
 1. Normal Delete
+
+*** SCHEDULE ***
+----Create
+1. Normal Create
+2. Time start > end
+3. empty form [reject]
+4. duplicate name [accept]
+----Update
+1. Normal Create
+2. empty form [reject]
+3. duplicate name [accept]
+----Delete
+1. Normal Delete
+
+*** ACTIVITY ***
+----Create
+1. Normal Create
+2. empty form [reject]
+3. duplicate name [accept]
+----Update
+1. Normal Create
+2. empty form [reject]
+3. duplicate name [accept]
+----Delete
+1. Normal Delete
+2. Delete when attendance is exist
+
+*** PAYMENT TYPE ***
+----Create
+1. Normal Create
+2. empty form [reject]
+3. duplicate name [reject]
+----Update
+1. Normal Create
+2. empty form [reject]
+3. duplicate name [reject]
+----Delete
+1. Normal Delete
+1. Delete while payment type used in fee [reject]
+
+
+
+####### TEACHER #######
+*** SCHEDULE ***
+---Read
+1. empty shcdule
+2. exist schedule
+
+*** ATTENDANCE ***
+---Read
+1. Empty attendance (rejected delete and edit)
+---Create
+1. Normal Create
+2. duplicate create (rombel, jenis, tanggal) sama [reject]
+---edit
+1. normal edit
+---delete
+1. normal delete.
+---report
+1. download report
+2. ketika pada rentang tanggal tidak terdapat presensi samsek [show message empty data]
+
+
+*** PAYMENT ***
+---Read
+1. empty list in payment detail
+---edit
+1. normal
+2. amount > free [reject]
+---delete
+1. normal delete

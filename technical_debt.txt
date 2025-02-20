@@ -6,6 +6,7 @@ FITUR MENDATANG:
 - Hapus kelas beserta semua turunannya (CASCADE)
 - SISWA onDelete-cascade
 - Reset password guru oleh admin
+- SETTING JADWAL, mata pelajaran yang diassign, harus sama dengan kelas pada setting jadwal
 
 
 FIEATURE:
@@ -22,6 +23,8 @@ SECURITY SECTION:
 REFACTOR SECTION:
 
 BUG:
+- DUPLICATE PAYMENT TYPE
+
 
 SOLVING_BUG:
 
