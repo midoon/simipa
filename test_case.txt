@@ -134,3 +134,7 @@
 2. amount > free [reject]
 ---delete
 1. normal delete
+2. admin-delete-fee
+--report
+1. data tagihan ada
+2. data tagihan tidak ada
