@@ -5,6 +5,9 @@
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Guru</h1>
             <div>
+                <button onclick="uploadTeacher()" class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
+                    Upload Data Guru
+                </button>
                 <button onclick="createModalTeacher()"
                     class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
                     Tambah Data Guru
@@ -107,6 +110,7 @@
 
 
     <x-modal-create-teacher></x-modal-create-teacher>
+    <x-modal-upload-teacher></x-modal-upload-teacher>
 
 
     <script>
@@ -126,6 +130,10 @@
 
         function editModalTeacher(id) {
             document.getElementById('editModalTeacher' + id).classList.toggle('hidden');
+        }
+
+        function uploadTeacher() {
+            document.getElementById('uploadTeacher').classList.toggle('hidden');
         }
     </script>
 

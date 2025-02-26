@@ -41,7 +41,7 @@ class AdminStudentController extends Controller
             });
 
             // Eksekusi query
-            $students = $studentsQuery->paginate(20);
+            $students = $studentsQuery->paginate(40);
 
             // Ambil data groups dan grades
             $groups = Group::all();
@@ -145,6 +145,28 @@ class AdminStudentController extends Controller
                  return back()->withErrors(['student' => "NISN: $request->nisn sudah terdaftar."]);
             }
             return back()->withErrors(['error' => 'Terjadi kesalahan saat mengupdate data.']);
+        }
+    }
+
+
+    public function downloadTemplate(){
+        try {
+            $headers = [
+                "Content-Type" => "text/csv",
+                "Content-Disposition" => "attachment; filename=student_template.csv"
+            ];
+
+            $columns = ['name', 'nisn', 'gender', 'group'];
+
+            $callback = function () use ($columns) {
+                $file = fopen('php://output', 'w');
+                fputcsv($file, $columns);
+                fclose($file);
+            };
+
+            return response()->stream($callback, 200, $headers);
+        } catch (Exception $e){
+            return back()->withErrors(['error' => 'Terjadi kesalahan saat mengunduh template.']);
         }
     }
 }

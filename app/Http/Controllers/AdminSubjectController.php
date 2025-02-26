@@ -107,4 +107,25 @@ class AdminSubjectController extends Controller
             return back()->withErrors(['error' => "Terjadi kesalahan saat mengedit data : $msg"]);
         }
     }
+
+    public function downloadTemplate(){
+        try {
+            $headers = [
+                "Content-Type" => "text/csv",
+                "Content-Disposition" => "attachment; filename=subject_template.csv"
+            ];
+
+            $columns = ['name', 'grade', 'description'];
+
+            $callback = function () use ($columns) {
+                $file = fopen('php://output', 'w');
+                fputcsv($file, $columns);
+                fclose($file);
+            };
+
+            return response()->stream($callback, 200, $headers);
+        } catch (Exception $e){
+            return back()->withErrors(['error' => 'Terjadi kesalahan saat mengunduh template.']);
+        }
+    }
 }

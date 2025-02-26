@@ -1,0 +1,9 @@
+how to start or init project:
+
+- sudah terinstall tailwind ketika init project laravel.
+
+- tingal npm i
+- npm run dev
+- php artisan serve
+
+- jangann lupa import vite di tag head html

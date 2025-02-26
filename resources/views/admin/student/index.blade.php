@@ -5,9 +5,12 @@
         {{-- header --}}
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Siswa</h1>
-            <div>
+            <div class="flex justify-center gap-3">
+                <button onclick="uploadStudent()" class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 ">
+                    Upload Data Siswa
+                </button>
                 <button onclick="createStudenModal()"
-                    class="px-2 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 w-full">
+                    class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 ">
                     Tambah Data Siswa
                 </button>
 
@@ -172,6 +175,7 @@
     </x-navbar-admin>
 
     <x-modal-create-student :groups="$groups"></x-modal-create-student>
+    <x-modal-upload-student></x-modal-upload-student>
 
 
     <script>
@@ -192,6 +196,13 @@
         // edit
         function editStudenModal(id) {
             document.getElementById('editModalStudent' + id).classList.toggle('hidden');
+        }
+
+
+
+        // upload
+        function uploadStudent() {
+            document.getElementById('uploadStudent').classList.toggle('hidden');
         }
     </script>
 </x-layout>

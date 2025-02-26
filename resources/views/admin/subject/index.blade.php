@@ -3,9 +3,12 @@
         {{-- header --}}
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Mata Pelajaran</h1>
-            <div>
+            <div class="flex gap-3">
+                <button onclick="uploadSubject()" class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 ">
+                    Upload Data Mapel
+                </button>
                 <button onclick="createSubjectModal()"
-                    class="px-2 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 w-full">
+                    class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2 ">
                     Tambah Data Mapel
                 </button>
 
@@ -133,6 +136,8 @@
 
     <x-modal-create-subject :grades="$grades"></x-modal-create-subject>
 
+    <x-modal-upload-subject></x-modal-upload-subject>
+
     <script>
         function closeErrorBtn(id) {
             document.getElementById(id).classList.toggle('hidden');
@@ -159,6 +164,12 @@
         // show more
         function showDescription(id) {
             document.getElementById('showModalSubjectDesc' + id).classList.toggle('hidden');
+        }
+
+
+        // upload
+        function uploadSubject() {
+            document.getElementById('uploadSubject').classList.toggle('hidden');
         }
     </script>
 

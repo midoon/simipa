@@ -43,23 +43,27 @@ Route::middleware([AdminMiddleware::class])->group(function(){
     Route::post('/admin/teacher', [AdminTeacherController::class, 'store']);
     Route::put('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'update']);
     Route::delete('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'destroy']);
+    Route::get('/admin/teacher/template/donwload', [AdminTeacherController::class, 'downloadTemplate']);
 
     //admin grade
     Route::get('/admin/grade',[AdminGradeController::class, 'index']);
     Route::post('/admin/grade', [AdminGradeController::class, 'store']);
     Route::delete('/admin/grade/{kelasId}', [AdminGradeController::class, 'destroy']);
     Route::put('/admin/grade/{kelasId}', [AdminGradeController::class, 'update']);
+    Route::get('/admin/grade/template/donwload', [AdminGradeController::class, 'downloadTemplate']);
 
     // admin group
     Route::post('/admin/group',[AdminGroupController::class, 'store']);
     Route::put('/admin/group/{groupId}', [AdminGroupController::class, 'update']);
     Route::delete('/admin/group/{groupId}',[AdminGroupController::class, 'destroy']);
+    Route::get('/admin/group/template/donwload', [AdminGroupController::class, 'downloadTemplate']);
 
     // admin student
     Route::get('/admin/student', [AdminStudentController::class, 'index']);
     Route::post('/admin/student', [AdminStudentController::class, 'store']);
     Route::delete('/admin/student/{studentId}', [AdminStudentController::class, 'destroy']);
     Route::put('/admin/student/{studentId}', [AdminStudentController::class, 'update']);
+    Route::get('/admin/student/template/donwload', [AdminStudentController::class, 'downloadTemplate']);
 
 
     //admin subject
@@ -67,6 +71,7 @@ Route::middleware([AdminMiddleware::class])->group(function(){
     Route::post('/admin/subject', [AdminSubjectController::class, 'store']);
     Route::delete('/admin/subject/{subjectId}', [AdminSubjectController::class, 'destroy']);
     Route::put('/admin/subject/{subjectId}', [AdminSubjectController::class, 'update']);
+    Route::get('/admin/subject/template/donwload', [AdminSubjectController::class, 'downloadTemplate']);
 
     // admin schedule
     Route::get('/admin/schedule', [AdminScheduleController::class, 'index']);

@@ -4,6 +4,12 @@
         <header class="flex items-center justify-between">
             <h1 class="text-3xl font-semibold">Data Kelas & Rombel</h1>
             <div class="flex justify-center gap-3">
+                <button onclick="uploadGrade()" class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
+                    Upload Data Kelas
+                </button>
+                <button onclick="uploadGroup()" class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
+                    Upload Data Rombel
+                </button>
                 <button onclick="createGradeModal()"
                     class="px-4 py-2 bg-simipa-1 text-white rounded-lg hover:bg-simipa-2">
                     Tambah Data Kelas
@@ -157,6 +163,9 @@
     <x-modal-create-grade></x-modal-create-grade>
     <x-modal-create-group :grades="$grades"></x-modal-create-group>
 
+    <x-modal-upload-grade></x-modal-upload-grade>
+    <x-modal-upload-group></x-modal-upload-group>
+
 
     <script>
         function closeErrorBtn(id) {
@@ -185,6 +194,16 @@
 
         function editGroupModal(id) {
             document.getElementById('editModalGroup' + id).classList.toggle('hidden');
+        }
+
+
+        // upload
+        function uploadGrade() {
+            document.getElementById('uploadGrade').classList.toggle('hidden');
+        }
+
+        function uploadGroup() {
+            document.getElementById('uploadGroup').classList.toggle('hidden');
         }
     </script>
 </x-layout>

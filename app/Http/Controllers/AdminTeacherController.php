@@ -99,4 +99,25 @@ class AdminTeacherController extends Controller
         }
 
     }
+
+    public function downloadTemplate(){
+        try {
+            $headers = [
+                "Content-Type" => "text/csv",
+                "Content-Disposition" => "attachment; filename=teacher_template.csv"
+            ];
+
+            $columns = ['name', 'nik', 'gender',];
+
+            $callback = function () use ($columns) {
+                $file = fopen('php://output', 'w');
+                fputcsv($file, $columns);
+                fclose($file);
+            };
+
+            return response()->stream($callback, 200, $headers);
+        } catch (Exception $e){
+            return back()->withErrors(['error' => 'Terjadi kesalahan saat mengunduh template.']);
+        }
+    }
 }
