@@ -37,6 +37,12 @@ class AdminPaymentTypeController extends Controller
             if ($validator->fails()) {
                 return back()->withErrors($validator);
             }
+
+            $isExist = PaymentType::where('name', $request->name)->exists();
+            if ($isExist){
+                return back()->withErrors(['error' => "Jenis pembayaran {$request->name} sudah ada"]);
+            }
+
             PaymentType::create([
                 'name' => $request->name,
                 'description' =>$defDesc
@@ -56,6 +62,11 @@ class AdminPaymentTypeController extends Controller
 
             if ($validator->fails()) {
                 return back()->withErrors($validator);
+            }
+
+            $paymentType = PaymentType::where('name', $request->name)->first();
+            if ($paymentType != null && $paymentType->id != $paymentTypeId){
+                return back()->withErrors(['error' => "Jenis pembayaran {$request->name} sudah ada"]);
             }
 
             DB::table('payment_types')->where("id", $paymentTypeId)->update([
