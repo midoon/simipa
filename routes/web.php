@@ -44,7 +44,7 @@ Route::middleware([AdminMiddleware::class])->group(function(){
     Route::put('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'update']);
     Route::delete('/admin/teacher/{teacherId}', [AdminTeacherController::class, 'destroy']);
     Route::get('/admin/teacher/template/donwload', [AdminTeacherController::class, 'downloadTemplate']);
-    Route::post('/admin/teacher/template/upload', [AdminTeacherController::class, 'upload']);
+    Route::post('/admin/teacher/upload', [AdminTeacherController::class, 'upload']);
 
 
     //admin grade
@@ -53,6 +53,7 @@ Route::middleware([AdminMiddleware::class])->group(function(){
     Route::delete('/admin/grade/{kelasId}', [AdminGradeController::class, 'destroy']);
     Route::put('/admin/grade/{kelasId}', [AdminGradeController::class, 'update']);
     Route::get('/admin/grade/template/donwload', [AdminGradeController::class, 'downloadTemplate']);
+    Route::post('/admin/grade/upload', [AdminGradeController::class, 'upload']);
 
     // admin group
     Route::post('/admin/group',[AdminGroupController::class, 'store']);
