@@ -3,7 +3,7 @@
         <div class="bg-white rounded-lg w-1/3 p-6">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Upload Data Rombel</h2>
             <!-- Formulir Tambah Data -->
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="/admin/group/upload" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-5 ">
                     <label for="file" class="block text-gray-700 font-medium mb-2">Pilih file CSV</label>

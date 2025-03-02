@@ -60,6 +60,7 @@ Route::middleware([AdminMiddleware::class])->group(function(){
     Route::put('/admin/group/{groupId}', [AdminGroupController::class, 'update']);
     Route::delete('/admin/group/{groupId}',[AdminGroupController::class, 'destroy']);
     Route::get('/admin/group/template/donwload', [AdminGroupController::class, 'downloadTemplate']);
+    Route::post('/admin/group/upload', [AdminGroupController::class, 'upload']);
 
     // admin student
     Route::get('/admin/student', [AdminStudentController::class, 'index']);
