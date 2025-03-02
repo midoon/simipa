@@ -68,6 +68,7 @@ Route::middleware([AdminMiddleware::class])->group(function(){
     Route::delete('/admin/student/{studentId}', [AdminStudentController::class, 'destroy']);
     Route::put('/admin/student/{studentId}', [AdminStudentController::class, 'update']);
     Route::get('/admin/student/template/donwload', [AdminStudentController::class, 'downloadTemplate']);
+    Route::post('/admin/student/upload', [AdminStudentController::class, 'upload']);
 
 
     //admin subject

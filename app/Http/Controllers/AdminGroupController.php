@@ -120,7 +120,8 @@ class AdminGroupController extends Controller
             return back()->withErrors(['error' => 'Terjadi kesalahan saat mengunduh template.']);
         }
     }
-     public function upload(Request $request){
+
+    public function upload(Request $request){
         $request->validate([
             'file' => 'required|mimes:csv,txt'
         ]);

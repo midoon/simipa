@@ -169,4 +169,68 @@ class AdminStudentController extends Controller
             return back()->withErrors(['error' => 'Terjadi kesalahan saat mengunduh template.']);
         }
     }
+
+    public function upload(Request $request){
+        $request->validate([
+            'file' => 'required|mimes:csv,txt'
+        ]);
+
+        $file = fopen($request->file('file')->getRealPath(), 'r');
+        $header = fgetcsv($file);
+
+        $data = [];
+        while ($row = fgetcsv($file)) {
+            $data[] = [
+                'name' => $row[0],
+                'nisn' => $row[1],
+                'gender' => $row[2],
+                'group' => $row[3],
+            ];
+        }
+        fclose($file);
+
+
+        // filter for duplicate nik and gender validation
+
+        $dataStudent = [];
+
+        foreach ($data as $student) {
+            $validator = Validator::make($student,[
+                'name' => 'required',
+                'nisn' => 'required|numeric',
+                'gender' => 'required|in:perempuan,laki-laki',
+                'group' => 'required',
+
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+            if (Student::where('nisn', $student['nisn'])->exists()) {
+                return back()->withErrors(['student' => "nins {$student['nisn']} sudah terdaftar."]);
+            }
+
+            $group = Group::where('name', $student['group'])->first();
+            if (!$group) {
+                return back()->withErrors(['grade' => "Rombel {$student['group']} tidak ditemukan."]);
+            }
+
+            $dataStudent[] = [
+                'name' => $group['name'],
+                'group_id' => $group->id,
+                'nisn' => $student['nisn'],
+                'gender' => $student['gender']
+            ];
+
+        }
+
+
+        DB::transaction(function () use ($dataStudent) {
+            foreach ($dataStudent as $student) {
+                Student::create($student);
+            }
+        });
+
+        return back()->with('success', 'Data siswa berhasil diimport!');
+    }
 }
