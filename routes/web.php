@@ -77,6 +77,7 @@ Route::middleware([AdminMiddleware::class])->group(function(){
     Route::delete('/admin/subject/{subjectId}', [AdminSubjectController::class, 'destroy']);
     Route::put('/admin/subject/{subjectId}', [AdminSubjectController::class, 'update']);
     Route::get('/admin/subject/template/donwload', [AdminSubjectController::class, 'downloadTemplate']);
+    Route::post('/admin/subject/upload', [AdminSubjectController::class, 'upload']);
 
     // admin schedule
     Route::get('/admin/schedule', [AdminScheduleController::class, 'index']);

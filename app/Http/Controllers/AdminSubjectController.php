@@ -128,4 +128,73 @@ class AdminSubjectController extends Controller
             return back()->withErrors(['error' => 'Terjadi kesalahan saat mengunduh template.']);
         }
     }
+
+    public function upload(Request $request){
+        $request->validate([
+            'file' => 'required|mimes:csv,txt'
+        ]);
+
+        $file = fopen($request->file('file')->getRealPath(), 'r');
+        $header = fgetcsv($file);
+
+        $data = [];
+        while ($row = fgetcsv($file)) {
+            $data[] = [
+                'name' => $row[0],
+                'grade' => $row[1],
+                'description' => $row[2],
+            ];
+        }
+        fclose($file);
+
+
+        // filter for duplicate nik and gender validation
+
+        $dataSubject = [];
+
+        foreach ($data as $subject) {
+            $validator = Validator::make($subject,[
+                'name' => 'required',
+                'grade' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator);
+            }
+
+
+            $grade = Grade::where('name', $subject['grade'])->first();
+            if (!$grade) {
+                return back()->withErrors(['grade' => "Kelas {$subject['grade']} tidak ditemukan."]);
+            }
+
+            if (Subject::where('name', $subject['name'])->where('grade_id',$grade->id)->exists()) {
+                return back()->withErrors(['name' => "Mata Pelajaran {$subject['name']} untuk kelas {$subject['grade']} sudah terdaftar."]);
+            }
+
+            $description = $subject['description'];
+            if ($description == null){
+                $description = $subject['name'];
+            }
+
+            $dataSubject[] = [
+                'name' => $subject['name'],
+                'grade_id' => $grade->id,
+                'description' => $description,
+            ];
+
+        }
+
+
+
+
+        DB::transaction(function () use ($dataSubject) {
+            foreach ($dataSubject as $subject) {
+                Subject::create($subject);
+            }
+        });
+
+        return back()->with('success', 'Data siswa berhasil diimport!');
+    }
+
 }
