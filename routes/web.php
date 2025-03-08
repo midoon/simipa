@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminActivityController;
+use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminFeeController;
 use App\Http\Controllers\AdminGradeController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\AdminTeacherController;
 use App\Http\Controllers\AuthTeacherController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\TeacherAttendanceController;
+use App\Http\Controllers\TeacherAuthController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TeacherFeeController;
 use App\Http\Controllers\TeacherPaymentController;
@@ -31,9 +33,9 @@ Route::get('/', fn () => redirect('/teacher/login'));
 
 
 // auth admin
-Route::get('/admin/login', [LoginAdminController::class, 'index']);
-Route::post('/admin/login', [LoginAdminController::class, 'auth']);
-Route::post('/admin/logout', [LoginAdminController::class, 'logout']);
+Route::get('/admin/login', [AdminAuthController::class, 'index']);
+Route::post('/admin/login', [AdminAuthController::class, 'auth']);
+Route::post('/admin/logout', [AdminAuthController::class, 'logout']);
 
 Route::middleware([AdminMiddleware::class])->group(function(){
     Route::get('/admin/dashboard', [AdminController::class, 'index']);
@@ -106,13 +108,13 @@ Route::middleware([AdminMiddleware::class])->group(function(){
 
 
 //  teacher auth
-Route::get('/teacher/register', [AuthTeacherController::class, 'showRegister']);
-Route::post('/teacher/register', [AuthTeacherController::class, 'register']);
-Route::get('/teacher/login', [AuthTeacherController::class, 'showLogin']);
-Route::post('/teacher/login', [AuthTeacherController::class, 'login']);
+Route::get('/teacher/register', [TeacherAuthController::class, 'showRegister']);
+Route::post('/teacher/register', [TeacherAuthController::class, 'register']);
+Route::get('/teacher/login', [TeacherAuthController::class, 'showLogin']);
+Route::post('/teacher/login', [TeacherAuthController::class, 'login']);
 
 Route::middleware([TeacherMiddleware::class])->group(function(){
-    Route::delete('/teacher/logout', [AuthTeacherController::class, 'logout']);
+    Route::delete('/teacher/logout', [TeacherAuthController::class, 'logout']);
 
     // Route
     Route::get('/teacher/dashboard', [TeacherController::class, 'index']);

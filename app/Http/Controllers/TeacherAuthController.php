@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Teacher;
-use App\Models\TeacherAccount;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class AuthTeacherController extends Controller
+class TeacherAuthController extends Controller
 {
     public function showLogin(){
         return view('auth.login_teacher');
